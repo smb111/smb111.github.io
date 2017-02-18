@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="hearting，QLGD," />
 
 
 
@@ -102,15 +102,18 @@
 
 
 
-<meta name="description" content="Studies pass into and influence manners">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="齐鲁工大供暖项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hearting--Qt4.8.5">
+<meta property="og:url" content="http://yoursite.com/2017/02/18/QLGD锅炉/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Studies pass into and influence manners">
+<meta property="og:description" content="齐鲁工大供暖项目">
+<meta property="og:image" content="http://i.imgur.com/0Wv8os2.jpg">
+<meta property="og:updated_time" content="2017-02-18T02:50:18.668Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="Studies pass into and influence manners">
+<meta name="twitter:title" content="Hearting--Qt4.8.5">
+<meta name="twitter:description" content="齐鲁工大供暖项目">
+<meta name="twitter:image" content="http://i.imgur.com/0Wv8os2.jpg">
 
 
 
@@ -128,7 +131,7 @@
   };
 </script>
 
-  <title> Hexo </title>
+  <title> Hearting--Qt4.8.5 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -149,9 +152,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -238,9 +239,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -260,10 +261,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/02/18/QLGD锅炉/" itemprop="url">
-                  Hearting--Qt4.8.5
-                </a>
+                Hearting--Qt4.8.5
               
             
           </h1>
@@ -322,42 +320,118 @@
       
 
       
-        
-          齐鲁工大供暖项目
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/18/QLGD锅炉/">
-              阅读全文 &raquo;
-            </a>
-          </div>
+        <h2 id="Welcome-to-MarkdownPad-2"><a href="#Welcome-to-MarkdownPad-2" class="headerlink" title="Welcome to MarkdownPad 2"></a>Welcome to MarkdownPad 2</h2><p><strong>MarkdownPad</strong> is a full-featured Markdown editor for Windows.</p>
+<h3 id="Built-exclusively-for-Markdown"><a href="#Built-exclusively-for-Markdown" class="headerlink" title="Built exclusively for Markdown"></a>Built exclusively for Markdown</h3><p>Enjoy first-class Markdown support with easy access to  Markdown syntax and convenient keyboard shortcuts.</p>
+<p>Give them a try:</p>
+<ul>
+<li><strong>Bold</strong> (<code>Ctrl+B</code>) and <em>Italic</em> (<code>Ctrl+I</code>)</li>
+<li>Quotes (<code>Ctrl+Q</code>)</li>
+<li>Code blocks (<code>Ctrl+K</code>)</li>
+<li>Headings 1, 2, 3 (<code>Ctrl+1</code>, <code>Ctrl+2</code>, <code>Ctrl+3</code>)</li>
+<li>Lists (<code>Ctrl+U</code> and <code>Ctrl+Shift+O</code>)</li>
+</ul>
+<h3 id="See-your-changes-instantly-with-LivePreview"><a href="#See-your-changes-instantly-with-LivePreview" class="headerlink" title="See your changes instantly with LivePreview"></a>See your changes instantly with LivePreview</h3><p>Don’t guess if your <a href="http://markdownpad.com" target="_blank" rel="external">hyperlink syntax</a> is correct; LivePreview will show you exactly what your document looks like every time you press a key.</p>
+<h3 id="Make-it-your-own"><a href="#Make-it-your-own" class="headerlink" title="Make it your own"></a>Make it your own</h3><p>Fonts, color schemes, layouts and stylesheets are all 100% customizable so you can turn MarkdownPad into your perfect editor.</p>
+<h3 id="A-robust-editor-for-advanced-Markdown-users"><a href="#A-robust-editor-for-advanced-Markdown-users" class="headerlink" title="A robust editor for advanced Markdown users"></a>A robust editor for advanced Markdown users</h3><p>MarkdownPad supports multiple Markdown processing engines, including standard Markdown, Markdown Extra (with Table support) and GitHub Flavored Markdown.</p>
+<p>With a tabbed document interface, PDF export, a built-in image uploader, session management, spell check, auto-save, syntax highlighting and a built-in CSS management interface, there’s no limit to what you can do with MarkdownPad.</p>
+<pre><code>QT   += core sql network
+QMAKE_CXXFLAGS += -std=c++0x
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+TARGET = heating
+TEMPLATE = app
+
+
+SOURCES += main.cpp\
+mainui.cpp \
+api/app.cpp \
+api/iconhelper.cpp \
+popwindow/messagebox.cpp \
+api/messagetype.cpp \
+keyboard/abstractkeyboard.cpp \
+keyboard/dialogkeyboard.cpp \
+keyboard/englishkeyboard.cpp \
+keyboard/numberkeyboard.cpp \
+popwindow/inputbox.cpp \
+popwindow/alarmpre.cpp \
+popwindow/alarmnow.cpp \
+popwindow/parameterset.cpp \
+mytcpserver.cpp \
+api/dataprocess.cpp
+
+HEADERS  += \
+mainui.h \
+api/app.h \
+api/iconhelper.h \
+api/styleset.h \
+popwindow/messagebox.h \
+api/messagetype.h \
+keyboard/abstractkeyboard.h \
+keyboard/dialogkeyboard.h \
+keyboard/englishkeyboard.h \
+keyboard/numberkeyboard.h \
+popwindow/inputbox.h \
+popwindow/alarmpre.h \
+popwindow/alarmnow.h \
+popwindow/parameterset.h \
+glog/log_severity.h \
+glog/logging.h \
+glog/raw_logging.h \
+glog/stl_logging.h \
+glog/vlog_is_on.h \
+mytcpserver.h \
+api/dataprocess.h
+
+FORMS+= \
+mainui.ui \
+popwindow/messagebox.ui \
+popwindow/inputbox.ui \
+popwindow/alarmpre.ui \
+popwindow/alarmnow.ui \
+popwindow/parameterset.ui
+
+RESOURCES += \
+</code></pre><p><img src="http://i.imgur.com/0Wv8os2.jpg" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/hearting，QLGD/" rel="tag">#hearting，QLGD</a>
+          
+        </div>
       
 
       
+
       
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -365,6 +439,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -384,8 +462,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -455,6 +542,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Welcome-to-MarkdownPad-2"><span class="nav-number">1.</span> <span class="nav-text">Welcome to MarkdownPad 2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Built-exclusively-for-Markdown"><span class="nav-number">1.1.</span> <span class="nav-text">Built exclusively for Markdown</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#See-your-changes-instantly-with-LivePreview"><span class="nav-number">1.2.</span> <span class="nav-text">See your changes instantly with LivePreview</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Make-it-your-own"><span class="nav-number">1.3.</span> <span class="nav-text">Make it your own</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-robust-editor-for-advanced-Markdown-users"><span class="nav-number">1.4.</span> <span class="nav-text">A robust editor for advanced Markdown users</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -551,6 +649,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
