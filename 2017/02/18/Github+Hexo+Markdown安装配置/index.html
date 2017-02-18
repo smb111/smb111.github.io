@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="个人博客," />
 
 
 
@@ -102,15 +102,19 @@
 
 
 
-<meta name="description" content="Studies pass into and influence manners">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="记录了搭建个人博客的过程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Github+Hexo+Markdown安装配置">
+<meta property="og:url" content="http://yoursite.com/2017/02/18/Github+Hexo+Markdown安装配置/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Studies pass into and influence manners">
+<meta property="og:description" content="记录了搭建个人博客的过程">
+<meta property="og:image" content="http://i.imgur.com/PHND1T9.png">
+<meta property="og:image" content="http://i.imgur.com/jcX3IIS.jpg">
+<meta property="og:updated_time" content="2017-02-18T13:15:41.974Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="Studies pass into and influence manners">
+<meta name="twitter:title" content="Github+Hexo+Markdown安装配置">
+<meta name="twitter:description" content="记录了搭建个人博客的过程">
+<meta name="twitter:image" content="http://i.imgur.com/PHND1T9.png">
 
 
 
@@ -128,7 +132,7 @@
   };
 </script>
 
-  <title> Hexo </title>
+  <title> Github+Hexo+Markdown安装配置 | Hexo </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -149,9 +153,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -238,9 +240,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -260,10 +262,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/02/18/Github+Hexo+Markdown安装配置/" itemprop="url">
-                  Github+Hexo+Markdown安装配置
-                </a>
+                Github+Hexo+Markdown安装配置
               
             
           </h1>
@@ -322,157 +321,109 @@
       
 
       
-        
-          记录了搭建个人博客的过程
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/18/Github+Hexo+Markdown安装配置/">
-              阅读全文 &raquo;
-            </a>
-          </div>
+        <p>#使用Github搭建Hexo技术博客托管在GitHub Pages上</p>
+<ul>
+<li><a href="http://www.jianshu.com/p/f9b213097c42" target="_blank" rel="external">http://www.jianshu.com/p/f9b213097c42</a>  </li>
+<li><a href="http://www.jianshu.com/p/ba76165ca84d" target="_blank" rel="external">http://www.jianshu.com/p/ba76165ca84d</a></li>
+<li><strong>个人推荐下面这篇：</strong>里面介绍了将一些推广引擎放入自己的博客（<code>多说</code>，<code>百度统计</code>等）<br><a href="http://www.jianshu.com/p/a2fe56d11c4f" target="_blank" rel="external">http://www.jianshu.com/p/a2fe56d11c4f</a></li>
+<li>配置 Hexo <a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/configuration.html</a></li>
+<li>MarkDown 语法集合<a href="https://www.zybuluo.com/mdeditor#fn:code" target="_blank" rel="external">https://www.zybuluo.com/mdeditor#fn:code</a></li>
+<li>next主题的配置和优化 <a href="http://blog.csdn.net/willxue123/article/details/50994852" target="_blank" rel="external">http://blog.csdn.net/willxue123/article/details/50994852</a></li>
+</ul>
+<hr>
+<p>#搭建完成之后的总结</p>
+<ul>
+<li><ol>
+<li>E:\HEXO\source_posts 下面将通过MarkDownPad 2写好的 .md文件放入这个目录中</li>
+</ol>
+</li>
+<li><p>2.写.md文件的时候开头部分的格式固定</p>
+<p>| title         | 所写文章的标题                       |<br>| ————- |:————-:                      |<br>| date          | 显示改文章写作的时间                   |<br>| description   | 关于这篇文章的描述                    |<br>| categories    | 分类（用于创建分类的不同文件夹）      |<br>| tags          | 文章的标签用于分类                   |<br><img src="http://i.imgur.com/PHND1T9.png" alt="">  </p>
+</li>
+<li>3.在Hexo的根目录下面打开 Git Bash  输入：hexo -s –debug.在浏览器中输入 localhost:4001 查看效果，如果效果可行，停掉当前的bash，Ctrl+ｃ。　执行 hexo g 生成静态页面，最后同步到github，hexo d。 如果是修改主题之前要清理一下 hexo clean   </li>
+</ul>
+<p>#使用MarkDown写.md 文件 （常用）</p>
+<h2 id="生成表格"><a href="#生成表格" class="headerlink" title="生成表格"></a>生成表格</h2><table>
+<thead>
+<tr>
+<th>项目</th>
+<th style="text-align:right">价格</th>
+<th style="text-align:center">数量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>计算机</td>
+<td style="text-align:right">\$1600</td>
+<td style="text-align:center">5</td>
+</tr>
+<tr>
+<td>手机</td>
+<td style="text-align:right">\$12</td>
+<td style="text-align:center">12</td>
+</tr>
+<tr>
+<td>管线</td>
+<td style="text-align:right">\$1</td>
+<td style="text-align:center">234</td>
+</tr>
+</tbody>
+</table>
+<h2 id="加入C-代码并高亮显示"><a href="#加入C-代码并高亮显示" class="headerlink" title="加入C++代码并高亮显示"></a>加入C++代码并高亮显示</h2> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> = <span class="number">0</span>;i &lt; argc;i++)	</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; (<span class="built_in">string</span>)argv[i] &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="插如图片"><a href="#插如图片" class="headerlink" title="插如图片"></a>插如图片</h2><p><img src="http://i.imgur.com/jcX3IIS.jpg" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/18/齐鲁工业大学供暖节能项目/" itemprop="url">
-                  齐鲁工业大学供暖节能（Qt4.8.5-Embeded）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-18T10:50:18+08:00" content="2017-02-18">
-              2017-02-18
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/项目/" itemprop="url" rel="index">
-                    <span itemprop="name">项目</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/个人博客/" rel="tag">#个人博客</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          齐鲁工大供暖项目，使用Qt4.8.5进行开发
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/18/齐鲁工业大学供暖节能项目/">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/18/齐鲁工业大学供暖节能项目/" rel="next" title="齐鲁工业大学供暖节能（Qt4.8.5-Embeded）">
+                <i class="fa fa-chevron-left"></i> 齐鲁工业大学供暖节能（Qt4.8.5-Embeded）
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -480,6 +431,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -499,8 +454,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -570,6 +534,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成表格"><span class="nav-number">1.</span> <span class="nav-text">生成表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加入C-代码并高亮显示"><span class="nav-number">2.</span> <span class="nav-text">加入C++代码并高亮显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插如图片"><span class="nav-number">3.</span> <span class="nav-text">插如图片</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -666,6 +641,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
