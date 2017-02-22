@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="树结构,数据结构," />
 
 
 
@@ -102,15 +102,23 @@
 
 
 
-<meta name="description" content="Studies pass into and influence manners">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Skymyweakness">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="二叉树、B树、B+树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树(Binary Tree)、B树(B-Tree)、B+树(B+ Tree)的简单介绍">
+<meta property="og:url" content="http://yoursite.com/2017/02/22/二叉树B树B+树/index.html">
 <meta property="og:site_name" content="Skymyweakness">
-<meta property="og:description" content="Studies pass into and influence manners">
+<meta property="og:description" content="二叉树、B树、B+树">
+<meta property="og:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/1.JPG">
+<meta property="og:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/2.JPG">
+<meta property="og:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/31.JPG">
+<meta property="og:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/4.JPG">
+<meta property="og:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/0.JPG">
+<meta property="og:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/5.JPG">
+<meta property="og:updated_time" content="2017-02-22T07:40:55.138Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Skymyweakness">
-<meta name="twitter:description" content="Studies pass into and influence manners">
+<meta name="twitter:title" content="二叉树(Binary Tree)、B树(B-Tree)、B+树(B+ Tree)的简单介绍">
+<meta name="twitter:description" content="二叉树、B树、B+树">
+<meta name="twitter:image" content="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/1.JPG">
 
 
 
@@ -128,7 +136,7 @@
   };
 </script>
 
-  <title> Skymyweakness </title>
+  <title> 二叉树(Binary Tree)、B树(B-Tree)、B+树(B+ Tree)的简单介绍 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -149,9 +157,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -238,9 +244,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
   
@@ -260,10 +266,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2017/02/22/二叉树B树B+树/" itemprop="url">
-                  二叉树(Binary Tree)、B树(B-Tree)、B+树(B+ Tree)的简单介绍
-                </a>
+                二叉树(Binary Tree)、B树(B-Tree)、B+树(B+ Tree)的简单介绍
               
             
           </h1>
@@ -322,272 +325,115 @@
       
 
       
-        
-          二叉树、B树、B+树
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/22/二叉树B树B+树/">
-              阅读全文 &raquo;
-            </a>
-          </div>
+        <h1 id="二叉搜索树"><a href="#二叉搜索树" class="headerlink" title="二叉搜索树"></a>二叉搜索树</h1><ol>
+<li>所有非叶子结点至多拥有两个儿子（Left和Right）； </li>
+<li>所有结点存储一个关键字；</li>
+<li>非叶子结点的左指针指向小于其关键字的子树，右指针指向大于其关键字的子树；</li>
+</ol>
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/1.JPG" alt=""></p>
+<p>B树的搜索，从根结点开始，如果查询的关键字与结点的关键字相等，那么就命中；</p>
+<p>否则，如果查询关键字比结点关键字小，就进入左儿子；如果比结点关键字大，就进入右儿子；如果左儿子或右儿子的指针为空，则报告找不到相应的关键字；</p>
+<p>如果B树的所有非叶子结点的左右子树的结点数目均保持差不多（平衡），那么B树的搜索性能逼近二分查找； </p>
+<p>但它比连续内存空间的二分查找的优点是，改变B树结构（插入与删除结点）不需要移动大段的内存数据，甚至通常是常数开销；</p>
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/2.JPG" alt=""> </p>
+<p>但B树在经过多次插入与删除后，有可能导致不同的结构：<br><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/31.JPG" alt=""></p>
+<p>右边也是一个B树，但它的搜索性能已经是线性的了；同样的关键字集合有可能导致不同的树结构索引；所以，使用B树还要考虑尽可能让B树保持左图的结构，和避免右图的结构，也就是所谓的“平衡”问题；</p>
+<p>实际使用的B树都是在原B树的基础上加上平衡算法，即“平衡二叉树”；如何保持B树结点分布均匀的平衡算法是平衡二叉树的关键；平衡算法是一种在B树中插入和删除结点的策略；</p>
+<hr>
+<h1 id="B树（Binary-Tree）"><a href="#B树（Binary-Tree）" class="headerlink" title="B树（Binary Tree）"></a>B树（Binary Tree）</h1><p>是一种多路搜索树（并不是二叉的）： </p>
+<p>1.定义任意非叶子结点最多只有M个儿子；且M&gt;2；</p>
+<p>2.根结点的儿子数为[2, M]；</p>
+<p>3.除根结点以外的非叶子结点的儿子数为[M/2, M]；</p>
+<p>4.每个结点存放至少M/2-1（取上整）和至多M-1个关键字；（至少2个关键字）</p>
+<p>5.非叶子结点的关键字个数=指向儿子的指针个数-1；</p>
+<p>6.非叶子结点的关键字：K[1], K[2], …, K[M-1]；且K[i] &lt; K[i+1]；</p>
+<p>7.非叶子结点的指针：P[1], P[2], …, P[M]；其中P[1]指向关键字小于K[1]的子树，P[M]指向关键字大于K[M-1]的子树，其它P[i]指向关键字属于(K[i-1], K[i])的子树；</p>
+<p>8.所有叶子结点位于同一层；</p>
+<p> 如：（M=3）</p>
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/4.JPG" alt=""> </p>
+<p>B树的搜索，从根结点开始，对结点内的关键字（有序）序列进行二分查找，如果命中则结束，否则进入查询关键字所属范围的儿子结点；重复，直到所对应的儿子指针为空，或已经是叶子结点；</p>
+<p>B树的特性：</p>
+<p>1.关键字集合分布在整颗树中；</p>
+<p>2.任何一个关键字出现且只出现在一个结点中；</p>
+<p>3.搜索有可能在非叶子结点结束；</p>
+<p>4.其搜索性能等价于在关键字全集内做一次二分查找；</p>
+<p>5.自动层次控制；</p>
+<p>由于限制了除根结点以外的非叶子结点，至少含有M/2个儿子，确保了结点的至少利用率，其最底搜索性能为： </p>
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/0.JPG" alt=""> </p>
+<p>其中，M为设定的非叶子结点最多子树个数，N为关键字总数；</p>
+<p>所以B树的性能总是等价于二分查找（与M值无关），也就没有B树平衡的问题；</p>
+<p>由于M/2的限制，在插入结点时，如果结点已满，需要将结点分裂为两个各占M/2的结点；</p>
+<p>删除结点时，需将两个不足M/2的兄弟结点合并</p>
+<h1 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h1><p>B+树是B树的变体，也是一种多路搜索树：</p>
+<p>1.其定义基本与B树同，除了：</p>
+<p>2.非叶子结点的子树指针与关键字个数相同；</p>
+<p>3.非叶子结点的子树指针P[i]，指向关键字值属于[K[i], K[i+1])的子树（B树是开区间）；</p>
+<p>5.为所有叶子结点增加一个链指针；</p>
+<p>6.所有关键字都在叶子结点出现； </p>
+<p>如：（M=3）</p>
+<p><img src="http://p.blog.csdn.net/images/p_blog_csdn_net/manesking/5.JPG" alt=""> </p>
+<p>B+的搜索与B-树也基本相同，区别是B+树只有达到叶子结点才命中（B-树可以在</p>
+<p>非叶子结点命中），其性能也等价于在关键字全集做一次二分查找；</p>
+<p>B+的特性：</p>
+<p>1.所有关键字都出现在叶子结点的链表中（稠密索引），且链表中的关键字恰好是有序的；</p>
+<p>2.不可能在非叶子结点命中；</p>
+<p>3.非叶子结点相当于是叶子结点的索引（稀疏索引），叶子结点相当于是存储（关键字）数据的数据层；</p>
+<p>4.更适合文件索引系统；</p>
+
+      
+    </div>
+
+    <div>
+      
         
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/18/Github+Hexo+Markdown安装配置/" itemprop="url">
-                  Github+Hexo+Markdown安装配置
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-18T18:54:26+08:00" content="2017-02-18">
-              2017-02-18
-            </time>
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/个人博客/" itemprop="url" rel="index">
-                    <span itemprop="name">个人博客</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
+            <a href="/tags/树结构/" rel="tag">#树结构</a>
           
-
-          
-            
-          
-
-          
-
-          
-          
-
+            <a href="/tags/数据结构/" rel="tag">#数据结构</a>
           
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          记录了搭建个人博客的过程
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/18/Github+Hexo+Markdown安装配置/">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/18/Github+Hexo+Markdown安装配置/" rel="next" title="Github+Hexo+Markdown安装配置">
+                <i class="fa fa-chevron-left"></i> Github+Hexo+Markdown安装配置
+              </a>
+            
           </div>
-        
-      
-    </div>
 
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+          <div class="post-nav-prev post-nav-item">
             
-            
-              
-                
-                <a class="post-title-link" href="/2017/02/18/齐鲁工业大学供暖节能项目/" itemprop="url">
-                  齐鲁工业大学供暖节能（Qt4.8.5-Embeded）
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-18T10:50:18+08:00" content="2017-02-18">
-              2017-02-18
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/项目/" itemprop="url" rel="index">
-                    <span itemprop="name">项目</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          齐鲁工大供暖项目，使用Qt4.8.5进行开发
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2017/02/18/齐鲁工业大学供暖节能项目/">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -595,6 +441,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -614,8 +464,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -713,6 +572,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#二叉搜索树"><span class="nav-number">1.</span> <span class="nav-text">二叉搜索树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B树（Binary-Tree）"><span class="nav-number">2.</span> <span class="nav-text">B树（Binary Tree）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#B-树"><span class="nav-number">3.</span> <span class="nav-text">B+树</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -808,6 +678,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
