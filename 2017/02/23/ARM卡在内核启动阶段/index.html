@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="齐鲁工大--Smartbuilding（维护）," />
 
 
 
@@ -102,16 +102,16 @@
 
 
 
-<meta name="description" content="Studies pass into and influence manners">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="齐鲁工大Smartbuilding项目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="齐鲁工大--Smartbuilding后期维护">
+<meta property="og:url" content="http://yoursite.com/2017/02/23/ARM卡在内核启动阶段/index.html">
 <meta property="og:site_name" content="Skymyweakness">
-<meta property="og:description" content="Studies pass into and influence manners">
-<meta property="og:updated_time" content="2017-02-17T07:18:24.580Z">
+<meta property="og:description" content="齐鲁工大Smartbuilding项目">
+<meta property="og:updated_time" content="2017-02-23T03:02:13.280Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="Studies pass into and influence manners">
+<meta name="twitter:title" content="齐鲁工大--Smartbuilding后期维护">
+<meta name="twitter:description" content="齐鲁工大Smartbuilding项目">
 
 
 
@@ -129,13 +129,7 @@
   };
 </script>
 
-  <title>
-  
-
-  
-    标签 | Skymyweakness
-  
-</title>
+  <title> 齐鲁工大--Smartbuilding后期维护 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -156,7 +150,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,16 +230,147 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 10 个标签
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                齐鲁工大--Smartbuilding后期维护
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-23T10:32:33+08:00" content="2017-02-23">
+              2017-02-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/项目/" itemprop="url" rel="index">
+                    <span itemprop="name">项目</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/ARM/" style="font-size: 12px; color: #ccc">ARM</a> <a href="/tags/C-基本语法/" style="font-size: 30px; color: #111">C++基本语法</a> <a href="/tags/个人博客/" style="font-size: 12px; color: #ccc">个人博客</a> <a href="/tags/常量函数/" style="font-size: 12px; color: #ccc">常量函数</a> <a href="/tags/常量数据成员及引用的初始化问题/" style="font-size: 12px; color: #ccc">常量数据成员及引用的初始化问题</a> <a href="/tags/数据结构/" style="font-size: 12px; color: #ccc">数据结构</a> <a href="/tags/树结构/" style="font-size: 12px; color: #ccc">树结构</a> <a href="/tags/系统时间/" style="font-size: 12px; color: #ccc">系统时间</a> <a href="/tags/齐鲁工大-Smartbuilding（维护）/" style="font-size: 12px; color: #ccc">齐鲁工大--Smartbuilding（维护）</a> <a href="/tags/齐鲁工大供暖/" style="font-size: 12px; color: #ccc">齐鲁工大供暖</a>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="ARM板启动的时候卡在Uncompressing-Linux……………-done-booting-the-kernel"><a href="#ARM板启动的时候卡在Uncompressing-Linux……………-done-booting-the-kernel" class="headerlink" title="ARM板启动的时候卡在Uncompressing Linux……………. done, booting the kernel."></a>ARM板启动的时候卡在Uncompressing Linux……………. done, booting the kernel.</h2><p>1、machine type 不匹配</p>
+<p>该部分审查代码后确定machine type是匹配的，排除</p>
+<p>2、串口驱动没有编译入内核</p>
+<p>该部分审查.config文件后发现串口也配置编入了内核，排除。</p>
+<p>3、内核启动参数设置错误   </p>
+<p>以上时出现该问题的原因，因为使用的是友善之臂的superboot，并不是uboot，不能进入uboot的命令行，无法查看命令行启动参数。但是从出错信息来看这是很明显的内核问题， —要么是superboot的启动参数出错，要么是内核文件出错。使用miniTools重新刷入内核和启动参数，OK！</p>
+<p>如果使用uboot便可以进入uboot的命令行查看 启动参数，但是并没有用 uboot，用别人的东西就要被捆绑使用别人的软件</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/齐鲁工大-Smartbuilding（维护）/" rel="tag">#齐鲁工大--Smartbuilding（维护）</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/22/常量数据成员以及被声明为引用的数据成员必须在初始化列表里面初始化/" rel="next" title="常量数据成员和引用数据成员，必须在成员初始化列表里面初始化">
+                <i class="fa fa-chevron-left"></i> 常量数据成员和引用数据成员，必须在成员初始化列表里面初始化
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/23/ARM板修改系统时间/" rel="prev" title="修改ARM板的硬件时钟时间和软件时间">
+                修改ARM板的硬件时钟时间和软件时间 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -277,8 +402,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -376,6 +510,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ARM板启动的时候卡在Uncompressing-Linux……………-done-booting-the-kernel"><span class="nav-number">1.</span> <span class="nav-text">ARM板启动的时候卡在Uncompressing Linux……………. done, booting the kernel.</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -471,6 +616,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

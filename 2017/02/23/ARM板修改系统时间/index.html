@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ARM,系统时间," />
 
 
 
@@ -102,16 +102,16 @@
 
 
 
-<meta name="description" content="Studies pass into and influence manners">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+<meta name="description" content="修改ARM板的硬件时钟时间和软件时间">
+<meta property="og:type" content="article">
+<meta property="og:title" content="修改ARM板的硬件时钟时间和软件时间">
+<meta property="og:url" content="http://yoursite.com/2017/02/23/ARM板修改系统时间/index.html">
 <meta property="og:site_name" content="Skymyweakness">
-<meta property="og:description" content="Studies pass into and influence manners">
-<meta property="og:updated_time" content="2017-02-17T07:18:24.580Z">
+<meta property="og:description" content="修改ARM板的硬件时钟时间和软件时间">
+<meta property="og:updated_time" content="2017-02-23T03:10:11.620Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="Studies pass into and influence manners">
+<meta name="twitter:title" content="修改ARM板的硬件时钟时间和软件时间">
+<meta name="twitter:description" content="修改ARM板的硬件时钟时间和软件时间">
 
 
 
@@ -129,13 +129,7 @@
   };
 </script>
 
-  <title>
-  
-
-  
-    标签 | Skymyweakness
-  
-</title>
+  <title> 修改ARM板的硬件时钟时间和软件时间 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -156,7 +150,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -236,16 +230,150 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
     
-      <div class="tag-cloud">
-        <div class="tag-cloud-title">
-            目前共计 10 个标签
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                修改ARM板的硬件时钟时间和软件时间
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-23T11:02:53+08:00" content="2017-02-23">
+              2017-02-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ARM-Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">ARM-Linux</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
         </div>
-        <div class="tag-cloud-tags">
-          <a href="/tags/ARM/" style="font-size: 12px; color: #ccc">ARM</a> <a href="/tags/C-基本语法/" style="font-size: 30px; color: #111">C++基本语法</a> <a href="/tags/个人博客/" style="font-size: 12px; color: #ccc">个人博客</a> <a href="/tags/常量函数/" style="font-size: 12px; color: #ccc">常量函数</a> <a href="/tags/常量数据成员及引用的初始化问题/" style="font-size: 12px; color: #ccc">常量数据成员及引用的初始化问题</a> <a href="/tags/数据结构/" style="font-size: 12px; color: #ccc">数据结构</a> <a href="/tags/树结构/" style="font-size: 12px; color: #ccc">树结构</a> <a href="/tags/系统时间/" style="font-size: 12px; color: #ccc">系统时间</a> <a href="/tags/齐鲁工大-Smartbuilding（维护）/" style="font-size: 12px; color: #ccc">齐鲁工大--Smartbuilding（维护）</a> <a href="/tags/齐鲁工大供暖/" style="font-size: 12px; color: #ccc">齐鲁工大供暖</a>
-        </div>
-      </div>
+      </header>
     
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前使用开发板时发现每次开机后，系统的时间都恢复到初始状态2012年。</p>
+<h2 id="一、-先说一下时钟的概念"><a href="#一、-先说一下时钟的概念" class="headerlink" title="一、 先说一下时钟的概念"></a>一、 先说一下时钟的概念</h2><p>时钟包括<strong>硬件时钟</strong>和<strong>系统时钟</strong> </p>
+<ol>
+<li>系统时钟就是linux系统显示的时间，用命令date可以显示当前系统时间； </li>
+<li>硬件时钟就是硬件自身的 时间了。  </li>
+</ol>
+<p>它们两者没有关系的，但是可以通过命令设置系统时钟和硬件设置，让它们同步。</p>
+<h3 id="设置系统时间"><a href="#设置系统时间" class="headerlink" title="设置系统时间"></a>设置系统时间</h3><p>在linux系统设置系统时钟用命令date，格式为：date 062920502008.10，表示系统时间设置为2008年6月29日20时50分10秒。 </p>
+<h3 id="设置硬件时间"><a href="#设置硬件时间" class="headerlink" title="设置硬件时间"></a>设置硬件时间</h3><p>硬件时钟RTC时间是通过hwclock命令来设置的，比 如说硬件时间要设置为2008年6月29日20时50分10秒，则应该先用date 062920502008.10，然后用命令：hwclock -w，这样RTC时间就跟系统时间一致了。</p>
+<h2 id="二、让系统时间和RTC时间同步。"><a href="#二、让系统时间和RTC时间同步。" class="headerlink" title="二、让系统时间和RTC时间同步。"></a>二、让系统时间和RTC时间同步。</h2><p>因为每次开机后系统的时间都是系统原来的时间，比如说1970年1月1日1时1分1秒，为了让系统时间和RTC时间同步，</p>
+<p>可以在文件系统中<strong>etc/init.d/rcS添 加如下命令：  /sbin/hwclock -s</strong>， </p>
+<p>这样每次开机时系统就会读取RTC的时间，系统时间就与RTC时间同步了。(hwclock有时候可能会在/bin目录下面，具体要看 busybox编译后放在/bin还是/sbin目录下)</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ARM/" rel="tag">#ARM</a>
+          
+            <a href="/tags/系统时间/" rel="tag">#系统时间</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/23/ARM卡在内核启动阶段/" rel="next" title="齐鲁工大--Smartbuilding后期维护">
+                <i class="fa fa-chevron-left"></i> 齐鲁工大--Smartbuilding后期维护
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -277,8 +405,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -376,6 +513,17 @@
       </section>
 
       
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、-先说一下时钟的概念"><span class="nav-number">1.</span> <span class="nav-text">一、 先说一下时钟的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置系统时间"><span class="nav-number">1.1.</span> <span class="nav-text">设置系统时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置硬件时间"><span class="nav-number">1.2.</span> <span class="nav-text">设置硬件时间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、让系统时间和RTC时间同步。"><span class="nav-number">2.</span> <span class="nav-text">二、让系统时间和RTC时间同步。</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
 
     </div>
   </aside>
@@ -471,6 +619,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
