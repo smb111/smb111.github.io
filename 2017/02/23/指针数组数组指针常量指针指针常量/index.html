@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/23/指针数组数组指针常量指针指针常量/index.html">
 <meta property="og:site_name" content="Skymyweakness">
 <meta property="og:description" content="指针数组和数组指针、常量指针和指针常量区别">
-<meta property="og:updated_time" content="2017-02-24T01:56:51.472Z">
+<meta property="og:updated_time" content="2017-02-24T02:00:58.473Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="指针数组和数组指针、常量指针和指针常量">
 <meta name="twitter:description" content="指针数组和数组指针、常量指针和指针常量区别">
@@ -332,7 +332,7 @@
 <p>这里<strong>执行p+1是错误</strong>的，这样<strong>赋值也是错误的：p=a；</strong>因为p是个不可知的表示，只存在p[0]、p[1]、p[2]…p[n-1],而且它们分别是指针变量可以用来存放变量地址。但可以这样 <em>p=a; 这里</em>p表示指针数组第一个元素的值，a的首地址的值。<br>如要将二维数组赋给一指针数组:</p>
  <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> *p[<span class="number">3</span>];</div><div class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">4</span>];</div><div class="line"><span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</div><div class="line">p[i]=a[i];</div></pre></td></tr></table></figure>
 <p>这里int *p[3] 表示一个一维数组内存放着三个指针变量，分别是p[0]、p[1]、p[2]所以要分别赋值。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这样两者的区别就豁然开朗了，<strong>数组指针只是一个指针变量</strong>，似乎是C语言里专门用来指向二维数组的，它占有内存中一个指针的存储空间。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这样两者的区别就豁然开朗了，<font color="red" size="5"><strong>数组指针只是一个指针变量(行指针)</strong></font>，似乎是C语言里专门用来指向二维数组的，它占有内存中一个指针的存储空间。</p>
 <p>还需要说明的一点就是，同时用来指向二维数组时，其引用和用数组名引用都是一样的。<br>比如要表示数组中i行j列一个元素： </p>
  <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">*(p[i]+j)、*(*(p+i)+j)、(*(p+i))[j]、p[i][j]</div></pre></td></tr></table></figure>
 <hr>
