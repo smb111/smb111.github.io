@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/23/指针数组数组指针常量指针指针常量/index.html">
 <meta property="og:site_name" content="Skymyweakness">
 <meta property="og:description" content="指针数组和数组指针、常量指针和指针常量区别">
-<meta property="og:updated_time" content="2017-02-23T15:21:50.332Z">
+<meta property="og:updated_time" content="2017-02-24T01:56:51.472Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="指针数组和数组指针、常量指针和指针常量">
 <meta name="twitter:description" content="指针数组和数组指针、常量指针和指针常量区别">
@@ -310,7 +310,20 @@
       
         <h2 id="常量指针和指针常量"><a href="#常量指针和指针常量" class="headerlink" title="常量指针和指针常量"></a>常量指针和指针常量</h2><font color="red" size="5" face="楷体"><br>1.<em>（指针）和 const（常量） 谁在前先读谁 ；<br><br>2.</em>象征着地址，const象征着内容；<br><br>3<strong>.谁在前面谁就不允许改变。</strong><br></font>
 
- <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">	int a =3; </div><div class="line">	int b = 1;  </div><div class="line">	int c = 2;  </div><div class="line">	int const *p1 = &amp;b;//const 在前，定义为常量指针  </div><div class="line">	int *const p2 = &amp;c;//*在前，定义为指针常量 </div><div class="line"> ```  </div><div class="line"></div><div class="line"></div><div class="line">&lt;font color = "green"&gt; 从英文翻译上看更明白，常量指针（const pointer） &lt;/font&gt;</div><div class="line"></div><div class="line">**常量指针&lt;font color = "red"&gt; (const pointer) &lt;/font&gt;p1：**指向的地址可以变，但内容不可以重新赋值，内容的改变只能通过修改地址指向后变换。 </div><div class="line">  </div><div class="line">    p1 = &amp;a是正确的，但 *p1 = a是错误的。</div><div class="line"></div><div class="line">**指针常量&lt;font color = "red"&gt; (pointer to const) &lt;/font&gt;p2：**指向的地址不可以重新赋值，但内容可以改变，必须初始化，地址跟随一生。</div><div class="line"></div><div class="line">    p2= &amp;a是错误的，而*p2 = a 是正确的。</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line">## 指针数组和数组指针的区别及区分 ##</div><div class="line"></div><div class="line">### 数组指针（也称行指针）数组指针只是一个指针变量 ###</div><div class="line"></div><div class="line">&lt;font color = "red" size = 5&gt;定义: int (*p)[n]; &lt;/font&gt;</div><div class="line"></div><div class="line">&lt;font color="green" size=4&gt;**()优先级高**，首先说明p是一个指针，指向一个整型的一维数组,这个一维数组的长度是n，也可以说是p的步长。&lt;/font&gt;</div><div class="line"></div><div class="line">也就是说执行p+1时，p要跨过n个整型数据的长度。</div><div class="line"></div><div class="line">如要将二维数组赋给一指针，应这样赋值： </div><div class="line"></div><div class="line"> ```c</div><div class="line">	int a[3][4];</div><div class="line">	int (*p)[4]; //该语句是定义一个数组指针，指向含4个元素的一维数组。</div><div class="line">	p=a;        //将该二维数组的首地址赋给p，也就是a[0]或&amp;a[0][0]</div><div class="line">	p++;       //该语句执行过后，也就是p=p+1;p跨过行a[0][]指向了行a[1][]</div></pre></td></tr></table></figure>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a =<span class="number">3</span>; </div><div class="line"><span class="keyword">int</span> b = <span class="number">1</span>;  </div><div class="line"><span class="keyword">int</span> c = <span class="number">2</span>;  </div><div class="line"><span class="keyword">int</span> <span class="keyword">const</span> *p1 = &amp;b;<span class="comment">//const 在前，定义为常量指针  </span></div><div class="line"><span class="keyword">int</span> *<span class="keyword">const</span> p2 = &amp;c;<span class="comment">//*在前，定义为指针常量</span></div></pre></td></tr></table></figure>
+<font color="green"> 从英文翻译上看更明白，常量指针（const pointer） </font>
+
+<p><strong>常量指针<font color="red"> (const pointer) </font>p1：</strong>指向的地址可以变，但内容不可以重新赋值，内容的改变只能通过修改地址指向后变换。 </p>
+<pre><code>p1 = &amp;a是正确的，但 *p1 = a是错误的。
+</code></pre><p><strong>指针常量<font color="red"> (pointer to const) </font>p2：</strong>指向的地址不可以重新赋值，但内容可以改变，必须初始化，地址跟随一生。</p>
+<pre><code>p2= &amp;a是错误的，而*p2 = a 是正确的。
+</code></pre><h2 id="指针数组和数组指针的区别及区分"><a href="#指针数组和数组指针的区别及区分" class="headerlink" title="指针数组和数组指针的区别及区分"></a>指针数组和数组指针的区别及区分</h2><h3 id="数组指针（也称行指针）数组指针只是一个指针变量"><a href="#数组指针（也称行指针）数组指针只是一个指针变量" class="headerlink" title="数组指针（也称行指针）数组指针只是一个指针变量"></a>数组指针（也称行指针）数组指针只是一个指针变量</h3><font color="red" size="5">定义: int (*p)[n]; </font>
+
+<font color="green" size="4"><strong>()优先级高</strong>，首先说明p是一个指针，指向一个整型的一维数组,这个一维数组的长度是n，也可以说是p的步长。</font>
+
+<p>也就是说执行p+1时，p要跨过n个整型数据的长度。</p>
+<p>如要将二维数组赋给一指针，应这样赋值： </p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> a[<span class="number">3</span>][<span class="number">4</span>];</div><div class="line"><span class="keyword">int</span> (*p)[<span class="number">4</span>]; <span class="comment">//该语句是定义一个数组指针，指向含4个元素的一维数组。</span></div><div class="line">p=a;        <span class="comment">//将该二维数组的首地址赋给p，也就是a[0]或&amp;a[0][0]</span></div><div class="line">p++;       <span class="comment">//该语句执行过后，也就是p=p+1;p跨过行a[0][]指向了行a[1][]</span></div></pre></td></tr></table></figure>
 <p>所以数组指针也称指向一维数组的指针，亦称行指针。</p>
 <h3 id="指针数组-指针数组是多个指针变量"><a href="#指针数组-指针数组是多个指针变量" class="headerlink" title="指针数组 指针数组是多个指针变量"></a>指针数组 指针数组是多个指针变量</h3><font color="red" size="5">定义: int *p[n];</font> 
 
@@ -530,7 +543,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针和指针常量"><span class="nav-number">1.</span> <span class="nav-text">常量指针和指针常量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针数组-指针数组是多个指针变量"><span class="nav-number">1.1.</span> <span class="nav-text">指针数组 指针数组是多个指针变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.2.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针和指针常量"><span class="nav-number">1.</span> <span class="nav-text">常量指针和指针常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针数组和数组指针的区别及区分"><span class="nav-number">2.</span> <span class="nav-text">指针数组和数组指针的区别及区分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组指针（也称行指针）数组指针只是一个指针变量"><span class="nav-number">2.1.</span> <span class="nav-text">数组指针（也称行指针）数组指针只是一个指针变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针数组-指针数组是多个指针变量"><span class="nav-number">2.2.</span> <span class="nav-text">指针数组 指针数组是多个指针变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
