@@ -104,13 +104,13 @@
 
 <meta name="description" content="指针数组和数组指针、常量指针和指针常量区别">
 <meta property="og:type" content="article">
-<meta property="og:title" content="指针数组和数组指针、常量指针和指针常量">
+<meta property="og:title" content="指针数组和数组指针、常量指针和指针常量、函数指针">
 <meta property="og:url" content="http://yoursite.com/2017/02/23/指针数组数组指针常量指针指针常量/index.html">
 <meta property="og:site_name" content="Skymyweakness">
 <meta property="og:description" content="指针数组和数组指针、常量指针和指针常量区别">
-<meta property="og:updated_time" content="2017-02-24T02:00:58.473Z">
+<meta property="og:updated_time" content="2017-02-25T11:30:59.859Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="指针数组和数组指针、常量指针和指针常量">
+<meta name="twitter:title" content="指针数组和数组指针、常量指针和指针常量、函数指针">
 <meta name="twitter:description" content="指针数组和数组指针、常量指针和指针常量区别">
 
 
@@ -129,7 +129,7 @@
   };
 </script>
 
-  <title> 指针数组和数组指针、常量指针和指针常量 | Skymyweakness </title>
+  <title> 指针数组和数组指针、常量指针和指针常量、函数指针 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +249,7 @@
             
             
               
-                指针数组和数组指针、常量指针和指针常量
+                指针数组和数组指针、常量指针和指针常量、函数指针
               
             
           </h1>
@@ -338,6 +338,10 @@
 <hr>
 <p><strong>指针数组是多个指针变量</strong>，以数组形式存在内存当中，占有多个指针的存储空间。</p>
 <font color="red" size="8">优先级：()&gt;[]&gt;* </font>
+
+<h2 id="函数指针"><a href="#函数指针" class="headerlink" title="函数指针"></a>函数指针</h2><p>  根据上面的优先级顺序，不难知道函数指针的表示： </p>
+<pre><code>int (*p) (int ,int) // 首先 由(*p)知--p是一个指针，指向一个参数为(int ,int)返回值为int 的函数
+</code></pre>
       
     </div>
 
@@ -543,7 +547,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针和指针常量"><span class="nav-number">1.</span> <span class="nav-text">常量指针和指针常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针数组和数组指针的区别及区分"><span class="nav-number">2.</span> <span class="nav-text">指针数组和数组指针的区别及区分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组指针（也称行指针）数组指针只是一个指针变量"><span class="nav-number">2.1.</span> <span class="nav-text">数组指针（也称行指针）数组指针只是一个指针变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针数组-指针数组是多个指针变量"><span class="nav-number">2.2.</span> <span class="nav-text">指针数组 指针数组是多个指针变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#常量指针和指针常量"><span class="nav-number">1.</span> <span class="nav-text">常量指针和指针常量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#指针数组和数组指针的区别及区分"><span class="nav-number">2.</span> <span class="nav-text">指针数组和数组指针的区别及区分</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数组指针（也称行指针）数组指针只是一个指针变量"><span class="nav-number">2.1.</span> <span class="nav-text">数组指针（也称行指针）数组指针只是一个指针变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针数组-指针数组是多个指针变量"><span class="nav-number">2.2.</span> <span class="nav-text">指针数组 指针数组是多个指针变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">2.3.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数指针"><span class="nav-number">3.</span> <span class="nav-text">函数指针</span></a></li></ol></div>
             
           </div>
         </section>
