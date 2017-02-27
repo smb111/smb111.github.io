@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/27/返回值为引用的用意/index.html">
 <meta property="og:site_name" content="Skymyweakness">
 <meta property="og:description" content="返回值为引用的各种情况和用意">
-<meta property="og:updated_time" content="2017-02-27T13:09:59.156Z">
+<meta property="og:updated_time" content="2017-02-27T13:12:17.803Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数返回值为引用">
 <meta name="twitter:description" content="返回值为引用的各种情况和用意">
@@ -314,14 +314,15 @@
     int ret=i;
     return ret:
 }
-</code></pre><p>可以正确返回所引用的实蚕参的值，那么ret是不是从int转换成引用类型了？</p>
+</code></pre><p>可以正确返回所引用的实参的值，那么ret是不是从int转换成引用类型了？  // 有的编译器对返回局部变量的引用不会进行编译报错</p>
 <p>问题2：   上面那个函数可以正确编译返回但是这个(c++primer edition 4中的一个例子)：</p>
 <pre><code>string &amp;back(string &amp;i)
 {  
     string ret=i;
     return ret;               
 }
-</code></pre><p>就是编译错误，reference to a local variable or object。<br>能不能 详细的解释一下这个例子，不明白为什么返回的是局部对象的引用！</p>
+</code></pre><p>就是编译错误，reference to a local variable or object。 // 有的编译器对返回局部变量的引用不会进行编译报错 </p>
+<p>能不能 详细的解释一下这个例子，不明白为什么返回的是局部对象的引用！</p>
 <h1 id="函数返回值和返回引用是不同的"><a href="#函数返回值和返回引用是不同的" class="headerlink" title="函数返回值和返回引用是不同的"></a>函数返回值和返回引用是不同的</h1><p>函数返回值时会产生一个临时变量作为函数返回值的副本，而返回引用时不会产生值的副本，既然是引用，那引用谁呢？这个问题必须清楚，否则将无法理解返回引用到底是个什么概念。以下是几种引用情况：</p>
 <font color="red" size="5"><strong>1 、引用函数的参数，当然该参数也是一个引用</strong></font> 
 
