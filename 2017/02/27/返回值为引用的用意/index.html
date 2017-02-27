@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/02/27/返回值为引用的用意/index.html">
 <meta property="og:site_name" content="Skymyweakness">
 <meta property="og:description" content="返回值为引用的各种情况和用意">
-<meta property="og:updated_time" content="2017-02-27T13:07:11.407Z">
+<meta property="og:updated_time" content="2017-02-27T13:09:59.156Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="函数返回值为引用">
 <meta name="twitter:description" content="返回值为引用的各种情况和用意">
@@ -308,7 +308,21 @@
       
 
       
-        <h1 id="函数返回值和返回引用是不同的"><a href="#函数返回值和返回引用是不同的" class="headerlink" title="函数返回值和返回引用是不同的"></a>函数返回值和返回引用是不同的</h1><p>函数返回值时会产生一个临时变量作为函数返回值的副本，而返回引用时不会产生值的副本，既然是引用，那引用谁呢？这个问题必须清楚，否则将无法理解返回引用到底是个什么概念。以下是几种引用情况：</p>
+        <h1 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h1><p><a href="http://bbs.csdn.net/topics/110140635" target="_blank" rel="external">http://bbs.csdn.net/topics/110140635</a><br>问题1： 函数   </p>
+<pre><code>int &amp;back(int &amp;i)
+{  
+    int ret=i;
+    return ret:
+}
+</code></pre><p>可以正确返回所引用的实蚕参的值，那么ret是不是从int转换成引用类型了？</p>
+<p>问题2：   上面那个函数可以正确编译返回但是这个(c++primer edition 4中的一个例子)：</p>
+<pre><code>string &amp;back(string &amp;i)
+{  
+    string ret=i;
+    return ret;               
+}
+</code></pre><p>就是编译错误，reference to a local variable or object。<br>能不能 详细的解释一下这个例子，不明白为什么返回的是局部对象的引用！</p>
+<h1 id="函数返回值和返回引用是不同的"><a href="#函数返回值和返回引用是不同的" class="headerlink" title="函数返回值和返回引用是不同的"></a>函数返回值和返回引用是不同的</h1><p>函数返回值时会产生一个临时变量作为函数返回值的副本，而返回引用时不会产生值的副本，既然是引用，那引用谁呢？这个问题必须清楚，否则将无法理解返回引用到底是个什么概念。以下是几种引用情况：</p>
 <font color="red" size="5"><strong>1 、引用函数的参数，当然该参数也是一个引用</strong></font> 
 
  <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">const</span> <span class="built_in">string</span> &amp;<span class="title">shorterString</span><span class="params">(<span class="keyword">const</span> <span class="built_in">string</span> &amp;s1,<span class="keyword">const</span> <span class="built_in">string</span> &amp;s2)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> s1.size()&lt;s2.size()?s1:s2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -537,7 +551,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#函数返回值和返回引用是不同的"><span class="nav-number">1.</span> <span class="nav-text">函数返回值和返回引用是不同的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#典型的代码分析"><span class="nav-number">2.</span> <span class="nav-text">典型的代码分析</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题引入"><span class="nav-number">1.</span> <span class="nav-text">问题引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#函数返回值和返回引用是不同的"><span class="nav-number">2.</span> <span class="nav-text">函数返回值和返回引用是不同的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#典型的代码分析"><span class="nav-number">3.</span> <span class="nav-text">典型的代码分析</span></a></li></ol></div>
             
           </div>
         </section>
