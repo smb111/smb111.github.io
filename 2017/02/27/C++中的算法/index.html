@@ -1,0 +1,764 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++,算法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="C++中顺序容器关联容器以及容器适配器的相关STL算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++中的STL算法">
+<meta property="og:url" content="http://yoursite.com/2017/02/27/C++中的算法/index.html">
+<meta property="og:site_name" content="Skymyweakness">
+<meta property="og:description" content="C++中顺序容器关联容器以及容器适配器的相关STL算法">
+<meta property="og:updated_time" content="2017-02-28T12:47:47.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++中的STL算法">
+<meta name="twitter:description" content="C++中顺序容器关联容器以及容器适配器的相关STL算法">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> C++中的STL算法 | Skymyweakness </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Skymyweakness</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C++中的STL算法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-27T21:27:10+08:00" content="2017-02-27">
+              2017-02-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="STL算法简介"><a href="#STL算法简介" class="headerlink" title="STL算法简介"></a>STL算法简介</h1><p>STL中的算法大致可以分为以下七类:</p>
+<ol>
+<li>不变序列算法</li>
+<li>变值算法</li>
+<li>删除算法</li>
+<li>变序算法</li>
+<li>排序算法</li>
+<li>有序区间算法</li>
+<li>数值算法</li>
+</ol>
+<font color="red" size="4"><strong>大多重载的算法都是有两个版本的</strong></font>
+
+<ol>
+<li><strong>用 “==” 判断元素是否相等, 或用 “&lt;” 来比较大小</strong></li>
+<li><strong>多出一个类型参数 “Pred” 和函数形参 “Pred op”</strong></li>
+</ol>
+<p>通过表达式 “op(x,y)” 的返回值: ture/false判断x是否 “等于” y，或者x是否 “小于” y</p>
+<p>如下面的有两个版本的min_element:<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function">iterator <span class="title">min_element</span><span class="params">(iterator first, iterator last)</span></span>;</div><div class="line"><span class="function">iterator <span class="title">min_element</span><span class="params">(iterator first, iterator last, Pred op)</span></span>;</div></pre></td></tr></table></figure></p>
+<h1 id="不变序列算法"><a href="#不变序列算法" class="headerlink" title="不变序列算法"></a>不变序列算法</h1><ol>
+<li><font color="red" size="4"><strong>该类算法不会修改算法所作用的容器或对象</strong></font></li>
+<li><font color="red" size="4">适用于顺序容器和关联容器</font></li>
+<li>时间复杂度都是O(n)</li>
+</ol>
+<h2 id="常用不变序列算法"><a href="#常用不变序列算法" class="headerlink" title="常用不变序列算法"></a>常用不变序列算法</h2><h3 id="find-在区间中查找等于某值的元素"><a href="#find-在区间中查找等于某值的元素" class="headerlink" title="find: 在区间中查找等于某值的元素"></a>find: 在区间中查找等于某值的元素</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> InIt, <span class="keyword">class</span> T&gt;</div><div class="line"><span class="function">InIt <span class="title">find</span><span class="params">(InIt first, InIt last, <span class="keyword">const</span> T&amp; val)</span></span>;</div></pre></td></tr></table></figure>
+<p>返回区间 [first,last) 中的迭代器 i ,使得 * i == val</p>
+<h3 id="find-if-在区间中查找符合某条件的元素"><a href="#find-if-在区间中查找符合某条件的元素" class="headerlink" title="find_if:在区间中查找符合某条件的元素"></a>find_if:在区间中查找符合某条件的元素</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> InIt, <span class="keyword">class</span> Pred&gt;</div><div class="line"><span class="function">InIt <span class="title">find_if</span><span class="params">(InIt first, InIt last, Pred pr)</span></span>;</div></pre></td></tr></table></figure>
+<p>返回区间 [first,last) 中的迭代器 i, 使得 pr(*i) == true</p>
+<h3 id="for-each-对区间中的每个元素都做某种操作"><a href="#for-each-对区间中的每个元素都做某种操作" class="headerlink" title="for_each:对区间中的每个元素都做某种操作"></a>for_each:对区间中的每个元素都做某种操作</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> InIt, <span class="keyword">class</span> Fun&gt;</div><div class="line"><span class="function">Fun <span class="title">for_each</span><span class="params">(InIt first, InIt last, Fun f)</span></span>;</div></pre></td></tr></table></figure>
+<p>对[first, last)中的每个元素e, 执行f(e), 要求 f(e)不能改变e</p>
+<h3 id="count-计算区间中等于某值的元素个数"><a href="#count-计算区间中等于某值的元素个数" class="headerlink" title="count:计算区间中等于某值的元素个数"></a>count:计算区间中等于某值的元素个数</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> InIt, <span class="keyword">class</span> T&gt;</div><div class="line"><span class="keyword">size_t</span> count(InIt first, InIt last, <span class="keyword">const</span> T&amp; val);</div></pre></td></tr></table></figure>
+<p>计算[first, last) 中等于val的元素个数(x==y为true算等于)</p>
+<h3 id="count-if-计算区间中符合某种条件的元素个数"><a href="#count-if-计算区间中符合某种条件的元素个数" class="headerlink" title="count_if:计算区间中符合某种条件的元素个数"></a>count_if:计算区间中符合某种条件的元素个数</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> InIt, <span class="keyword">class</span> Pred&gt;</div><div class="line"><span class="keyword">size_t</span> count_if(InIt first, InIt last, Pred pr);</div></pre></td></tr></table></figure>
+<p>计算[first, last) 中符合pr(e) == true 的元素e的个数</p>
+<h3 id="min-element-求区间中的最小值-可自定义比较器"><a href="#min-element-求区间中的最小值-可自定义比较器" class="headerlink" title="min_element:求区间中的最小值(可自定义比较器)"></a>min_element:求区间中的最小值(可自定义比较器)</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> FwdIt&gt;</div><div class="line"><span class="function">FwdIt <span class="title">min_element</span><span class="params">(FwdIt first, FwdIt last)</span></span>;</div></pre></td></tr></table></figure>
+<p>返回[first,last) 中最小元素的迭代器, 以 “&lt;” 作比较器，<font color="red"> <strong> 最小指没有元素比它小, 而不是它比别的不同元素都小 </strong> </font>因为即便a!= b, a&lt;b 和b&lt;a有可能都不成立</p>
+<h3 id="max-element-求区间中的最大值-可自定义比较器"><a href="#max-element-求区间中的最大值-可自定义比较器" class="headerlink" title="max_element:求区间中的最大值(可自定义比较器)"></a>max_element:求区间中的最大值(可自定义比较器)</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> FwdIt&gt;</div><div class="line"><span class="function">FwdIt <span class="title">max_element</span><span class="params">(FwdIt first, FwdIt last)</span></span>;</div></pre></td></tr></table></figure>
+<p>返回[first,last) 中最大元素(不小于任何其他元素)的迭代器,默认以 “&lt;” 作比较器</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> A </div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> n;</div><div class="line">	A(<span class="keyword">int</span> i):n(i) &#123; &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>&lt;( <span class="keyword">const</span> A &amp; a1, <span class="keyword">const</span> A &amp; a2)</div><div class="line">&#123;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; “&lt; called” &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">if</span>( a1.n == <span class="number">3</span> &amp;&amp; a2.n == <span class="number">7</span> )</div><div class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></div><div class="line">	&#123;</div><div class="line">	A aa[] = &#123; <span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">1</span> &#125;;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; min_element(aa,aa+<span class="number">5</span>)-&gt;n &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; max_element(aa,aa+<span class="number">5</span>)-&gt;n &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">			输出：</div><div class="line">			&lt; called</div><div class="line">			&lt; called</div><div class="line">			&lt; called</div><div class="line">			&lt; called</div><div class="line">			<span class="number">3</span></div><div class="line">			&lt; called</div><div class="line">			&lt; called</div><div class="line">			&lt; called</div><div class="line">			&lt; called</div><div class="line">			<span class="number">7</span></div></pre></td></tr></table></figure>
+<h1 id="变值算法"><a href="#变值算法" class="headerlink" title="变值算法"></a>变值算法</h1><ol>
+<li>此类算法会修改源区间或目标区间元素的值</li>
+<li><font color="red" size="4">值被修改的那个区间, 不可以是属于关联容器的</font>
+
+</li>
+</ol>
+<h2 id="常用变值算法"><a href="#常用变值算法" class="headerlink" title="常用变值算法"></a>常用变值算法</h2><h3 id="copy-复制一个区间到别处"><a href="#copy-复制一个区间到别处" class="headerlink" title="copy: 复制一个区间到别处"></a>copy: 复制一个区间到别处</h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> InIt, <span class="keyword">class</span> OutIt&gt;</div><div class="line"><span class="function">OutIt <span class="title">copy</span><span class="params">(InIt first, InIt last, OutIt x)</span></span>;</div></pre></td></tr></table></figure>
+<p>本函数对每个在区间[0, last - first)中的N执行一次</p>
+<p><em>(x+N) = </em>(first + N), 返回 x + N</p>
+<p>对于copy(v.begin(),v.end(),output);</p>
+<p>first 和 last 的类型是 vector<int>::const_iterator</int></p>
+<p>output 的类型是 ostream_iterator<int></int></p>
+<p>copy 的源代码:<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> _II, <span class="keyword">class</span> _OI&gt;</div><div class="line"><span class="keyword">inline</span> _<span class="function">OI <span class="title">copy</span><span class="params">(_II _F, _II _L, _OI _X)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span> (; _F != _L; ++_X, ++_F)</div><div class="line">		*_X = *_F;</div><div class="line">	<span class="keyword">return</span> (_X);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="transform-将一个区间的元素变形后拷贝到另一个区间"><a href="#transform-将一个区间的元素变形后拷贝到另一个区间" class="headerlink" title="transform 将一个区间的元素变形后拷贝到另一个区间"></a>transform 将一个区间的元素变形后拷贝到另一个区间</h3><p>template<class init,="" class="" outit,="" unop=""><br>OutIt transform(InIt first, InIt last, OutIt x, Unop uop);</class></p>
+<p>对[first,last)中的每个迭代器I</p>
+<ul>
+<li>执行 uop( * I ); 并将结果依次放入从 x 开始的地方</li>
+<li>要求 uop( <em> I ) 不得改变 </em> I 的值</li>
+<li>本模板返回值是个迭代器, 即 x + (last-first), x可以和 first相等</li>
+</ul>
+<h2 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h2> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;numeric&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;list&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iterator&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> CLessThen9 </div><div class="line">&#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">( <span class="keyword">int</span> n)</span> </span>&#123; <span class="keyword">return</span> n &lt; <span class="number">9</span>; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">outputSquare</span><span class="params">(<span class="keyword">int</span> value )</span> </span>&#123; <span class="built_in">cout</span> &lt;&lt; value * value &lt;&lt; <span class="string">" "</span>; &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">calculateCube</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123; <span class="keyword">return</span> value * value * value; &#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">const</span> <span class="keyword">int</span> SIZE = <span class="number">10</span>;</div><div class="line">	<span class="keyword">int</span> a1[] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span> &#125;;</div><div class="line">	<span class="keyword">int</span> a2[] = &#123; <span class="number">100</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">50</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">2</span> &#125;;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(a1,a1+SIZE);</div><div class="line">	ostream_iterator&lt;<span class="keyword">int</span>&gt; output(<span class="built_in">cout</span>,<span class="string">" "</span>);</div><div class="line">	random_shuffle(v.begin(),v.end());</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"1) "</span>;</div><div class="line">	copy( v.begin(),v.end(),output);</div><div class="line">	copy( a2,a2+SIZE,v.begin());</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"2）"</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; count(v.begin(),v.end(),<span class="number">8</span>);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"3）"</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; count_if(v.begin(),v.end(),CLessThen9());</div><div class="line"></div><div class="line">					输出:</div><div class="line">					<span class="number">1</span>) <span class="number">5</span> <span class="number">4</span> <span class="number">1</span> <span class="number">3</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span> <span class="number">10</span> <span class="number">6</span> <span class="number">2</span></div><div class="line">					<span class="number">2</span>) <span class="number">2</span></div><div class="line">					<span class="number">3</span>) <span class="number">6</span></div><div class="line">	<span class="comment">//1) 是随机的</span></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"4) "</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; * (min_element(v.begin(), v.end()));</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"5) "</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; * (max_element(v.begin(), v.end()));</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"6) "</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; accumulate(v.begin(), v.end(), <span class="number">0</span>); <span class="comment">//求和</span></div><div class="line">	<span class="number">18</span></div><div class="line">					输出:</div><div class="line">					<span class="number">4</span>) <span class="number">1</span></div><div class="line">					<span class="number">5</span>) <span class="number">100</span></div><div class="line">					<span class="number">6</span>) <span class="number">193</span></div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"7) "</span>;</div><div class="line">	for_each(v.begin(), v.end(), outputSquare);</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; cubes(SIZE);</div><div class="line">	transform(a1, a1+SIZE, cubes.begin(), calculateCube);</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"8) "</span>;</div><div class="line">	copy(cubes.begin(), cubes.end(), output);</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line">		输出：</div><div class="line">		<span class="number">7</span>)<span class="number">10000</span> <span class="number">4</span> <span class="number">64</span> <span class="number">1</span> <span class="number">2500</span> <span class="number">9</span> <span class="number">64</span> <span class="number">81</span> <span class="number">100</span> <span class="number">4</span></div><div class="line">		<span class="number">8</span>)<span class="number">1</span> <span class="number">8</span> <span class="number">27</span> <span class="number">64</span> <span class="number">125</span> <span class="number">216</span> <span class="number">343</span> <span class="number">512</span> <span class="number">729</span> <span class="number">1000</span></div><div class="line"></div><div class="line">ostream_iterator&lt;<span class="keyword">int</span>&gt; output(<span class="built_in">cout</span> ,“ ”);</div><div class="line">定义了一个 ostream_iterator&lt;<span class="keyword">int</span>&gt; 对象,</div><div class="line">可以通过<span class="built_in">cout</span>输出以 “ ”(空格) 分隔的一个个整数</div><div class="line">copy (v.begin(), v.end(), output);</div><div class="line">导致v的内容在 <span class="built_in">cout</span>上输出</div></pre></td></tr></table></figure>
+<h1 id="删除算法"><a href="#删除算法" class="headerlink" title="删除算法"></a>删除算法</h1><p>删除一个容器里的某些元素</p>
+<font color="red" size="4">删除 – <strong>不会使容器里的元素减少</strong></font>
+
+<font size="4"><br>1.  将所有应该被删除的元素看做空位子<br>1.  用留下的元素从后往前移, 依次去填空位子<br>1.  元素往前移后, 它原来的位置也就算是空位子<br>1.  也应由后面的留下的元素来填上<br>1.  最后, 没有被填上的空位子, 维持其原来的值不变<br></font>
+
+<font color="red" size="4">删除算法不应作用于关联容器</font>
+
+<h2 id="常用删除算法"><a href="#常用删除算法" class="headerlink" title="常用删除算法"></a>常用删除算法</h2><p>remove : 删除区间中等于某个值的元素<br>remove_if :  删除区间中满足某种条件的元素<br>unique : 删除区间中连续相等的元素, 只留下一个(可自定义比较器(什么是相等可自定义默认使用 == ))返回最后删除的元素的后一个元素的迭代器（和begin相减就会知道还剩多少元素）<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> FwdIt&gt;</div><div class="line"><span class="function">FwdIt <span class="title">unique</span><span class="params">(FwdIt first, FwdIt last)</span></span>; <span class="comment">//用 == 比较是否等</span></div><div class="line"></div><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> FwdIt, <span class="keyword">class</span> Pred&gt;</div><div class="line"><span class="function">FwdIt <span class="title">unique</span><span class="params">(FwdIt first, FwdIt last, Pred pr)</span></span>; <span class="comment">//用 pr (x,y)为 true说明x和y相等</span></div></pre></td></tr></table></figure></p>
+<p>对[first,last) 这个序列中<font color="red">连续相等的元素</font>, 只留下第一个</p>
+<p><strong>返回值是迭代器</strong>, 指向元素删除后的区间的最后一个元素的后面</p>
+<h3 id="代码实现："><a href="#代码实现：" class="headerlink" title="代码实现："></a><strong>代码实现：</strong></h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</div><div class="line"><span class="keyword">int</span> a[<span class="number">5</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span> &#125;;</div><div class="line"><span class="keyword">int</span> b[<span class="number">6</span>] = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">6</span> &#125;;</div><div class="line">ostream_iterator&lt;<span class="keyword">int</span>&gt; oit(<span class="built_in">cout</span>,<span class="string">","</span>);</div><div class="line"><span class="keyword">int</span> * p = remove(a,a+<span class="number">5</span>,<span class="number">2</span>);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"1) "</span>; copy(a,a+<span class="number">5</span>,oit); <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//输出 1) 1,3,5,2,5,</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"2) "</span> &lt;&lt; p - a &lt;&lt; <span class="built_in">endl</span>; <span class="comment">//输出 2) 3</span></div><div class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(b,b+<span class="number">6</span>);</div><div class="line">remove(v.begin(), v.end(),<span class="number">2</span>);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"3) "</span>; copy(v.begin(), v.end(), oit); <span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="comment">//输出 3) 1,3,5,6,5,6,</span></div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"4) "</span>; <span class="built_in">cout</span> &lt;&lt; v.size() &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="comment">//v中的元素没有减少,输出 4) 6</span></div><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="变序算法"><a href="#变序算法" class="headerlink" title="变序算法"></a>变序算法</h1><ol>
+<li>变序算法改变容器中元素的顺序</li>
+<li>但是不改变元素的值</li>
+<li><font color="red" size="4">变序算法不适用于关联容器</font></li>
+<li>算法复杂度都是O(n)的</li>
+</ol>
+<h2 id="常用变序算法"><a href="#常用变序算法" class="headerlink" title="常用变序算法"></a>常用变序算法</h2><ol>
+<li>reverse 颠倒区间的前后次序</li>
+<li>next_permutation 将区间改为下一个排列(可自定义比较器)  比如 { 1,2，3 } 的排列， [1,2,3] 排列的下一个排列是 [1,3,2] 下一个 [2,1,3] 下一个 [2,3,1]  </li>
+<li>prev_permutation 将区间改为上一个排列(可自定义比较器)  </li>
+<li>random_shuffle 随机打乱区间内元素的顺序（适用于能随机访问的元素）</li>
+<li>stable_patition把区间内满足某个条件的元素移到前面,s不满足该条件的移到后面,而对这两部分元素, 分别保持它们原来的先后次序不变</li>
+</ol>
+<h3 id="代码实现：-1"><a href="#代码实现：-1" class="headerlink" title="代码实现："></a><strong>代码实现：</strong></h3> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">string</span> str = <span class="string">"231"</span>;</div><div class="line">	<span class="keyword">char</span> szStr[] = <span class="string">"324"</span>;</div><div class="line">	<span class="keyword">while</span> (next_permutation(str.begin(), str.end()))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"****"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">while</span> (next_permutation(szStr,szStr + <span class="number">3</span>))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; szStr &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125; </div><div class="line">				输出:</div><div class="line">				<span class="number">312</span></div><div class="line">				<span class="number">321</span></div><div class="line">				****</div><div class="line">				<span class="number">342</span></div><div class="line">				<span class="number">423</span></div><div class="line">				<span class="number">432</span></div><div class="line">	sort(str.begin(), str.end());</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"****"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	<span class="keyword">while</span> (next_permutation(str.begin(), str.end()))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; str &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">				输出:</div><div class="line">				<span class="number">132</span></div><div class="line">				<span class="number">213</span></div><div class="line">				<span class="number">231</span></div><div class="line">				<span class="number">312</span></div><div class="line">				<span class="number">321</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> a[] = &#123; <span class="number">8</span>,<span class="number">7</span>,<span class="number">10</span> &#125;;</div><div class="line">	<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; ls(a, a+<span class="number">3</span>);</div><div class="line">	<span class="keyword">while</span>( next_permutation(ls.begin(), ls.end())) </div><div class="line">	&#123;</div><div class="line">		<span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt;::iterator i;</div><div class="line">		<span class="keyword">for</span>( i = ls.begin(); i != ls.end(); ++i)</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; * i &lt;&lt; <span class="string">" "</span>;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">输出：</div><div class="line"><span class="number">8</span> <span class="number">10</span> <span class="number">7</span></div><div class="line"><span class="number">10</span> <span class="number">7</span> <span class="number">8</span></div><div class="line"><span class="number">10</span> <span class="number">8</span> <span class="number">7</span></div></pre></td></tr></table></figure>
+<h1 id="排序算法"><a href="#排序算法" class="headerlink" title="排序算法"></a>排序算法</h1><ol>
+<li>比前面的变序算法复杂度更高, 一般是O(nlog(n))</li>
+<li><font color="red" size="4">排序算法需要随机访问迭代器的支持</font></li>
+<li><font color="red" size="4">不适用于关联容器和list</font>
+
+</li>
+</ol>
+<h2 id="常用排序算法"><a href="#常用排序算法" class="headerlink" title="常用排序算法"></a>常用排序算法</h2><p>sort 将区间从小到大排序(可自定义比较器：缺省的话使用 &lt; 进行比较)<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> RanIt&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(RanIt first, RanIt last)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>按升序排序<br>判断x是否应比y靠前, 就看 x &lt; y 是否为true<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> RanIt, <span class="keyword">class</span> Pred&gt;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(RanIt first, RanIt last, Pred pr)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>按升序排序<br>判断x是否应比y靠前, 就看 pr(x,y) 是否为true</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">class</span> MyLess </div><div class="line">   &#123;</div><div class="line">	<span class="keyword">public</span>:</div><div class="line">	<span class="function"><span class="keyword">bool</span> <span class="title">operator</span><span class="params">()</span><span class="params">( <span class="keyword">int</span> n1,<span class="keyword">int</span> n2)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> (n1 % <span class="number">10</span>) &lt; ( n2 % <span class="number">10</span>);</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="keyword">int</span> a[] = &#123; <span class="number">14</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">111</span>,<span class="number">78</span> &#125;;</div><div class="line">	sort(a, a + <span class="number">5</span>, MyLess());</div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="keyword">for</span>( i = <span class="number">0</span>;i &lt; <span class="number">5</span>;i ++)</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	sort(a, a+<span class="number">5</span>, greater&lt;<span class="keyword">int</span>&gt;());</div><div class="line">	<span class="keyword">for</span>( i = <span class="number">0</span>;i &lt; <span class="number">5</span>;i ++)</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; a[i] &lt;&lt; <span class="string">" "</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="有序区间算法"><a href="#有序区间算法" class="headerlink" title="有序区间算法"></a>有序区间算法</h1><ol>
+<li>要求所操作的区间是已经从小到大排好序的</li>
+<li><font color="red" size="4">需要随机访问迭代器的支持</font></li>
+<li>有序区间算法不能用于关联容器和list</li>
+</ol>
+<h2 id="常用有序区间算法"><a href="#常用有序区间算法" class="headerlink" title="常用有序区间算法"></a>常用有序区间算法</h2><ol>
+<li>binary_search 判断区间中是否包含某个元素</li>
+<li>lower_bound 查找最后一个不小于某值的元素的位置</li>
+<li>upper_bound 查找第一个大于某值的元素的位置</li>
+<li>equal_range 同时获取lower_bound和upper_bound</li>
+<li>merge 合并两个有序区间到第三个区间</li>
+</ol>
+<p>binary_search：折半查找</p>
+<p>要求容器已经有序且支持随机访问迭代器, 返回是否找到<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> FwdIt, <span class="keyword">class</span> T&gt;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">binary_search</span><span class="params">(FwdIt first, FwdIt last, <span class="keyword">const</span> T&amp; val)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>上面这个版本, 比较两个元素x, y 大小时, 看 x &lt; y<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> FwdIt, <span class="keyword">class</span> T, <span class="keyword">class</span> Pred&gt;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">binary_search</span><span class="params">(FwdIt first, FwdIt last, <span class="keyword">const</span> T&amp; val, Pred pr)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>上面这个版本, 比较两个元素x, y 大小时, 若 pr(x,y) 为true, 则认为x小于y</p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Greater10</span><span class="params">(<span class="keyword">int</span> n)</span> </span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> n &gt; <span class="number">10</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">const</span> <span class="keyword">int</span> SIZE = <span class="number">10</span>;</div><div class="line">	<span class="keyword">int</span> a1[] = &#123; <span class="number">2</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">50</span>,<span class="number">3</span>,<span class="number">100</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">10</span>,<span class="number">2</span> &#125;;</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v(a1,a1+SIZE);</div><div class="line">	ostream_iterator&lt;<span class="keyword">int</span>&gt; output(<span class="built_in">cout</span>,<span class="string">" "</span>);</div><div class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator location;</div><div class="line">	location = find(v.begin(),v.end(),<span class="number">10</span>);</div><div class="line">	<span class="keyword">if</span>( location != v.end()) </div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"1) "</span> &lt;&lt; location - v.begin();</div><div class="line">	&#125;</div><div class="line">	location = find_if( v.begin(),v.end(),Greater10);</div><div class="line">	<span class="keyword">if</span>( location != v.end())</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"2) "</span> &lt;&lt; location - v.begin();</div><div class="line">					输出:</div><div class="line">					<span class="number">1</span>) <span class="number">8</span></div><div class="line">					<span class="number">2</span>) <span class="number">3</span></div><div class="line">	sort(v.begin(),v.end());</div><div class="line">	<span class="keyword">if</span>( binary_search(v.begin(),v.end(),<span class="number">9</span>)) </div><div class="line">	&#123;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="string">"3) "</span> &lt;&lt; <span class="string">"9 found"</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="bitset类模板"><a href="#bitset类模板" class="headerlink" title="bitset类模板"></a>bitset类模板</h1><p>bitset ：<br> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">size_t</span> N&gt;</div><div class="line"><span class="keyword">class</span> <span class="built_in">bitset</span></div><div class="line">&#123;</div><div class="line">	…..</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>实际使用的时候, N是个整型常数</p>
+<p>如:</p>
+<p>• bitset<40> bst;<br>• bst是一个由40位组成的对象<br>• 用bitset的函数可以方便地访问任何一位</40></p>
+ <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">bitset</span>的成员函数:</div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; <span class="keyword">operator</span>&amp;=(<span class="keyword">const</span> <span class="built_in">bitset</span>&lt;N&gt;&amp; rhs);</div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; <span class="keyword">operator</span>|=(<span class="keyword">const</span> <span class="built_in">bitset</span>&lt;N&gt;&amp; rhs);</div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; <span class="keyword">operator</span>^=(<span class="keyword">const</span> <span class="built_in">bitset</span>&lt;N&gt;&amp; rhs);</div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; <span class="keyword">operator</span>&lt;&lt;=(<span class="keyword">size_t</span> num);</div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; <span class="keyword">operator</span>&gt;&gt;=(<span class="keyword">size_t</span> num);</div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; <span class="built_in">set</span>(); <span class="comment">//全部设成1</span></div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; <span class="built_in">set</span>(<span class="keyword">size_t</span> pos, <span class="keyword">bool</span> val = <span class="literal">true</span>); <span class="comment">//设置某位</span></div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; reset(); <span class="comment">//全部设成0</span></div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; reset(<span class="keyword">size_t</span> pos); <span class="comment">//某位设成0</span></div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; flip(); <span class="comment">//全部翻转</span></div><div class="line">• <span class="built_in">bitset</span>&lt;N&gt;&amp; flip(<span class="keyword">size_t</span> pos); <span class="comment">//翻转某位 </span></div><div class="line"></div><div class="line">reference <span class="keyword">operator</span>[](<span class="keyword">size_t</span> pos); <span class="comment">//返回对某位的引用</span></div><div class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>[](<span class="keyword">size_t</span> pos) <span class="keyword">const</span>; <span class="comment">//判断某位是否为1</span></div><div class="line"><span class="function">reference <span class="title">at</span><span class="params">(<span class="keyword">size_t</span> pos)</span></span>;</div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">at</span><span class="params">(<span class="keyword">size_t</span> pos)</span> <span class="keyword">const</span></span>;</div><div class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">to_ulong</span><span class="params">()</span> <span class="keyword">const</span></span>; <span class="comment">//转换成整数</span></div><div class="line"><span class="function"><span class="built_in">string</span> <span class="title">to_string</span><span class="params">()</span> <span class="keyword">const</span></span>; <span class="comment">//转换成字符串</span></div><div class="line"><span class="keyword">size_t</span> count() <span class="keyword">const</span>; <span class="comment">//计算1的个数</span></div><div class="line"><span class="keyword">size_t</span> size() <span class="keyword">const</span>;</div><div class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>==(<span class="keyword">const</span> <span class="built_in">bitset</span>&lt;N&gt;&amp; rhs) <span class="keyword">const</span>;</div><div class="line"><span class="keyword">bool</span> <span class="keyword">operator</span>!=(<span class="keyword">const</span> <span class="built_in">bitset</span>&lt;N&gt;&amp; rhs) <span class="keyword">const</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">test</span><span class="params">(<span class="keyword">size_t</span> pos)</span> <span class="keyword">const</span></span>; <span class="comment">//测试某位是否为 1</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">any</span><span class="params">()</span> <span class="keyword">const</span></span>; <span class="comment">//是否有某位为1</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">none</span><span class="params">()</span> <span class="keyword">const</span></span>; <span class="comment">//是否全部为0</span></div><div class="line"><span class="built_in">bitset</span>&lt;N&gt; <span class="keyword">operator</span>&lt;&lt;(<span class="keyword">size_t</span> pos) <span class="keyword">const</span>;</div><div class="line"><span class="built_in">bitset</span>&lt;N&gt; <span class="keyword">operator</span>&gt;&gt;(<span class="keyword">size_t</span> pos) <span class="keyword">const</span>;</div><div class="line"><span class="built_in">bitset</span>&lt;N&gt; <span class="keyword">operator</span>~();</div><div class="line"><span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">size_t</span> bitset_size = N;</div><div class="line">注意: 第<span class="number">0</span>位在最右边</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+            <a href="/tags/算法/" rel="tag">#算法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/27/返回值为引用的用意/" rel="next" title="函数返回值为引用">
+                <i class="fa fa-chevron-left"></i> 函数返回值为引用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="sdu-zyq" />
+          <p class="site-author-name" itemprop="name">sdu-zyq</p>
+          <p class="site-description motion-element" itemprop="description">Studies pass into and influence manners</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/smb111" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://219.231.143.34/" target="_blank" title="Lab517">
+                  
+                    <i class="fa fa-fw fa-building"></i>
+                  
+                  Lab517
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2446286071/home?wvr=5&lf=reg" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://gradms.sdu.edu.cn/login" target="_blank" title="SDU">
+                  
+                    <i class="fa fa-fw fa-star"></i>
+                  
+                  SDU
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.nowcoder.com/3883768" target="_blank" title="NewCoder">
+                  
+                    <i class="fa fa-fw fa-code"></i>
+                  
+                  NewCoder
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" title="Google">
+                  
+                    <i class="fa fa-fw fa-google"></i>
+                  
+                  Google
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#STL算法简介"><span class="nav-number">1.</span> <span class="nav-text">STL算法简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不变序列算法"><span class="nav-number">2.</span> <span class="nav-text">不变序列算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用不变序列算法"><span class="nav-number">2.1.</span> <span class="nav-text">常用不变序列算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#find-在区间中查找等于某值的元素"><span class="nav-number">2.1.1.</span> <span class="nav-text">find: 在区间中查找等于某值的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#find-if-在区间中查找符合某条件的元素"><span class="nav-number">2.1.2.</span> <span class="nav-text">find_if:在区间中查找符合某条件的元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-each-对区间中的每个元素都做某种操作"><span class="nav-number">2.1.3.</span> <span class="nav-text">for_each:对区间中的每个元素都做某种操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count-计算区间中等于某值的元素个数"><span class="nav-number">2.1.4.</span> <span class="nav-text">count:计算区间中等于某值的元素个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#count-if-计算区间中符合某种条件的元素个数"><span class="nav-number">2.1.5.</span> <span class="nav-text">count_if:计算区间中符合某种条件的元素个数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#min-element-求区间中的最小值-可自定义比较器"><span class="nav-number">2.1.6.</span> <span class="nav-text">min_element:求区间中的最小值(可自定义比较器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#max-element-求区间中的最大值-可自定义比较器"><span class="nav-number">2.1.7.</span> <span class="nav-text">max_element:求区间中的最大值(可自定义比较器)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现"><span class="nav-number">2.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变值算法"><span class="nav-number">3.</span> <span class="nav-text">变值算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用变值算法"><span class="nav-number">3.1.</span> <span class="nav-text">常用变值算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#copy-复制一个区间到别处"><span class="nav-number">3.1.1.</span> <span class="nav-text">copy: 复制一个区间到别处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transform-将一个区间的元素变形后拷贝到另一个区间"><span class="nav-number">3.1.2.</span> <span class="nav-text">transform 将一个区间的元素变形后拷贝到另一个区间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码实现-1"><span class="nav-number">3.2.</span> <span class="nav-text">代码实现</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#删除算法"><span class="nav-number">4.</span> <span class="nav-text">删除算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用删除算法"><span class="nav-number">4.1.</span> <span class="nav-text">常用删除算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现："><span class="nav-number">4.1.1.</span> <span class="nav-text">代码实现：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#变序算法"><span class="nav-number">5.</span> <span class="nav-text">变序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用变序算法"><span class="nav-number">5.1.</span> <span class="nav-text">常用变序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码实现：-1"><span class="nav-number">5.1.1.</span> <span class="nav-text">代码实现：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序算法"><span class="nav-number">6.</span> <span class="nav-text">排序算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用排序算法"><span class="nav-number">6.1.</span> <span class="nav-text">常用排序算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有序区间算法"><span class="nav-number">7.</span> <span class="nav-text">有序区间算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#常用有序区间算法"><span class="nav-number">7.1.</span> <span class="nav-text">常用有序区间算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#bitset类模板"><span class="nav-number">8.</span> <span class="nav-text">bitset类模板</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sdu-zyq</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
