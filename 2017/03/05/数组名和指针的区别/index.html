@@ -108,7 +108,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/03/05/数组名和指针的区别/index.html">
 <meta property="og:site_name" content="Skymyweakness">
 <meta property="og:description" content="数组名和指针变量的区别很大，数组名可以当指针来用，但不是指针变量，指针变量占有单独的存储空间">
-<meta property="og:updated_time" content="2017-03-05T12:52:38.279Z">
+<meta property="og:updated_time" content="2017-03-05T13:35:29.477Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数组名和指针变量的区别">
 <meta name="twitter:description" content="数组名和指针变量的区别很大，数组名可以当指针来用，但不是指针变量，指针变量占有单独的存储空间">
@@ -329,7 +329,9 @@
 <li><code>int *p; int array[10]; p = array;</code>  p 就是一个指针变量  <code>sizeof(p) = sizeof(int *): 4</code></li>
 <li><code>char str[16];</code> str是一个指针（他就是一个内存地址），并不是一个指针变量； <code>sizeof(str) = 16;</code></li>
 </ol>
-<p><font color="red" size="5"> 上面两条，说明了使用 sizeof(数组名)得到的是整个数组的空间大小，sizeof(指针变量，哪怕指向的是一个数组的首地址仍然是该类型指针变量的空间大小)</font></p>
+<font color="red" size="5"> 上面两条，说明了使用 sizeof(数组名)得到的是整个数组的空间大小，sizeof(指针变量，哪怕指向的是一个数组的首地址仍然是该类型指针变量的空间大小) </font>
+
+<h1 id="如果要获得一个字符串数组的长度，通过指针变量也是可以实现的-“"><a href="#如果要获得一个字符串数组的长度，通过指针变量也是可以实现的-“" class="headerlink" title="如果要获得一个字符串数组的长度，通过指针变量也是可以实现的 “"></a>如果要获得一个字符串数组的长度，通过指针变量也是可以实现的 “</h1> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> str[] = <span class="string">"string"</span>;</div><div class="line"><span class="keyword">char</span> *p = str;</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="built_in">strlen</span>(p) &lt;&lt; <span class="built_in">endl</span>;    <span class="comment">//  和 strlen(str) 是一样的效果，目前其他变量类型的数组我还没有好方法</span></div></pre></td></tr></table></figure>
 
       
     </div>
@@ -538,7 +540,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组名和指针的区别"><span class="nav-number">1.</span> <span class="nav-text">数组名和指针的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先要清楚指针和指针变量："><span class="nav-number">1.1.</span> <span class="nav-text">首先要清楚指针和指针变量：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序解释"><span class="nav-number">2.</span> <span class="nav-text">程序解释</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组名和指针的区别"><span class="nav-number">1.</span> <span class="nav-text">数组名和指针的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先要清楚指针和指针变量："><span class="nav-number">1.1.</span> <span class="nav-text">首先要清楚指针和指针变量：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序解释"><span class="nav-number">2.</span> <span class="nav-text">程序解释</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如果要获得一个字符串数组的长度，通过指针变量也是可以实现的-“"><span class="nav-number">3.</span> <span class="nav-text">如果要获得一个字符串数组的长度，通过指针变量也是可以实现的 “</span></a></li></ol></div>
             
           </div>
         </section>
