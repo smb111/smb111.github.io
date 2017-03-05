@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="SecureCRT," />
+  <meta name="keywords" content="C++,知识点," />
 
 
 
@@ -102,25 +102,16 @@
 
 
 
-<meta name="description" content="安装：dpkg -i scrt-7.3.1-685.ubuntu13.i386.deb
-apt-get install openssh-server
-破解：wget http://download.boll.me/securecrt_linux_crack.pl
-sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
+<meta name="description" content="数组名和指针变量的区别很大，数组名可以当指针来用，但不是指针变量，指针变量占有单独的存储空间">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ubuntu下安装SecureCRT步骤">
-<meta property="og:url" content="http://yoursite.com/2017/03/02/ubuntu下安装SecureCRT/index.html">
+<meta property="og:title" content="数组名和指针变量的区别">
+<meta property="og:url" content="http://yoursite.com/2017/03/05/数组名和指针的区别/index.html">
 <meta property="og:site_name" content="Skymyweakness">
-<meta property="og:description" content="安装：dpkg -i scrt-7.3.1-685.ubuntu13.i386.deb
-apt-get install openssh-server
-破解：wget http://download.boll.me/securecrt_linux_crack.pl
-sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
-<meta property="og:updated_time" content="2017-03-02T08:40:20.223Z">
+<meta property="og:description" content="数组名和指针变量的区别很大，数组名可以当指针来用，但不是指针变量，指针变量占有单独的存储空间">
+<meta property="og:updated_time" content="2017-03-05T12:49:50.512Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ubuntu下安装SecureCRT步骤">
-<meta name="twitter:description" content="安装：dpkg -i scrt-7.3.1-685.ubuntu13.i386.deb
-apt-get install openssh-server
-破解：wget http://download.boll.me/securecrt_linux_crack.pl
-sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
+<meta name="twitter:title" content="数组名和指针变量的区别">
+<meta name="twitter:description" content="数组名和指针变量的区别很大，数组名可以当指针来用，但不是指针变量，指针变量占有单独的存储空间">
 
 
 
@@ -138,7 +129,7 @@ sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
   };
 </script>
 
-  <title> ubuntu下安装SecureCRT步骤 | Skymyweakness </title>
+  <title> 数组名和指针变量的区别 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -258,7 +249,7 @@ sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
             
             
               
-                ubuntu下安装SecureCRT步骤
+                数组名和指针变量的区别
               
             
           </h1>
@@ -270,8 +261,8 @@ sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-02T16:36:32+08:00" content="2017-03-02">
-              2017-03-02
+            <time itemprop="dateCreated" datetime="2017-03-05T20:20:50+08:00" content="2017-03-05">
+              2017-03-05
             </time>
           </span>
 
@@ -284,8 +275,8 @@ sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Ubuntu-Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Ubuntu-Linux</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
 
@@ -317,10 +308,29 @@ sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
       
 
       
-        <h1 id="安装："><a href="#安装：" class="headerlink" title="安装："></a>安装：</h1><p>dpkg -i scrt-7.3.1-685.ubuntu13.i386.deb</p>
-<p>apt-get install openssh-server</p>
-<h2 id="破解："><a href="#破解：" class="headerlink" title="破解："></a>破解：</h2><p>wget <a href="http://download.boll.me/securecrt_linux_crack.pl" target="_blank" rel="external">http://download.boll.me/securecrt_linux_crack.pl</a></p>
-<p>sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT </p>
+        <h1 id="数组名和指针的区别"><a href="#数组名和指针的区别" class="headerlink" title="数组名和指针的区别"></a>数组名和指针的区别</h1><font color="red" size="6"> 数组名不是指针变量</font>
+
+
+
+<font color="blue">首先看C标准对指针的解释为：指针是一个变量，变量的值是另外一个变量的地址。那么，既然指针是变量，那么指针必然有自己的存储空间，只不过是该存储空间内的值是一个地址值，而不是别的内容。如果按照林博士的观点“数组名就是指针”，想必，数组名也会是一个变量，而且有自己的存储空间？下面上汇编代码反驳之，汇编代码没有骗我们，<strong>数组名仅仅是一个符号，不是变量，</strong>它没有自己的存储空间，而指针实实在在的是个变量，有自己的空间。</font>
+
+
+<p>以上观点引自<a href="http://blog.csdn.net/yby4769250/article/details/7294718" target="_blank" rel="external">http://blog.csdn.net/yby4769250/article/details/7294718</a>。</p>
+<p>林博士说的没错，数组名确实是一个指针（指针是一个概念：就是一个内存地址），但是数组名不是一个指针变量，没有自己的存储空间。</p>
+<h2 id="首先要清楚指针和指针变量："><a href="#首先要清楚指针和指针变量：" class="headerlink" title="首先要清楚指针和指针变量："></a>首先要清楚指针和指针变量：</h2><ul>
+<li>一个变量的(内存)地址称为该变量的“指针”，通过指针能找到以它为地址的内存单元。</li>
+<li><p>而指针变量是用来存放另一个变量的地址的(即指针)。</p>
+</li>
+<li><p>指针变量，顾名思义，就是一个<strong>变量</strong>，其值是可变的，与整形变量、浮点变量等等的命名规则完全相同。</p>
+</li>
+<li>“指针”是<strong>概念</strong>，“指针变量”是具体实现。</li>
+<li>指针也是一个变量,所以需要我们进行定义,而对于指针的定义,与一般变量一样.</li>
+</ul>
+<h1 id="程序解释"><a href="#程序解释" class="headerlink" title="程序解释"></a>程序解释</h1><ol>
+<li><code>int *p; int array[10]; p = array;</code>  p 就是一个指针变量  <code>sizeof(p) = sizeof(int *): 4</code></li>
+<li><code>char str[16];</code> str是一个指针（他就是一个内存地址），并不是一个指针变量； <code>sizeof(str) = 16;</code></li>
+</ol>
+<p><font color="red" size="5"> 上面两条，说明了使用 sizeof(数组名)得到的是整个数组的空间大小，sizeof(指针变量，哪怕指向的是一个数组的首地址仍然是该类型指针变量的空间大小)</font></p>
 
       
     </div>
@@ -342,7 +352,9 @@ sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
       
         <div class="post-tags">
           
-            <a href="/tags/SecureCRT/" rel="tag">#SecureCRT</a>
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+            <a href="/tags/知识点/" rel="tag">#知识点</a>
           
         </div>
       
@@ -351,17 +363,13 @@ sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/02/修改ARM板的静态IP/" rel="next" title="修改ARM板的静态IP">
-                <i class="fa fa-chevron-left"></i> 修改ARM板的静态IP
+              <a href="/2017/03/02/ubuntu下查看串口设备信息/" rel="next" title="ubuntu下查看串口设备信息">
+                <i class="fa fa-chevron-left"></i> ubuntu下查看串口设备信息
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/02/ubuntu下查看串口设备信息/" rel="prev" title="ubuntu下查看串口设备信息">
-                ubuntu下查看串口设备信息 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -531,7 +539,7 @@ sudo perl securecrt_linux_crack.pl /usr/bin/SecureCRT">
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装："><span class="nav-number">1.</span> <span class="nav-text">安装：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#破解："><span class="nav-number">1.1.</span> <span class="nav-text">破解：</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数组名和指针的区别"><span class="nav-number">1.</span> <span class="nav-text">数组名和指针的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先要清楚指针和指针变量："><span class="nav-number">1.1.</span> <span class="nav-text">首先要清楚指针和指针变量：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序解释"><span class="nav-number">2.</span> <span class="nav-text">程序解释</span></a></li></ol></div>
             
           </div>
         </section>
