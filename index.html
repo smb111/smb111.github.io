@@ -252,7 +252,7 @@
               
                 
                 <a class="post-title-link" href="/2017/03/10/Qt程序打包发布方法（使用官方提供的windeployqt工具）/" itemprop="url">
-                  未命名
+                  Qt程序打包发布方法（使用官方提供的windeployqt工具）
                 </a>
               
             
@@ -270,6 +270,25 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/QT/" itemprop="url" rel="index">
+                    <span itemprop="name">QT</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -294,9 +313,12 @@
 
       
         
-          
-            
-          
+          Qt程序打包发布方法（使用官方提供的windeployqt工具），不用手动添加QT的库文件
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/10/Qt程序打包发布方法（使用官方提供的windeployqt工具）/">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -345,7 +367,7 @@
               
                 
                 <a class="post-title-link" href="/2017/03/08/字符驱动编程模型/" itemprop="url">
-                  未命名
+                  字符驱动编程
                 </a>
               
             
@@ -363,6 +385,25 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ARM驱动/" itemprop="url" rel="index">
+                    <span itemprop="name">ARM驱动</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -387,84 +428,12 @@
 
       
         
-          
-            <p><img src="http://i.imgur.com/tKUy7th.png" alt=""></p>
- <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">int alloc_chrdev_region(dev_t *dev, unsigned baseminor, unsigned count,const char *name)  // 动态分配主设备号</div><div class="line">dev：就是被分配的主设备号</div><div class="line">baseminor：次设备号从几开始</div><div class="line">count : 设备个数</div><div class="line">name ： 设备名字： cat /proc/dev  里面显示的就是这个名字</div><div class="line"></div><div class="line">struct file_operations &#123;</div><div class="line">struct module *owner;</div><div class="line">loff_t (*llseek) (struct file *, loff_t, int);</div><div class="line">ssize_t (*read) (struct file *, char __user *, size_t, loff_t *);</div><div class="line">ssize_t (*write) (struct file *, const char __user *, size_t, loff_t *);</div><div class="line">ssize_t (*aio_read) (struct kiocb *, const struct iovec *, unsigned long, loff_t);</div><div class="line">ssize_t (*aio_write) (struct kiocb *, const struct iovec *, unsigned long, loff_t);</div><div class="line">int (*readdir) (struct file *, void *, filldir_t);</div><div class="line">unsigned int (*poll) (struct file *, struct poll_table_struct *);</div><div class="line">int (*ioctl) (struct inode *, struct file *, unsigned int, unsigned long);</div><div class="line">long (*unlocked_ioctl) (struct file *, unsigned int, unsigned long);</div><div class="line">long (*compat_ioctl) (struct file *, unsigned int, unsigned long);</div><div class="line">int (*mmap) (struct file *, struct vm_area_struct *);</div><div class="line">int (*open) (struct inode *, struct file *);</div><div class="line">int (*flush) (struct file *, fl_owner_t id);</div><div class="line">int (*release) (struct inode *, struct file *);</div><div class="line">int (*fsync) (struct file *, struct dentry *, int datasync);</div><div class="line">int (*aio_fsync) (struct kiocb *, int datasync);</div><div class="line">int (*fasync) (int, struct file *, int);</div><div class="line">int (*lock) (struct file *, int, struct file_lock *);</div><div class="line">ssize_t (*sendpage) (struct file *, struct page *, int, size_t, loff_t *, int);</div><div class="line">unsigned long (*get_unmapped_area)(struct file *, unsigned long, unsigned long, unsigned long, unsigned long);</div><div class="line">int (*check_flags)(int);</div><div class="line">int (*flock) (struct file *, int, struct file_lock *);</div><div class="line">ssize_t (*splice_write)(struct pipe_inode_info *, struct file *, loff_t *, size_t, unsigned int);</div><div class="line">ssize_t (*splice_read)(struct file *, loff_t *, struct pipe_inode_info *, size_t, unsigned int);</div><div class="line">int (*setlease)(struct file *, long, struct file_lock **);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h2 id="read操作函数"><a href="#read操作函数" class="headerlink" title="read操作函数"></a>read操作函数</h2><pre><code>ssize_t (*read) (struct file *, char __user *, size_t, loff_t *);
-
-struct file * ： 一个打开的文件，linux内核会关联一个 struct file 
-char __user * buffer ： 用户空间 传入的参数 - 缓存区
-size_t count : 用户空间 传入的要读的字节数
-loff_t *ppos : 文件的读写位置，由内核从file结构中取出后，传递进来.  可以通过 lseek 对文件的读写起始位置进行设置
-</code></pre><p>static inline long copy_to_user(void __user <em>to,<br>        const void </em>from, unsigned long n)  </p>
-<h2 id="ioctl的系统调用和驱动中的操作函数"><a href="#ioctl的系统调用和驱动中的操作函数" class="headerlink" title="ioctl的系统调用和驱动中的操作函数"></a>ioctl的系统调用和驱动中的操作函数</h2><p>系统调用;<br> <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/ioctl.h&gt;</span></span></div><div class="line">   <span class="function"><span class="keyword">int</span> <span class="title">ioctl</span><span class="params">(<span class="keyword">int</span> d, <span class="keyword">int</span> request, ...)</span></span>;</div><div class="line"></div><div class="line"><span class="keyword">int</span> d : 设备文件操作符 fd</div><div class="line"><span class="keyword">int</span> request : 命令cmd</div><div class="line">... : 可选的参数，补充前面的命令参数的，比如设置波特率的数值，但是如果是reset的话就不需要附加参数了</div></pre></td></tr></table></figure></p>
-<p>驱动中的操作函数：</p>
- <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// 2.6.36之前的内核使用ioctl</span></div><div class="line"><span class="keyword">int</span> (*ioctl) (<span class="keyword">struct</span> inode *, <span class="keyword">struct</span> file *, <span class="keyword">unsigned</span> <span class="keyword">int</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>);</div><div class="line"><span class="comment">// 2.6.36之后的内核使用 unlocked_ioctl</span></div><div class="line">   <span class="keyword">long</span> (*unlocked_ioctl) (<span class="keyword">struct</span> file *, <span class="keyword">unsigned</span> <span class="keyword">int</span>, <span class="keyword">unsigned</span> <span class="keyword">long</span>);</div><div class="line">   </div><div class="line">   <span class="keyword">struct</span> file * ： 一个打开的文件，linux内核会关联一个 <span class="keyword">struct</span> file </div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">int</span> cmd : 从用户控件的系统调用传过来的</div><div class="line"><span class="keyword">unsigned</span> <span class="keyword">long</span> arg : 对应着用户控件传来的第三个参数</div></pre></td></tr></table></figure>
-<p><font color="red">命令从其实质而言就是一个整数</font>, 但为了让这个整数具备更好的可读性，我们通常会把这个整数分为几个段：</p>
-<p>类型（8位），序号，参数传送方向，参数长度。</p>
-<ul>
-<li>Type(类型/<font color="red">幻数</font>): 表明这是属于哪个设备的命令。</li>
-<li>Number(序号)，用来区分同一设备的不同命令</li>
-<li>Direction：参数传送的方向，可能的值是 _IOC_NONE(没有数据传输), _IOC_READ, _IOC_WRITE（向设备写入参数）</li>
-<li>Size： 参数长度</li>
-</ul>
-<p>Linux系统提供了下面的宏来帮助定义命令:</p>
-<ol>
-<li>_IO(type,nr)：不带参数的命令</li>
-<li>_IOR(type,nr,datatype)：从设备中读参数的命令</li>
-<li>_IOW(type,nr,datatype)：向设备写入参数的命令</li>
-</ol>
-<p>例如：</p>
-<pre><code>#define MEM_MAGIC ‘m’ //定义幻数，type 8位的，所以使用字母表示即可
-#define MEM_SET _IOW(MEM_MAGIC, 0, int)  // MEM_MAGIC对应设备，0对应第几个命令，_IOW向设备写入参数，传输的参数是int
-</code></pre><p><code>unlocked_ioctl</code>函数的实现通常是根据命令执行的一个switch语句。但是，当命令号不能匹配任何一个设备所支持的命令时，返回-EINVAL.</p>
-<h3 id="编程模型："><a href="#编程模型：" class="headerlink" title="编程模型："></a>编程模型：</h3><pre><code>Switch cmd
-Case 命令A：
-//执行A对应的操作
-Case 命令B：
-//执行B对应的操作
-Default:
-// return -EINVAL   error invalid value
-</code></pre><h2 id="IO操作"><a href="#IO操作" class="headerlink" title="IO操作"></a>IO操作</h2><p>第一步： 配置 GPIO 输入输出<br>第二部： 向 data 寄存器写入 0/1</p>
-<p>字符串转换成整数： atoi 函数</p>
-<h1 id="硬件访问技术"><a href="#硬件访问技术" class="headerlink" title="硬件访问技术"></a>硬件访问技术</h1><p>驱动程序控制设备，主要是通过访问设备内的寄存器来达到控制目的,因此我们讨论如何访问硬件，就成了如何访问这些寄存器了.</p>
-<p>在Linux系统中，无论是<font color="red">内核程序</font>还是<font color="red">应用程序</font>，都只能使用虚拟地址，而芯片手册中给出的硬件寄存器地址或者RAM地址则是物理地址，无法直接使用，因此，我们读写寄存器的第1步就是将将它的物理地址映射为虚拟地址</p>
-<h2 id="动态映射（ioremap）"><a href="#动态映射（ioremap）" class="headerlink" title="动态映射（ioremap）"></a>动态映射（ioremap）</h2><p>所谓动态映射，是指在驱动程序中采用ioremap函数将物理地址映射为虚拟地址。</p>
-<pre><code>原型：void * ioremap(physaddr, size)
-参数：
-Physaddr：待映射的物理地址
-Size: 映射的区域长度
-返回值：映射后的虚拟地址
-</code></pre><h2 id="静态映射"><a href="#静态映射" class="headerlink" title="静态映射"></a>静态映射</h2><p>所谓静态映射，是指Linux系统根据用户事先指定的映射关系，在内核启动时，自动地将物理地址映射为虚拟地址。</p>
-<p>在静态映射中，用户是通过map_desc结构来指明物理地址与虚拟地址的映射关系。</p>
-<pre><code>struct map_desc {
-unsigned long virtual; /* 映射后的虚拟地址 */
-unsigned long pfn; /* 物理地址所在的页帧号 */
-嵌入式Linux技术咨询QQ号: 550491596
-嵌入式Linux学习交流QQ群: 65212116
-
-unsigned long length; /* 映射长度 */
-unsigned int type; /* 映射的设备类型 */
-};
-pfn: 利用__phys_to_pfn(物理地址)可以计算出物理地址所在的物理页帧号
-</code></pre><h2 id="寄存器读写"><a href="#寄存器读写" class="headerlink" title="寄存器读写"></a>寄存器读写</h2><p>在完成地址映射后，就可以读写寄存器了，Linux内核提供了一系列函数，来读写寄存器。</p>
-<pre><code>unsigned ioread8(void *addr)
-unsigned ioread16(void *addr)
-unsigned ioread32(void *addr)
-unsigned readb(address)
-unsigned readw(address)
-
-unsigned readl(address)
-void iowrite8(u8 value, void *addr)
-void iowrite16(u16 value, void *addr)
-void iowrite32(u32 value, void *addr)
-void writeb(unsigned value, address)
-void writew(unsigned value, address)
-void writel(unsigned value, address)
-</code></pre><h1 id="板子上测试"><a href="#板子上测试" class="headerlink" title="板子上测试"></a>板子上测试</h1><p>insmod *.ko<br>cat /proc/devices 查找驱动的主设备号</p>
-<p>mknod /dev/XXX c 主设备号 次设备号    //  创建驱动设备文件</p>
-
-          
+          字符驱动编程模型
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/08/字符驱动编程模型/">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -859,7 +828,7 @@ void writel(unsigned value, address)
               
                 
                 <a class="post-title-link" href="/2017/03/02/修改ARM板的静态IP/" itemprop="url">
-                  Qt程序打包发布方法（使用官方提供的windeployqt工具）
+                  修改ARM板的静态IP
                 </a>
               
             
@@ -886,8 +855,8 @@ void writel(unsigned value, address)
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/QT/" itemprop="url" rel="index">
-                    <span itemprop="name">QT</span>
+                  <a href="/categories/ARM-Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">ARM-Linux</span>
                   </a>
                 </span>
 
@@ -920,7 +889,7 @@ void writel(unsigned value, address)
 
       
         
-          Qt程序打包发布方法（使用官方提供的windeployqt工具），不用手动添加QT的库文件
+          修改ARM板的静态IP
           <div class="post-more-link text-center">
             <a class="btn" href="/2017/03/02/修改ARM板的静态IP/">
               阅读全文 &raquo;
@@ -1463,7 +1432,7 @@ void writel(unsigned value, address)
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1472,7 +1441,7 @@ void writel(unsigned value, address)
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

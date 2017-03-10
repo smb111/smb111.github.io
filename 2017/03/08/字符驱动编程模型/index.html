@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ARM,字符驱动," />
 
 
 
@@ -102,17 +102,17 @@
 
 
 
-<meta name="description" content="1234567891011121314151617181920212223242526272829303132333435int alloc_chrdev_region(dev_t *dev, unsigned baseminor, unsigned count,const char *name)  // 动态分配主设备号dev：就是被分配的主设备号baseminor：次设备号从几开始coun">
+<meta name="description" content="字符驱动编程模型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Skymyweakness">
+<meta property="og:title" content="字符驱动编程">
 <meta property="og:url" content="http://yoursite.com/2017/03/08/字符驱动编程模型/index.html">
 <meta property="og:site_name" content="Skymyweakness">
-<meta property="og:description" content="1234567891011121314151617181920212223242526272829303132333435int alloc_chrdev_region(dev_t *dev, unsigned baseminor, unsigned count,const char *name)  // 动态分配主设备号dev：就是被分配的主设备号baseminor：次设备号从几开始coun">
+<meta property="og:description" content="字符驱动编程模型">
 <meta property="og:image" content="http://i.imgur.com/tKUy7th.png">
-<meta property="og:updated_time" content="2017-03-09T13:26:16.547Z">
+<meta property="og:updated_time" content="2017-03-10T03:19:33.880Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Skymyweakness">
-<meta name="twitter:description" content="1234567891011121314151617181920212223242526272829303132333435int alloc_chrdev_region(dev_t *dev, unsigned baseminor, unsigned count,const char *name)  // 动态分配主设备号dev：就是被分配的主设备号baseminor：次设备号从几开始coun">
+<meta name="twitter:title" content="字符驱动编程">
+<meta name="twitter:description" content="字符驱动编程模型">
 <meta name="twitter:image" content="http://i.imgur.com/tKUy7th.png">
 
 
@@ -131,7 +131,7 @@
   };
 </script>
 
-  <title>  | Skymyweakness </title>
+  <title> 字符驱动编程 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -251,7 +251,7 @@
             
             
               
-                
+                字符驱动编程
               
             
           </h1>
@@ -268,6 +268,25 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ARM驱动/" itemprop="url" rel="index">
+                    <span itemprop="name">ARM驱动</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -385,6 +404,14 @@ void writel(unsigned value, address)
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ARM/" rel="tag">#ARM</a>
+          
+            <a href="/tags/字符驱动/" rel="tag">#字符驱动</a>
+          
+        </div>
+      
 
       
         <div class="post-nav">
@@ -398,8 +425,8 @@ void writel(unsigned value, address)
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/10/Qt程序打包发布方法（使用官方提供的windeployqt工具）/" rel="prev" title="">
-                 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/10/Qt程序打包发布方法（使用官方提供的windeployqt工具）/" rel="prev" title="Qt程序打包发布方法（使用官方提供的windeployqt工具）">
+                Qt程序打包发布方法（使用官方提供的windeployqt工具） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -476,7 +503,7 @@ void writel(unsigned value, address)
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -485,7 +512,7 @@ void writel(unsigned value, address)
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
