@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="破解," />
+  <meta name="keywords" content="C++," />
 
 
 
@@ -102,16 +102,16 @@
 
 
 
-<meta name="description" content="RHTBY-VWY6D-QJRJ9-JGQ3X-Q2289">
+<meta name="description" content="原码反码补码的定义和在计算机中的表示">
 <meta property="og:type" content="article">
-<meta property="og:title" content="激活win7旗舰版的密钥">
-<meta property="og:url" content="http://yoursite.com/2017/03/02/win7激活旗舰版/index.html">
+<meta property="og:title" content="原码反码补码">
+<meta property="og:url" content="http://yoursite.com/2017/03/22/原码反码补码/index.html">
 <meta property="og:site_name" content="Skymyweakness">
-<meta property="og:description" content="RHTBY-VWY6D-QJRJ9-JGQ3X-Q2289">
-<meta property="og:updated_time" content="2017-03-02T08:29:53.563Z">
+<meta property="og:description" content="原码反码补码的定义和在计算机中的表示">
+<meta property="og:updated_time" content="2017-03-22T12:01:43.741Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="激活win7旗舰版的密钥">
-<meta name="twitter:description" content="RHTBY-VWY6D-QJRJ9-JGQ3X-Q2289">
+<meta name="twitter:title" content="原码反码补码">
+<meta name="twitter:description" content="原码反码补码的定义和在计算机中的表示">
 
 
 
@@ -129,7 +129,7 @@
   };
 </script>
 
-  <title> 激活win7旗舰版的密钥 | Skymyweakness </title>
+  <title> 原码反码补码 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +249,7 @@
             
             
               
-                激活win7旗舰版的密钥
+                原码反码补码
               
             
           </h1>
@@ -261,8 +261,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-03-02T16:27:00+08:00" content="2017-03-02">
-              2017-03-02
+            <time itemprop="dateCreated" datetime="2017-03-22T18:40:13+08:00" content="2017-03-22">
+              2017-03-22
             </time>
           </span>
 
@@ -275,8 +275,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/系统/" itemprop="url" rel="index">
-                    <span itemprop="name">系统</span>
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
 
@@ -308,7 +308,64 @@
       
 
       
-        <font color="green" size="6">RHTBY-VWY6D-QJRJ9-JGQ3X-Q2289</font>
+        <h1 id="机器数和真值"><a href="#机器数和真值" class="headerlink" title="机器数和真值"></a>机器数和真值</h1><h2 id="1、机器数"><a href="#1、机器数" class="headerlink" title="1、机器数"></a>1、机器数</h2><p>一个数在计算机中的表现形式（<font color="red">注意并不是存储形式</font>），机器数是带符号的 </p>
+<p>比如十进制的 +3 ,计算机字长是8位那么，转换成二进制数就是 : 0000 0011</p>
+<p>如果十进制的 -3 ,二进制数是 ： 1000 0011</p>
+<h2 id="2、真值"><a href="#2、真值" class="headerlink" title="2、真值"></a>2、真值</h2><p>0000 0001的真值 = +000 0001 = +1，1000 0001的真值 = –000 0001 = –1</p>
+<h1 id="原码、补码、反码"><a href="#原码、补码、反码" class="headerlink" title="原码、补码、反码"></a>原码、补码、反码</h1><p>原码、补码、反码  只是计算机对机器数的一种编码方式，用来存储，在计算机中使用补码来进行编码存储（至于为什么，下面会讲）</p>
+<h2 id="1-原码"><a href="#1-原码" class="headerlink" title="1. 原码"></a>1. 原码</h2><p>原码就是符号位加上真值的绝对值, 即用第一位表示符号, 其余位表示值. 比如如果是8位二进制:</p>
+<p>[+1]原 = 0000 0001</p>
+<p>[-1]原 = 1000 0001</p>
+<p>第一位是符号位. 因为第一位是符号位, 所以8位二进制数的取值范围就是:</p>
+<p>[1111 1111 , 0111 1111]</p>
+<p>即</p>
+<p>[-127 , 127]</p>
+<p>原码是人脑最容易理解和计算的表示方式.</p>
+<h2 id="2-反码"><a href="#2-反码" class="headerlink" title="2. 反码"></a>2. 反码</h2><p>反码的表示方法是:</p>
+<p>正数的反码是其本身</p>
+<p>负数的反码是在其原码的基础上, <font color="red">符号位不变，其余各个位取反.</font></p>
+<p>[+1] = [00000001]原 = [00000001]反</p>
+<p>[-1] = [10000001]原 = [11111110]反</p>
+<p>可见如果一个反码表示的是负数, 人脑无法直观的看出来它的数值. 通常要将其转换成原码再计算.</p>
+<h2 id="3-补码"><a href="#3-补码" class="headerlink" title="3. 补码"></a>3. 补码</h2><p>补码的表示方法是:</p>
+<p>正数的补码就是其本身</p>
+<p>负数的补码是在其原码的基础上, 符号位不变, 其余各位取反, 最后+1. (即在反码的基础上+1)</p>
+<p>[+1] = [00000001]原 = [00000001]反 = [00000001]补</p>
+<p>[-1] = [10000001]原 = [11111110]反 = [11111111]补</p>
+<p>对于负数, 补码表示方式也是人脑无法直观看出其数值的. 通常也需要转换成原码在计算其数值.</p>
+<font color="red">负数原码求补码 ： 符号位不变, 其余各位取反, 最后+1<br><br>负数补码求原码 ： 符号位不变, 其余各位取反, 最后+1</font>
+
+
+<h1 id="为什么要使用-原码-补码-反码"><a href="#为什么要使用-原码-补码-反码" class="headerlink" title="为什么要使用 原码 补码 反码"></a>为什么要使用 原码 补码 反码</h1><p>原码是最直观的，但是这仅仅是对人类而言，因为我们能知道第一位是表示符号位的。</p>
+<p>而对于计算机来说，要进行第一位符号位的判断就要添加额外的电路，非常麻烦。</p>
+<p>因为加法运算就是加上一个负数，所以计算机只设计加法运算电路。</p>
+<p>综上：我们可以让符号位也参与运算，这样就不用设计判断电路</p>
+<p>比如计算 ： 1 + （-1）</p>
+<p>使用原码 ： 0000 0001 + 1000 0001 = 1000 0010  真值（-2）这是不对的</p>
+<p>使用反码 ： 0000 0001 + 1111 1110 = 1111 1111  结果取反 1000 0000 真值（-0）</p>
+<p>使用反码的结果是对的，但是会有 +0 和 -0 这样零的表示就有两种，使用补码可以解决这个问题</p>
+<p>使用补码 ： 解决了0的符号以及两个编码的问题:</p>
+<p>1-1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原 = [0000 0001]补 + [1111 1111]补 = [0000 0000]补=[0000 0000]原</p>
+<p>这样 0000 0000 就用来表示 0 ， <font color="red">而 1000 0000 则用来表示 -128 : 注意因为实际上是使用以前的-0的补码来表示-128, 所以-128并没有原码和反码表示.(对-128的补码表示[1000 0000]补算出来的原码是[0000 0000]原, 这是不正确的)<font></font></font></p>
+<h2 id="为什么使用原码或反码表示的范围为-127-127-而使用补码表示的范围为-128-127"><a href="#为什么使用原码或反码表示的范围为-127-127-而使用补码表示的范围为-128-127" class="headerlink" title="为什么使用原码或反码表示的范围为[-127, +127], 而使用补码表示的范围为[-128, 127]."></a>为什么使用原码或反码表示的范围为[-127, +127], 而使用补码表示的范围为[-128, 127].</h2><p>使用补码 ： 解决了0的符号以及两个编码的问题:</p>
+<p>1-1 = 1 + (-1) = [0000 0001]原 + [1000 0001]原 = [0000 0001]补 + [1111 1111]补 = [0000 0000]补=[0000 0000]原</p>
+<p>这样 0000 0000 就用来表示 0 ， <font color="red">而 1000 0000 则用来表示 -128 : 注意因为实际上是使用以前的-0的补码来表示-128, 所以-128并没有原码和反码表示.(对-128的补码表示[1000 0000]补算出来的原码是[0000 0000]原, 这是不正确的)<font></font></font></p>
+<p>因为机器使用补码, 所以对于编程中常用到的32位int类型, 可以表示范围是: [-231, 231-1] 因为第一位表示的是符号位.而使用补码表示时又可以多保存一个最小值.</p>
+<h1 id="C语言中的-printf-的使用"><a href="#C语言中的-printf-的使用" class="headerlink" title="Ｃ语言中的 printf 的使用"></a>Ｃ语言中的 printf 的使用</h1><pre><code>#define A (1u &lt;&lt; 31)  // 这个地方使用 u 后标指示A是一个无符号的数
+
+#define B (1 &lt;&lt; 31)   // 不使用 u 则默认是一个有符号的数（这里编译器认为 int 占有 4 个字节） 有符号 -2147483648 -- 2147483647   无符号  0 -- 
+
+cout &lt;&lt; B;   // -2147483648     1000000 00000000 00000000 00000000 就是上文说到的 -0，被表示成了负的最小值（补码的原因）
+
+cout &lt;&lt; A;   // 2147483648
+
+printf(&quot;%d&quot;,B);  // -2147483648   
+
+printf(&quot;%u&quot;,B)   // 2147483648   这里有符号数转换成了无符号进行了输出
+
+出现这种情况的原因是  :  1000000 00000000 00000000 00000000 在有符号的情况下表示 -2147483648  而在无符号的情况下就是2147483648
+</code></pre><p> 无符号数和有符号数进行运算的时候会转换成 无符号数 在进行运算 </p>
+<p> 以后使用变量的时候，如果确定无符号一定使用 unsinged 或者 u  </p>
 
       
     </div>
@@ -330,7 +387,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/破解/" rel="tag">#破解</a>
+            <a href="/tags/C/" rel="tag">#C++</a>
           
         </div>
       
@@ -339,17 +396,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/02/Filezilla软件的使用和配置/" rel="next" title="Filezilla可视化ftp软件的配置和使用">
-                <i class="fa fa-chevron-left"></i> Filezilla可视化ftp软件的配置和使用
+              <a href="/2017/03/10/按键驱动模型/" rel="next" title="按键驱动编程">
+                <i class="fa fa-chevron-left"></i> 按键驱动编程
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/02/修改ARM板的静态IP/" rel="prev" title="修改ARM板的静态IP">
-                修改ARM板的静态IP <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -528,7 +581,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机器数和真值"><span class="nav-number">1.</span> <span class="nav-text">机器数和真值</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、机器数"><span class="nav-number">1.1.</span> <span class="nav-text">1、机器数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、真值"><span class="nav-number">1.2.</span> <span class="nav-text">2、真值</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#原码、补码、反码"><span class="nav-number">2.</span> <span class="nav-text">原码、补码、反码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-原码"><span class="nav-number">2.1.</span> <span class="nav-text">1. 原码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-反码"><span class="nav-number">2.2.</span> <span class="nav-text">2. 反码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-补码"><span class="nav-number">2.3.</span> <span class="nav-text">3. 补码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么要使用-原码-补码-反码"><span class="nav-number">3.</span> <span class="nav-text">为什么要使用 原码 补码 反码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么使用原码或反码表示的范围为-127-127-而使用补码表示的范围为-128-127"><span class="nav-number">3.1.</span> <span class="nav-text">为什么使用原码或反码表示的范围为[-127, +127], 而使用补码表示的范围为[-128, 127].</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C语言中的-printf-的使用"><span class="nav-number">4.</span> <span class="nav-text">Ｃ语言中的 printf 的使用</span></a></li></ol></div>
             
           </div>
         </section>
