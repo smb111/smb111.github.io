@@ -252,7 +252,7 @@
               
                 
                 <a class="post-title-link" href="/2017/03/10/按键驱动模型/" itemprop="url">
-                  未命名
+                  按键驱动编程
                 </a>
               
             
@@ -270,6 +270,25 @@
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ARM驱动/" itemprop="url" rel="index">
+                    <span itemprop="name">ARM驱动</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -294,43 +313,12 @@
 
       
         
-          
-            <h2 id="回顾裸机中断处理流程"><a href="#回顾裸机中断处理流程" class="headerlink" title="回顾裸机中断处理流程"></a>回顾裸机中断处理流程</h2><ul>
-<li>中断处理入口</li>
-<li>事先注册中断处理程序</li>
-<li>根据中断源编号调用中断处理程序</li>
-</ul>
-<h2 id="Linux中"><a href="#Linux中" class="headerlink" title="Linux中"></a>Linux中</h2><ol>
-<li>irq_svc:</li>
-<li>拿到产生中断的编号（中断号）</li>
-<li>根据中断号找到irq_desc</li>
-<li>取出事先注册好的中断处理程序</li>
-</ol>
-<p>驱动实现什么：</p>
-<ol>
-<li>注册中断</li>
-<li>实现中断处理程序</li>
-<li>注销处理</li>
-</ol>
-<p>注册中断处理程序：使用request_irq</p>
-<pre><code>int request_irq(unsigned int irq,void (*handler)(int, void*, structpt_regs *),
-        unsigned long flags,const char *devname,void *dev_id)
-返回0表示成功，或者返回一个错误码
-
-irq ： 中断编号
-void (*handler)(int, void*, structpt_regs *) ： 中断处理函数
-unsigned long flags ： 与中断处理有关的相关选项 比如：IRQF_DISABLED说明是快速中断
-const char *devname ： 设备名
-void *dev_id ： 共享中断时使用
-</code></pre><p>中断处理函数的两个原则：</p>
-<ul>
-<li>不能使用可能引起阻塞的函数</li>
-<li>不能使用可能引起调度的函数</li>
-</ul>
-<p>注销中断：</p>
-<p>当设备不再需要使用中断时(通常在驱动卸载时), 应当把它们注销, 使用函数:<br>    void free_irq(unsigned int irq, void *dev_id)</p>
-
-          
+          中断驱动编程模型
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2017/03/10/按键驱动模型/">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -1453,7 +1441,7 @@ void *dev_id ： 共享中断时使用
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

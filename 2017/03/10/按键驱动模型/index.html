@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ARM,中断驱动," />
 
 
 
@@ -102,70 +102,16 @@
 
 
 
-<meta name="description" content="回顾裸机中断处理流程
-中断处理入口
-事先注册中断处理程序
-根据中断源编号调用中断处理程序
-
-Linux中
-irq_svc:
-拿到产生中断的编号（中断号）
-根据中断号找到irq_desc
-取出事先注册好的中断处理程序
-
-驱动实现什么：
-
-注册中断
-实现中断处理程序
-注销处理
-
-注册中断处理程序：使用request_irq
-int request_irq(unsigned int irq,void (">
+<meta name="description" content="中断驱动编程模型">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Skymyweakness">
+<meta property="og:title" content="按键驱动编程">
 <meta property="og:url" content="http://yoursite.com/2017/03/10/按键驱动模型/index.html">
 <meta property="og:site_name" content="Skymyweakness">
-<meta property="og:description" content="回顾裸机中断处理流程
-中断处理入口
-事先注册中断处理程序
-根据中断源编号调用中断处理程序
-
-Linux中
-irq_svc:
-拿到产生中断的编号（中断号）
-根据中断号找到irq_desc
-取出事先注册好的中断处理程序
-
-驱动实现什么：
-
-注册中断
-实现中断处理程序
-注销处理
-
-注册中断处理程序：使用request_irq
-int request_irq(unsigned int irq,void (">
-<meta property="og:updated_time" content="2017-03-10T13:16:42.493Z">
+<meta property="og:description" content="中断驱动编程模型">
+<meta property="og:updated_time" content="2017-03-22T03:21:49.066Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Skymyweakness">
-<meta name="twitter:description" content="回顾裸机中断处理流程
-中断处理入口
-事先注册中断处理程序
-根据中断源编号调用中断处理程序
-
-Linux中
-irq_svc:
-拿到产生中断的编号（中断号）
-根据中断号找到irq_desc
-取出事先注册好的中断处理程序
-
-驱动实现什么：
-
-注册中断
-实现中断处理程序
-注销处理
-
-注册中断处理程序：使用request_irq
-int request_irq(unsigned int irq,void (">
+<meta name="twitter:title" content="按键驱动编程">
+<meta name="twitter:description" content="中断驱动编程模型">
 
 
 
@@ -183,7 +129,7 @@ int request_irq(unsigned int irq,void (">
   };
 </script>
 
-  <title>  | Skymyweakness </title>
+  <title> 按键驱动编程 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -303,7 +249,7 @@ int request_irq(unsigned int irq,void (">
             
             
               
-                
+                按键驱动编程
               
             
           </h1>
@@ -320,6 +266,25 @@ int request_irq(unsigned int irq,void (">
             </time>
           </span>
 
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ARM驱动/" itemprop="url" rel="index">
+                    <span itemprop="name">ARM驱动</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
           
 
           
@@ -395,6 +360,14 @@ void *dev_id ： 共享中断时使用
     </div>
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ARM/" rel="tag">#ARM</a>
+          
+            <a href="/tags/中断驱动/" rel="tag">#中断驱动</a>
+          
+        </div>
       
 
       
@@ -492,7 +465,7 @@ void *dev_id ： 共享中断时使用
           
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">21</span>
+                <span class="site-state-item-count">22</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
