@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="ARM,系统时间," />
+  <meta name="keywords" content="字符串编码," />
 
 
 
@@ -102,16 +102,16 @@
 
 
 
-<meta name="description" content="修改ARM板的硬件时钟时间和软件时间">
+<meta name="description" content="Qt中字符和文件编码的问题(针对不同Qt库的版本，以及不同编译器下的设置)">
 <meta property="og:type" content="article">
-<meta property="og:title" content="修改ARM板的硬件时钟时间和软件时间">
-<meta property="og:url" content="http://yoursite.com/2017/02/23/ARM板修改系统时间/index.html">
+<meta property="og:title" content="Qt中字符和文件编码的问题">
+<meta property="og:url" content="http://yoursite.com/2017/03/23/Qt中字符和文件编码/index.html">
 <meta property="og:site_name" content="Skymyweakness">
-<meta property="og:description" content="修改ARM板的硬件时钟时间和软件时间">
-<meta property="og:updated_time" content="2017-02-23T03:10:11.620Z">
+<meta property="og:description" content="Qt中字符和文件编码的问题(针对不同Qt库的版本，以及不同编译器下的设置)">
+<meta property="og:updated_time" content="2017-03-23T02:49:52.845Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="修改ARM板的硬件时钟时间和软件时间">
-<meta name="twitter:description" content="修改ARM板的硬件时钟时间和软件时间">
+<meta name="twitter:title" content="Qt中字符和文件编码的问题">
+<meta name="twitter:description" content="Qt中字符和文件编码的问题(针对不同Qt库的版本，以及不同编译器下的设置)">
 
 
 
@@ -129,7 +129,7 @@
   };
 </script>
 
-  <title> 修改ARM板的硬件时钟时间和软件时间 | Skymyweakness </title>
+  <title> Qt中字符和文件编码的问题 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -249,7 +249,7 @@
             
             
               
-                修改ARM板的硬件时钟时间和软件时间
+                Qt中字符和文件编码的问题
               
             
           </h1>
@@ -261,8 +261,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-23T11:02:53+08:00" content="2017-02-23">
-              2017-02-23
+            <time itemprop="dateCreated" datetime="2017-03-23T10:46:25+08:00" content="2017-03-23">
+              2017-03-23
             </time>
           </span>
 
@@ -275,8 +275,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/ARM-Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">ARM-Linux</span>
+                  <a href="/categories/QT/" itemprop="url" rel="index">
+                    <span itemprop="name">QT</span>
                   </a>
                 </span>
 
@@ -308,18 +308,33 @@
       
 
       
-        <p>之前使用开发板时发现每次开机后，系统的时间都恢复到初始状态2012年。</p>
-<h2 id="一、-先说一下时钟的概念"><a href="#一、-先说一下时钟的概念" class="headerlink" title="一、 先说一下时钟的概念"></a>一、 先说一下时钟的概念</h2><p>时钟包括<strong>硬件时钟</strong>和<strong>系统时钟</strong> </p>
-<ol>
-<li>系统时钟就是linux系统显示的时间，用命令date可以显示当前系统时间； </li>
-<li>硬件时钟就是硬件自身的 时间了。  </li>
-</ol>
-<p>它们两者没有关系的，但是可以通过命令设置系统时钟和硬件设置，让它们同步。</p>
-<h3 id="设置系统时间"><a href="#设置系统时间" class="headerlink" title="设置系统时间"></a>设置系统时间</h3><p>在linux系统设置系统时钟用命令date，格式为：date 062920502008.10，表示系统时间设置为2008年6月29日20时50分10秒。 </p>
-<h3 id="设置硬件时间"><a href="#设置硬件时间" class="headerlink" title="设置硬件时间"></a>设置硬件时间</h3><p>硬件时钟RTC时间是通过hwclock命令来设置的，比 如说硬件时间要设置为2008年6月29日20时50分10秒，则应该先用date 062920502008.10，然后用命令：hwclock -w，这样RTC时间就跟系统时间一致了。</p>
-<h2 id="二、让系统时间和RTC时间同步。"><a href="#二、让系统时间和RTC时间同步。" class="headerlink" title="二、让系统时间和RTC时间同步。"></a>二、让系统时间和RTC时间同步。</h2><p>因为每次开机后系统的时间都是系统原来的时间，比如说1970年1月1日1时1分1秒，为了让系统时间和RTC时间同步，</p>
-<p>可以在文件系统中<strong>etc/init.d/rcS添 加如下命令：  /sbin/hwclock -s</strong>， </p>
-<p>这样每次开机时系统就会读取RTC的时间，系统时间就与RTC时间同步了。(hwclock有时候可能会在/bin目录下面，具体要看 busybox编译后放在/bin还是/sbin目录下)</p>
+        <p>QString 属于unicode字符集，在Qt4中默认使用Latin1来解释中文窄字符编码（我们只要在程序里面使用QTextCodec::setCodecForCStrings(QTextCodec::codecForName(“源文件编码格式”));来进行改变默认编码即可）</p>
+<p>在Qt5中默认使用UTF-8来解释中文窄字符编码（在linux下面只要将源文件的编码格式设置成UTF-8格式就可以直接使用直接赋值而不用担心乱码了</p>
+<p>但是在windows下面使用cl编译器，即使你源文件使用了UTF-8不带BOM的编码格式，msvc会自动把它变成UTF-8带BOM格式<br>，而且在cl编译器中，UTF-8带BOM的编码就是GBK，所以直接使用还是乱码，而且QTextCodec::setCodecForCStrings(QTextCodec::codecForName(“GBK”));）可以解决，</p>
+<p> 不幸的是QT5已经不支持这一句了，哈哈哈哈哈。所以我们只能在程序中使用的地方手动的指明  QString对中文窄字符的  解码方式了，而不是使用它默认的UTF-8，要指定成GBK</p>
+<h1 id="在QT4中："><a href="#在QT4中：" class="headerlink" title="在QT4中："></a>在QT4中：</h1><h2 id="在Windows下："><a href="#在Windows下：" class="headerlink" title="在Windows下："></a>在Windows下：</h2><h3 id="使用Mingw编译器模拟Linux环境："><a href="#使用Mingw编译器模拟Linux环境：" class="headerlink" title="使用Mingw编译器模拟Linux环境："></a>使用Mingw编译器模拟Linux环境：</h3><p>一般我们不会使用tr()函数，它的开销也比较大，它的用途也比较冷门。一般我们需要的是QString而不是tr(中文);</p>
+<p>QString str(“我是中文”);   QString 默认的是Unicode编码，”我是中文”const char * 是传统的窄字符串编码格式，当窄字符串赋值给QString的时候我们需要告诉它我们的窄字符串是使用什么编码格式的（GBK或UTF-8）</p>
+<p>否则QString将会默认的使用Latin1来解释const char *窄字符串编码，而不是用户期望的GBK或者UTF-8,到底是GBK还是UTF-8则取决于你源文件(main.cpp)的编码格式在工具里面可以修改,</p>
+<p>这个地方我们需要的是QString而不是使用tr进行格式的转换来浪费资源，一般不要使用tr</p>
+<pre><code>QTextCodec::setCodecForCStrings(QTextCodec::codecForName(&quot;UTF-8&quot;));   //这句话的意思就是告诉QString再解释const char *的时候使用UTF-8编解码规则来进行解释
+或者 QTextCodec::setCodecForCStrings(QTextCodec::codecForName(&quot;GBK&quot;));  //你的源文件（.cpp\.h）是GBK编码的
+</code></pre><h3 id="使用vs的msvc编译器来进行编译："><a href="#使用vs的msvc编译器来进行编译：" class="headerlink" title="使用vs的msvc编译器来进行编译："></a>使用vs的msvc编译器来进行编译：</h3><p>对于UTF-8 来说有带BOM和不带BOM的两种格式，就是加上一个表示数据是大端还是小端的前缀，对于linux下的编译来说这个是无所谓的，但是对于使用微软的cl编译器来说，如果源文件的编码格式使用的是带BOM的UTF-8格式，那么就是GBK的编码格式，</p>
+<pre><code>QTextCodec::setCodecForCStrings(QTextCodec::codecForName(&quot;GBK&quot;));  //你的源文件（.cpp\.h）是GBK编码的
+</code></pre><p>也就是在windows下面使用cl编译器：如果源文件是UTF-8不带BOM的格式：QTextCodec::setCodecForCStrings(QTextCodec::codecForName(“UTF-8”));<br>如果源文件是GBK或者是UTF-8带BOM格式的：QTextCodec::setCodecForCStrings(QTextCodec::codecForName(“GBK”));</p>
+<h1 id="在QT5中："><a href="#在QT5中：" class="headerlink" title="在QT5中："></a>在QT5中：</h1><h2 id="在Windows下使用微软的-cl编译器（msvc）"><a href="#在Windows下使用微软的-cl编译器（msvc）" class="headerlink" title="在Windows下使用微软的 cl编译器（msvc）"></a>在Windows下使用微软的 cl编译器（msvc）</h2><p>因为自从QT5以来取消了QTextCodec::setCodecForCStrings(QTextCodec::codecForName(“GBK”));函数，</p>
+<p>但是QT5发布的时候默认使用UTF-8，所以不用担心以上不能进行QString编码格式设置的问题了，只要你的源文件编码是UTF-8不带BOM（在Windows下对于cl编译器就是UTF-8格式），直接使用就可以了，但是事情并没有那么简单，从msvc2005以后，他自作聪明的将你的  UTF-8不带BOM的源文件 自动转化成 UTF-8带BOM的格式，这样在cl编译器下你的源码就成了GBK格式。还是不能直接使用 - - （屮屮屮屮屮） </p>
+<p>这里也不用担心，我们可以使用麻烦一点的办法：</p>
+<pre><code>QString str(QString::fromLoca18Bit(&quot;我是中文&quot;));  
+
+①：就像下面的函数一样，QString的成员函数知道按照何种编码来处理 C 字符串  
+    QString QString::fromAscii ( const char * str, int size = -1 )      //按照ASCII码来进行解析   中文 窄字符编码
+    QString QString::fromLatin1 ( const char * str, int size = -1 )     //按照Latin1码来进行解析   中文 窄字符编码
+    QString QString::fromLocal8Bit ( const char * str, int size = -1 )  //按照GBK码来进行解析   中文 窄字符编码
+    QString QString::fromUtf8 ( const char * str, int size = -1 )       //按照UTF-8码来进行解析   中文 窄字符编码
+
+②：或者你的编译器支持  C++11，
+    QString str(u8&quot;我是中文&quot;)；//这样UTF-8带BOM（在vl编译器下面就是GBK）编码就可以直接通过 UTF-8 格式来进行解析了。因为&quot;我是中文&quot;已经进行了强制的编码类型转换，现在是UTF-8不带BOM了
+</code></pre><h2 id="在Linux下面使用G-来进行编译的话："><a href="#在Linux下面使用G-来进行编译的话：" class="headerlink" title="在Linux下面使用G++来进行编译的话："></a>在Linux下面使用G++来进行编译的话：</h2><p>通过以上的分析我们已经很容易知道：UTF-8带不带BOM，g++编译器都认为是UTF-8编码格式，所以使用QT5并且在linux下面编程我们不用考虑中文乱码的问题（只要我们的原文件是UTF-8的编码格式就行了）</p>
 
       
     </div>
@@ -341,9 +356,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/ARM/" rel="tag">#ARM</a>
-          
-            <a href="/tags/系统时间/" rel="tag">#系统时间</a>
+            <a href="/tags/字符串编码/" rel="tag">#字符串编码</a>
           
         </div>
       
@@ -352,17 +365,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/23/ARM卡在内核启动阶段/" rel="next" title="齐鲁工大--Smartbuilding后期维护">
-                <i class="fa fa-chevron-left"></i> 齐鲁工大--Smartbuilding后期维护
+              <a href="/2017/03/22/原码反码补码/" rel="next" title="原码反码补码">
+                <i class="fa fa-chevron-left"></i> 原码反码补码
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/23/指针数组数组指针常量指针指针常量/" rel="prev" title="指针数组和数组指针、常量指针和指针常量、函数指针">
-                指针数组和数组指针、常量指针和指针常量、函数指针 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -541,7 +550,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、-先说一下时钟的概念"><span class="nav-number">1.</span> <span class="nav-text">一、 先说一下时钟的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置系统时间"><span class="nav-number">1.1.</span> <span class="nav-text">设置系统时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置硬件时间"><span class="nav-number">1.2.</span> <span class="nav-text">设置硬件时间</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、让系统时间和RTC时间同步。"><span class="nav-number">2.</span> <span class="nav-text">二、让系统时间和RTC时间同步。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在QT4中："><span class="nav-number">1.</span> <span class="nav-text">在QT4中：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在Windows下："><span class="nav-number">1.1.</span> <span class="nav-text">在Windows下：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Mingw编译器模拟Linux环境："><span class="nav-number">1.1.1.</span> <span class="nav-text">使用Mingw编译器模拟Linux环境：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用vs的msvc编译器来进行编译："><span class="nav-number">1.1.2.</span> <span class="nav-text">使用vs的msvc编译器来进行编译：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#在QT5中："><span class="nav-number">2.</span> <span class="nav-text">在QT5中：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在Windows下使用微软的-cl编译器（msvc）"><span class="nav-number">2.1.</span> <span class="nav-text">在Windows下使用微软的 cl编译器（msvc）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在Linux下面使用G-来进行编译的话："><span class="nav-number">2.2.</span> <span class="nav-text">在Linux下面使用G++来进行编译的话：</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
