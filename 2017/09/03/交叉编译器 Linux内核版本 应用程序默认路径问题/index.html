@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="个人博客," />
+  <meta name="keywords" content="交叉编译器 Linux内核版本 应用程序默认路径问题," />
 
 
 
@@ -102,19 +102,16 @@
 
 
 
-<meta name="description" content="记录了搭建个人博客的过程">
+<meta name="description" content="Linux 2.6.32 的交叉编译工具 4.5.1 编译 包含系统文件的源文件，跑在 Linux 3.5.0 的嵌入式 Tiny4412 上面出现内核版本错误的信息">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Github+Hexo+Markdown安装配置">
-<meta property="og:url" content="http://yoursite.com/2017/02/18/Github+Hexo+Markdown安装配置/index.html">
+<meta property="og:title" content="关于交叉编译工具（arm-linux-）的默认头文件路径的问题">
+<meta property="og:url" content="http://yoursite.com/2017/09/03/交叉编译器 Linux内核版本 应用程序默认路径问题/index.html">
 <meta property="og:site_name" content="Skymyweakness">
-<meta property="og:description" content="记录了搭建个人博客的过程">
-<meta property="og:image" content="http://i.imgur.com/PHND1T9.png">
-<meta property="og:image" content="http://i.imgur.com/jcX3IIS.jpg">
-<meta property="og:updated_time" content="2017-02-23T11:33:11.176Z">
+<meta property="og:description" content="Linux 2.6.32 的交叉编译工具 4.5.1 编译 包含系统文件的源文件，跑在 Linux 3.5.0 的嵌入式 Tiny4412 上面出现内核版本错误的信息">
+<meta property="og:updated_time" content="2017-09-03T02:37:15.321Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Github+Hexo+Markdown安装配置">
-<meta name="twitter:description" content="记录了搭建个人博客的过程">
-<meta name="twitter:image" content="http://i.imgur.com/PHND1T9.png">
+<meta name="twitter:title" content="关于交叉编译工具（arm-linux-）的默认头文件路径的问题">
+<meta name="twitter:description" content="Linux 2.6.32 的交叉编译工具 4.5.1 编译 包含系统文件的源文件，跑在 Linux 3.5.0 的嵌入式 Tiny4412 上面出现内核版本错误的信息">
 
 
 
@@ -132,7 +129,7 @@
   };
 </script>
 
-  <title> Github+Hexo+Markdown安装配置 | Skymyweakness </title>
+  <title> 关于交叉编译工具（arm-linux-）的默认头文件路径的问题 | Skymyweakness </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -252,7 +249,7 @@
             
             
               
-                Github+Hexo+Markdown安装配置
+                关于交叉编译工具（arm-linux-）的默认头文件路径的问题
               
             
           </h1>
@@ -264,8 +261,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-02-18T18:54:26+08:00" content="2017-02-18">
-              2017-02-18
+            <time itemprop="dateCreated" datetime="2017-09-03T09:40:39+08:00" content="2017-09-03">
+              2017-09-03
             </time>
           </span>
 
@@ -278,8 +275,32 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/个人博客/" itemprop="url" rel="index">
-                    <span itemprop="name">个人博客</span>
+                  <a href="/categories/QT/" itemprop="url" rel="index">
+                    <span itemprop="name">QT</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/QT/ARM-Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">ARM-Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/QT/ARM-Linux/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
                   </a>
                 </span>
 
@@ -311,56 +332,53 @@
       
 
       
-        <h1 id="使用Github搭建Hexo技术博客托管在GitHub-Pages上"><a href="#使用Github搭建Hexo技术博客托管在GitHub-Pages上" class="headerlink" title="使用Github搭建Hexo技术博客托管在GitHub Pages上"></a>使用Github搭建Hexo技术博客托管在GitHub Pages上</h1><ul>
-<li><a href="http://www.jianshu.com/p/f9b213097c42" target="_blank" rel="external">http://www.jianshu.com/p/f9b213097c42</a>  </li>
-<li><a href="http://www.jianshu.com/p/ba76165ca84d" target="_blank" rel="external">http://www.jianshu.com/p/ba76165ca84d</a></li>
-<li><strong>个人推荐下面这篇：</strong>里面介绍了将一些推广引擎放入自己的博客（<code>多说</code>，<code>百度统计</code>等）<br><a href="http://www.jianshu.com/p/a2fe56d11c4f" target="_blank" rel="external">http://www.jianshu.com/p/a2fe56d11c4f</a></li>
-<li>配置 Hexo <a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">https://hexo.io/zh-cn/docs/configuration.html</a></li>
-<li>MarkDown 语法集合<a href="https://www.zybuluo.com/mdeditor#fn:code" target="_blank" rel="external">https://www.zybuluo.com/mdeditor#fn:code</a></li>
-<li>next主题的配置和优化 <a href="http://blog.csdn.net/willxue123/article/details/50994852" target="_blank" rel="external">http://blog.csdn.net/willxue123/article/details/50994852</a></li>
-</ul>
-<h1 id="如何通过Git-GUI将自己本地的项目上传至Github"><a href="#如何通过Git-GUI将自己本地的项目上传至Github" class="headerlink" title="如何通过Git GUI将自己本地的项目上传至Github"></a>如何通过Git GUI将自己本地的项目上传至Github</h1><p><a href="http://m.blog.csdn.net/article/details?id=50537407" target="_blank" rel="external">http://m.blog.csdn.net/article/details?id=50537407</a></p>
-<hr>
-<h1 id="搭建完成之后的总结"><a href="#搭建完成之后的总结" class="headerlink" title="搭建完成之后的总结"></a>搭建完成之后的总结</h1><ul>
-<li><ol>
-<li>E:\HEXO\source_posts 下面将通过MarkDownPad 2写好的 .md文件放入这个目录中</li>
-</ol>
-</li>
-<li><p>2.写.md文件的时候开头部分的格式固定</p>
-<p>| title         | 所写文章的标题                       |<br>| ————- |:————-:                      |<br>| date          | 显示改文章写作的时间                   |<br>| description   | 关于这篇文章的描述                    |<br>| categories    | 分类（用于创建分类的不同文件夹）      |<br>| tags          | 文章的标签用于分类                   |<br><img src="http://i.imgur.com/PHND1T9.png" alt="">  </p>
-</li>
-<li>3.在Hexo的根目录下面打开 Git Bash  输入：hexo -s –debug.在浏览器中输入 localhost:4001 查看效果，如果效果可行，停掉当前的bash，Ctrl+ｃ。　执行 hexo g 生成静态页面，最后同步到github，hexo d。 如果是修改主题之前要清理一下 hexo clean   </li>
-</ul>
-<h1 id="使用MarkDown写-md-文件-（常用）"><a href="#使用MarkDown写-md-文件-（常用）" class="headerlink" title="使用MarkDown写.md 文件 （常用）"></a>使用MarkDown写.md 文件 （常用）</h1><h2 id="给文字上色"><a href="#给文字上色" class="headerlink" title="给文字上色"></a>给文字上色</h2><font color="red" size="7" face="楷体"> 这是一条红色的楷体7号文字 </font>
+        <h1 id="ARM-板的交叉编译器"><a href="#ARM-板的交叉编译器" class="headerlink" title="ARM 板的交叉编译器"></a>ARM 板的交叉编译器</h1><p>在使用友善之臂的 嵌入式 ARM 开发板的时候，其提供的 交叉编译工具是： arm-linux- 4.5.1</p>
+<p>不管是 smart210 还是 tiny4412 光盘文件里面的 4.5.1 版本的交叉编译器 都是基于 Linux 2.6.35 的</p>
+<p>我们可以从这个路径得到相关信息： <font color="red" size="4"> /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/include/linux/version.h </font></p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LINUX_VERSION_CODE 132643</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> KERNEL_VERSION(a,b,c) (((a) <span class="meta-string">&lt;&lt; 16) + ((b) &lt;&lt; 8) + (c))</span></span></div></pre></td></tr></table></figure>
+<h1 id="关于应用程序的-默认路径"><a href="#关于应用程序的-默认路径" class="headerlink" title="关于应用程序的 默认路径"></a>关于应用程序的 默认路径</h1><p>在编写应用程序的时候，有的时候我们需要 </p>
+<pre><code>#include &lt;linux/compiler.h&gt;
+#include &lt;linux/ioctl.h&gt;
+#include &lt;linux/types.h&gt;
+#include &lt;stdlib.h&gt;
+</code></pre><p>包含以上头文件，有的是Linux系统相关的头文件，有的是标准C库文件，那么这些文件的默认路径是什么呢？我们又没有指定。</p>
+<p>是 我们 PC 上面的 /usr/include/linux/compiler.h… 以及 /usr/include/stdlib.h 吗？</p>
+<p>如果我们开发的是 PC 上的程序，使用的是 GCC 编译器，那么上面的路径就是 非常 OK</p>
+<p>但是现在我们在交叉编译哎！！！ 嵌入式应用程序，使用的是 交叉编译器 arm-linux- ，那对于 那些使用这个头文件的源文件来说，这些头文件的默认路径是哪呢？ ！！！  还是上面的路径吗。 显然不是，这些默认路径是 </p>
+<font color="green" size="4"> /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/include/linux/<br><br>以及<br><br> /opt/FriendlyARM/toolschain/4.5.1/arm-none-linux-gnueabi/include/ </font>
 
-<h2 id="生成表格"><a href="#生成表格" class="headerlink" title="生成表格"></a>生成表格</h2><table>
-<thead>
-<tr>
-<th>项目</th>
-<th style="text-align:right">价格</th>
-<th style="text-align:center">数量</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>计算机</td>
-<td style="text-align:right">\$1600</td>
-<td style="text-align:center">5</td>
-</tr>
-<tr>
-<td>手机</td>
-<td style="text-align:right">\$12</td>
-<td style="text-align:center">12</td>
-</tr>
-<tr>
-<td>管线</td>
-<td style="text-align:right">\$1</td>
-<td style="text-align:center">234</td>
-</tr>
-</tbody>
-</table>
-<h2 id="加入C-代码并高亮显示"><a href="#加入C-代码并高亮显示" class="headerlink" title="加入C++代码并高亮显示"></a>加入C++代码并高亮显示</h2> <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></div><div class="line">&#123;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> = <span class="number">0</span>;i &lt; argc;i++)	</div><div class="line">	<span class="built_in">cout</span> &lt;&lt; (<span class="built_in">string</span>)argv[i] &lt;&lt; <span class="built_in">endl</span>;</div><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="插如图片"><a href="#插如图片" class="headerlink" title="插如图片"></a>插如图片</h2><p><img src="http://i.imgur.com/jcX3IIS.jpg" alt=""></p>
+<h1 id="编译嵌入式-应用程序-到底该使用什么路径呢"><a href="#编译嵌入式-应用程序-到底该使用什么路径呢" class="headerlink" title="编译嵌入式 应用程序 到底该使用什么路径呢"></a>编译嵌入式 应用程序 到底该使用什么路径呢</h1><h2 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h2><p>首先， 我们应该确定 你的嵌入式 Linux 系统是什么版本的，比如我的 tiny4412 开发板使用的是 Linux3.5.0 版本，那么这些关于 Linux 系统的文件路径就得是 linux 3.5.0 内核所在的目录，而不应该是默认的交叉编译工具的 include 路径。</p>
+<p>举个简单例子，我的 arm-linux- 的 include 路径下的 version.h 中的内核版本 是 2.6.32 ，如果应用程序源码文件中我要用到这个文件，默认的就是找到这个文件，显然这是个错误的路径，会让你的应用程序在编译的时候 指定 内核版本为 2.6.32; 而我们的应用程序 真正要跑在 Linux3.5.0 内核上面，这就会出现应用程序在 执行时 出现内核版本错误，好多内核函数和命令都已经发生了改变。。。。</p>
+<h2 id="然后"><a href="#然后" class="headerlink" title="然后"></a>然后</h2><p>然后，我们该怎么做呢？！！！ 那就是给应用程序指定默认 include 路径， 那么我们应该指定的路径在什么地方呢？？</p>
+<p>通过上面的分析，我们发现我们必须指定 include 的路径为 Linux 3.5.0 版本的内核中的 include 路径。  </p>
+<p>具体就是下载一个 和嵌入式 Linux 内核版本相同的一份源码，解压放在PC的合适位置，在应用程序工程中指定 这个include 的路径。  我放在了 /home/linux-3.5/include</p>
+<ol>
+<li><p>Makefile 中的改变默认路径的方法 </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="meta">#compiler</span></div><div class="line">CC = arm-linux-gcc</div><div class="line">#flags</div><div class="line">CFLAGS = -g -I/home/linux<span class="number">-3.5</span>/include</div><div class="line">#objects</div><div class="line">OBJS = H264_UVC_TestAP.o h264_xu_ctrls.o v4l2uvc.o nalu.o cap_desc_parser.o cap_desc.o</div><div class="line">#install path</div><div class="line">INSTALL_PATH = ./</div><div class="line"></div><div class="line">all: H264_UVC_TestAP</div><div class="line"></div><div class="line">H264_UVC_TestAP: $(OBJS)</div><div class="line">	$(CC) $(CFLAGS) $(OBJS) -o $@ -lpthread</div><div class="line"></div><div class="line">H264_UVC_TestAP.o: H264_UVC_TestAP.c h264_xu_ctrls.h</div><div class="line">	$(CC) $(CFLAGS) -c -o $@ $&lt;</div><div class="line"></div><div class="line">H264_xu_ctrls.o: h264_xu_ctrls.c h264_xu_ctrls.h</div><div class="line">	$(CC) $(CFLAGS) -c -o $@ $&lt;</div><div class="line"></div><div class="line">clean:</div><div class="line">	-rm -f *.o *.ko .*.cmd .*.flags *.mod.c</div></pre></td></tr></table></figure>
+</li>
+<li><p>Qt 工程中</p>
+<pre><code class="c">
+QT += core network
+QT -= gui
+
+TARGET = encoder-device4412
+CONFIG += console
+CONFIG -= app_bundle
+
+INCLUDEPATH += /home/linux<span class="number">-3.5</span>/include
+
+TEMPLATE = app
+
+SOURCES += main.cpp \
+    encoder_iformation.cpp \
+    encoder_rtp.cpp \
+    encoder_udpsocket.cpp \
+    encoder_v4l2.cpp \
+    XU_Ctrl/h264_xu_ctrls.c \
+    XU_Ctrl/v4l2uvc.c
+</code></pre>
+</li>
+</ol>
 
       
     </div>
@@ -382,7 +400,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/个人博客/" rel="tag">#个人博客</a>
+            <a href="/tags/交叉编译器-Linux内核版本-应用程序默认路径问题/" rel="tag">#交叉编译器 Linux内核版本 应用程序默认路径问题</a>
           
         </div>
       
@@ -391,17 +409,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/18/齐鲁工业大学供暖节能项目/" rel="next" title="齐鲁工业大学供暖节能（Qt4.8.5-Embeded）">
-                <i class="fa fa-chevron-left"></i> 齐鲁工业大学供暖节能（Qt4.8.5-Embeded）
+              <a href="/2017/08/04/交叉编译 jrtplib-3.11.1 和 jthread-1.3.3/" rel="next" title="交叉编译 jrtplib-3.11.1 和 jthread-1.3.3">
+                <i class="fa fa-chevron-left"></i> 交叉编译 jrtplib-3.11.1 和 jthread-1.3.3
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/22/二叉树B树B+树/" rel="prev" title="二叉树(Binary Tree)、B树(B-Tree)、B+树(B+ Tree)的简单介绍">
-                二叉树(Binary Tree)、B树(B-Tree)、B+树(B+ Tree)的简单介绍 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -589,7 +603,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Github搭建Hexo技术博客托管在GitHub-Pages上"><span class="nav-number">1.</span> <span class="nav-text">使用Github搭建Hexo技术博客托管在GitHub Pages上</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何通过Git-GUI将自己本地的项目上传至Github"><span class="nav-number">2.</span> <span class="nav-text">如何通过Git GUI将自己本地的项目上传至Github</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#搭建完成之后的总结"><span class="nav-number">3.</span> <span class="nav-text">搭建完成之后的总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用MarkDown写-md-文件-（常用）"><span class="nav-number">4.</span> <span class="nav-text">使用MarkDown写.md 文件 （常用）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#给文字上色"><span class="nav-number">4.1.</span> <span class="nav-text">给文字上色</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生成表格"><span class="nav-number">4.2.</span> <span class="nav-text">生成表格</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加入C-代码并高亮显示"><span class="nav-number">4.3.</span> <span class="nav-text">加入C++代码并高亮显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插如图片"><span class="nav-number">4.4.</span> <span class="nav-text">插如图片</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ARM-板的交叉编译器"><span class="nav-number">1.</span> <span class="nav-text">ARM 板的交叉编译器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于应用程序的-默认路径"><span class="nav-number">2.</span> <span class="nav-text">关于应用程序的 默认路径</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译嵌入式-应用程序-到底该使用什么路径呢"><span class="nav-number">3.</span> <span class="nav-text">编译嵌入式 应用程序 到底该使用什么路径呢</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#首先"><span class="nav-number">3.1.</span> <span class="nav-text">首先</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#然后"><span class="nav-number">3.2.</span> <span class="nav-text">然后</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
