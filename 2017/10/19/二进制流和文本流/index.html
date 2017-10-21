@@ -1,0 +1,696 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="编解码," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="二进制流和文本流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二进制流和文本流 二进制文件和文本文件">
+<meta property="og:url" content="http://yoursite.com/2017/10/19/二进制流和文本流/index.html">
+<meta property="og:site_name" content="Skymyweakness">
+<meta property="og:description" content="二进制流和文本流">
+<meta property="og:updated_time" content="2017-10-21T14:11:13.619Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="二进制流和文本流 二进制文件和文本文件">
+<meta name="twitter:description" content="二进制流和文本流">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 二进制流和文本流 二进制文件和文本文件 | Skymyweakness </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Skymyweakness</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                二进制流和文本流 二进制文件和文本文件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-19T09:43:14+08:00" content="2017-10-19">
+              2017-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/加解密/" itemprop="url" rel="index">
+                    <span itemprop="name">加解密</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="文本文件-和-二进制文件"><a href="#文本文件-和-二进制文件" class="headerlink" title="文本文件 和 二进制文件"></a>文本文件 和 二进制文件</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>两种文件格式的存储在物理上面是没区别的，因为在计算机中都是二进制存储的。 区别在逻辑上，两者只是在编码层次上面有差异。</p>
+<p>文本文件是基于字符编码的文件，常见的编码有 ASCII编码，UNICODE编码，UTF-8编码等等。。。。</p>
+<p>二进制文件是基于值进行编码的，至于指定某个值是什么意思你可以自己定义。。。</p>
+<p>从上面可以看出： 文本文件基本都是定长编码的（也有费定长编码的 如 UTF-8），一般ASCII编码的文本文件是 8bit 编码， UNICODE编码 是 16bits 编码。    文本文件的编码，因为是值编码所以多少 bit 代表一个值由自己确定，当然也有一些制定好的值编码格式，比如 bmp jpg 文件，它就规定了，前面几个字节代表的数值是 图片的大小和长宽 等信息 ， 后面的是 色度和亮度信息，。。。。</p>
+<h2 id="文本文件与二进制文件的存取"><a href="#文本文件与二进制文件的存取" class="headerlink" title="文本文件与二进制文件的存取"></a>文本文件与二进制文件的存取</h2><p>1.在windows系统中，文本模式下，文件以”\r\n”代表换行。若以文本模式打开文件，并用fputs等函数写入换行符”\n”时，函数会自动在”\n”前面加上”\r”。即实际写入文件的是”\r\n”。读取的时候自动去掉\r，将\n写入内存。</p>
+<p>2.在类Unix/Linux系统中文本模式下，文件以”\n”代表换行。所以Linux系统中在文本模式和二进制模式下并无区别</p>
+<p>总结： 文本文件和二进制文件本身并没有什么大的区别，在Linux系统下面更是一样的，但是在windows操作系统下面，对 ‘\n’ 的存储和读取都是 按照 ‘\r’’\n’ 进行存储和读写的。</p>
+<h2 id="文本文件与二进制文件的优缺点"><a href="#文本文件与二进制文件的优缺点" class="headerlink" title="文本文件与二进制文件的优缺点"></a>文本文件与二进制文件的优缺点</h2><p>因为文本文件与二进制文件的区别仅仅是编码上不同，所以他们的优缺点就是编码的优缺点。</p>
+<p>一般认为，文本文件编码基于字符定长，译码容易些；二进制文件编码是变长的，所以它灵活，存储利用率要高些，译码难一些（不同的二进制文件格式，有不同的译码方式）。关于空间利用率，想想看，二进制文件甚至可以用一个比特来代表一个意思(位操作)，而文本文件任何一个意思至少是一个字符．<br>很多书上还认为，文本文件的可读性要好些，存储要花费转换时间(读写要编译码)，而二进制文件可读性差，存储不存在转换时间（读写不要编解码，直接写值）．这里的可读性是从软件使用者角度来说的，因为我们用通用的记事本工具就几乎可以浏览所有文本文件，所以说文本文件可读性好；而读写一个具体的二进制文件需要一个具体的文件解码器，所以说二进制文件可读性差，比如读BMP文件，必须用读图软件．而这里的存储转换时间应该是从编程的角度来说的，因为有些操作系统如windows需要对回车换行符进行转换(将’’\n’’，换成’’\r\n’’，所以文件读写时，操作系统需要一个一个字符的检查<br>当前字符是不是’’\n’’或’’\r\n’’).这个在存储转换在Linux操作系统中并不需要，当然，当在两个不同的操作系统上共享文件时，这种存储转换又可能出来(如Linux系统和Windows系统共享文本文件)。</p>
+<h1 id="C-语言读写的两种方式"><a href="#C-语言读写的两种方式" class="headerlink" title="C 语言读写的两种方式"></a>C 语言读写的两种方式</h1><p>应该说Ｃ的文本读写与二进制的读写是一个编程层次上的问题，与具体的操作系统有关，所以＂用文本方式读写的文件一定是文本文件，用二进制读写的文件一定是二进制文件”这类观点是错误的．下面的讲述非明确指出操作系统类型，都暗指windows．</p>
+<p>Ｃ的文本方读写与二进制读写的差别仅仅体现在回车换行符的处理上．文本方式写时，每遇到一个’’\n’’(0AH换行符)，它将其换成’’\r\n’’(0D0AH，回车换行)，然后再写入文件；</p>
+<p>当文本读取时，它每遇到一个’’\r\n’’将其反变化为’’\n’’，然后送到读缓冲区．正因为文本方式有’’\n’’－－’’\r\n’’之间的转换，其存在转换耗时．二进制读写时，其不存在任何转换，直接将写缓冲区中数据写入文件．</p>
+<p>总地来说，从编程的角度来说，Ｃ中文本或二进制读写都是缓冲区与文件中二进制流的交互，只是文本读写时有回车换行的转换．所以当写缓冲区中无换行符’’\n’’(0AH)，文本写与二进制写的结果是一样的，同理，当文件中不存在’’\r\n’’(0DH0AH)时，文本读与二进制读的结果一样．</p>
+<h2 id="文本方式（ASCII）"><a href="#文本方式（ASCII）" class="headerlink" title="文本方式（ASCII）"></a>文本方式（ASCII）</h2><p>注意 fprintf  和  fscanf 的使用</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">FILE *fp;</div><div class="line">fp = fopen(<span class="string">"test.txt"</span>, <span class="string">"w"</span>);</div><div class="line"><span class="comment">// int fprintf ( FILE * stream, const char * format, ... );</span></div><div class="line"><span class="built_in">fprintf</span>(fp, <span class="string">"%c"</span>, <span class="string">'A'</span>);</div><div class="line">fclose(fp);</div><div class="line">fp = fopen(<span class="string">"test.txt"</span>, <span class="string">"r"</span>);</div><div class="line"><span class="keyword">char</span> c;</div><div class="line"><span class="keyword">int</span> i;</div><div class="line"><span class="built_in">fscanf</span>(fp, <span class="string">"%c"</span>, &amp;c);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"c: "</span> &lt;&lt; c &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">fclose(fp);</div></pre></td></tr></table></figure>
+<h2 id="二进制方式"><a href="#二进制方式" class="headerlink" title="二进制方式"></a>二进制方式</h2><p>注意 fread  和  fwrite  的使用</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// size_t fwrite ( const void * ptr, size_t size, size_t count, FILE * stream );</span></div><div class="line"></div><div class="line"><span class="comment">// size_t fread ( void * ptr, size_t size, size_t count, FILE * stream );</span></div><div class="line"><span class="keyword">int</span> arr[] = &#123; <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span> &#125;;</div><div class="line"><span class="keyword">int</span> *arr2 = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(arr));</div><div class="line">fp = fopen(<span class="string">"test2.txt"</span>, <span class="string">"wb"</span>);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; fwrite(arr, <span class="keyword">sizeof</span>(<span class="keyword">int</span>), <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>), fp) &lt;&lt; <span class="built_in">endl</span>;;</div><div class="line">fclose(fp);</div><div class="line">fp = fopen(<span class="string">"test2.txt"</span>, <span class="string">"rb"</span>);</div><div class="line">fread(arr2, <span class="keyword">sizeof</span>(<span class="keyword">int</span>), <span class="keyword">sizeof</span>(arr) / <span class="keyword">sizeof</span>(<span class="keyword">int</span>), fp);</div><div class="line"><span class="built_in">cout</span> &lt;&lt; arr2[<span class="number">5</span>] &lt;&lt; <span class="built_in">endl</span>;</div></pre></td></tr></table></figure>
+<h1 id="字符串发送和十六进制发送的区别"><a href="#字符串发送和十六进制发送的区别" class="headerlink" title="字符串发送和十六进制发送的区别"></a>字符串发送和十六进制发送的区别</h1><p> 在使用串口助手调试，TCP/UDP测试等工具时，经常会在主界面上的数据发送区和数据接收区有一个“按十六进制”的选项，在数据发送区，如果不选择此项，在输入框中输入要发送的字母或者数字，点击“发送”时，这时将按字符的方式发送，即输入的每一个数字或者字母将转换成ASCii码发送，如1a，实际发送的是1的ACSII值49，a的ACSII值97，发送的是两个字符的ASCII值，如果选择了此项，那么点击“发送”按钮时将直接发送1a而非每一个字符的ASCII值，即1a；在数据接收区，该功能类似。</p>
+<p>注意：由于char类型的取值范围为-128-+127，所以在接收十六进制发送的数据时为防止溢出，接收数据类型最好定义为unsigned char，其取值范围为0-255。</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   QByteArray <span class="built_in">array</span>;</div><div class="line">   <span class="built_in">array</span>.append(<span class="number">0x65</span>);</div><div class="line">   <span class="built_in">array</span>.append(<span class="number">0x66</span>);</div><div class="line"></div><div class="line">   qDebug() &lt;&lt; <span class="built_in">array</span>.size() &lt;&lt; <span class="string">": "</span> &lt;&lt; <span class="built_in">array</span>;</div><div class="line"></div><div class="line">   QByteArray tmp = <span class="built_in">array</span>.toHex();</div><div class="line">   qDebug() &lt;&lt; tmp.size() &lt;&lt; <span class="string">": "</span> &lt;&lt; tmp;</div><div class="line"></div><div class="line"></div><div class="line">输出 ： </div><div class="line"></div><div class="line">	<span class="number">2</span> :  <span class="string">"ef"</span></div><div class="line">	<span class="number">4</span> :  <span class="string">"6566"</span></div></pre></td></tr></table></figure>
+<p>想必大家使用 QT 编写 网络 或者 串口的接收程序的时候，都会用到 tohex 方法，这里说明一下为什么会用到这个方法。  因为发送方发送的数据是以 hex 格式发送的 拿起始标识符来说 0x00 0x00 0x00 0x01 （00000001 熟悉吧~）， 发送过来的时候 二进制形式是这样是的  00000000 00000000 00000000 00000001 四个字节（二进制流~）， 我们存放在 QByteArray 结构中。</p>
+<p>我们要匹配这个 “00000001” 使用的是 文本格式（ASCII编码）， QByteArray 的 tohex 方法实现了这个功能 将一个字节中的二进制数的 hex 值转换成字符类型存储， 比如 0xef 在内存中的二进制存储是<br>11101111 ， tohex 之后返回的 QByteArray 结构内存扩充两倍，存储的是 “ef” , 内存中存放的是 ‘e’ 和 ‘f’ 的 ASCII 码值（65,66） – 01000001 01000010 。</p>
+<p>这样转换之后，我们进行匹配的时候就可以这样了   QByteArray data = socket.readall();  QByteArrary data_hex = data.tohex();  if(data_hex != “00000001”) …..</p>
+<p>同样的，发送的时候一般我们拿到的数据都是 QString 或者 QByteArray 类型的，里面存放的都是 字符值，比如 “44111400010517” , 现在要求按照 hex 格式发送，那么也就是说我们要对字符串进行一定的处理；</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">QByteArrary command_ = <span class="string">"44111400010517"</span>;</div><div class="line">QByteArrary command ;</div><div class="line">command.clear();</div><div class="line"><span class="keyword">bool</span> ok = <span class="literal">false</span>;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; command_.size(); i += <span class="number">2</span>)</div><div class="line">&#123;</div><div class="line">	command.appand(command_.mid(i,<span class="number">2</span>).toInt(&amp;ok,<span class="number">16</span>));</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">char</span> *str = command.data();</div><div class="line">qDebug() &lt;&lt; QString(str) ;</div><div class="line"></div><div class="line">qint64 len = command.size();</div><div class="line">   (*it)-&gt;write(str,len);       <span class="comment">// 因为 socket 的发送函数的入口参数是 char * 类型的。。。。  char 就是 Byte</span></div></pre></td></tr></table></figure>
+<p>经过上面的操作之后 command 的大小是 command_ 的一半，  </p>
+<pre><code>4    4   1   1   1   4   0   0   0   1   0   5   1   7
+</code></pre><p>command_ 在内存中的存储：  0x34 0x34 0x31 ….</p>
+<p>char* str = command.data();</p>
+<pre><code>44   11   14   00   01   05   17
+</code></pre><p>command 在内存中的存储：    0x44 0x11 0x14 …</p>
+<p>上面的输出：  “DC\u0014”  发送的是 上面的 二进制数据…</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/编解码/" rel="tag">#编解码</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/19/Crypto库使用前的基本概念/" rel="next" title="数字签名和数字证书">
+                <i class="fa fa-chevron-left"></i> 数字签名和数字证书
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="sdu-zyq" />
+          <p class="site-author-name" itemprop="name">sdu-zyq</p>
+          <p class="site-description motion-element" itemprop="description">Studies pass into and influence manners</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">28</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/smb111" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://219.231.143.218" target="_blank" title="Lab517">
+                  
+                    <i class="fa fa-fw fa-building"></i>
+                  
+                  Lab517
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2446286071/home?wvr=5&lf=reg" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://gradms.sdu.edu.cn/login" target="_blank" title="SDU">
+                  
+                    <i class="fa fa-fw fa-star"></i>
+                  
+                  SDU
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.nowcoder.com/3883768" target="_blank" title="NewCoder">
+                  
+                    <i class="fa fa-fw fa-code"></i>
+                  
+                  NewCoder
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" title="Google">
+                  
+                    <i class="fa fa-fw fa-google"></i>
+                  
+                  Google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.hackerrank.com/dashboard" target="_blank" title="hackerrank">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  hackerrank
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://bailian.openjudge.cn/practice/status/" target="_blank" title="OpenJudge">
+                  
+                    <i class="fa fa-fw fa-code"></i>
+                  
+                  OpenJudge
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#文本文件-和-二进制文件"><span class="nav-number">1.</span> <span class="nav-text">文本文件 和 二进制文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-number">1.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本文件与二进制文件的存取"><span class="nav-number">1.2.</span> <span class="nav-text">文本文件与二进制文件的存取</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本文件与二进制文件的优缺点"><span class="nav-number">1.3.</span> <span class="nav-text">文本文件与二进制文件的优缺点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#C-语言读写的两种方式"><span class="nav-number">2.</span> <span class="nav-text">C 语言读写的两种方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#文本方式（ASCII）"><span class="nav-number">2.1.</span> <span class="nav-text">文本方式（ASCII）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二进制方式"><span class="nav-number">2.2.</span> <span class="nav-text">二进制方式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#字符串发送和十六进制发送的区别"><span class="nav-number">3.</span> <span class="nav-text">字符串发送和十六进制发送的区别</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sdu-zyq</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
