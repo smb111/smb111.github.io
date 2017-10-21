@@ -1,0 +1,800 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="加密," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="数字签名和数字证书概念">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数字签名和数字证书">
+<meta property="og:url" content="http://yoursite.com/2017/10/19/Crypto库使用前的基本概念/index.html">
+<meta property="og:site_name" content="Skymyweakness">
+<meta property="og:description" content="数字签名和数字证书概念">
+<meta property="og:image" content="http://img.my.csdn.net/uploads/201207/24/1343098474_7916.png">
+<meta property="og:image" content="http://my.csdn.net/uploads/201207/24/1343098615_5226.png">
+<meta property="og:updated_time" content="2017-10-21T00:54:21.031Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数字签名和数字证书">
+<meta name="twitter:description" content="数字签名和数字证书概念">
+<meta name="twitter:image" content="http://img.my.csdn.net/uploads/201207/24/1343098474_7916.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> 数字签名和数字证书 | Skymyweakness </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Skymyweakness</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                数字签名和数字证书
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-19T09:43:14+08:00" content="2017-10-19">
+              2017-10-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/加解密/" itemprop="url" rel="index">
+                    <span itemprop="name">加解密</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="三大类加密算法"><a href="#三大类加密算法" class="headerlink" title="三大类加密算法"></a>三大类加密算法</h1><h2 id="Hash算法（摘要算法）"><a href="#Hash算法（摘要算法）" class="headerlink" title="Hash算法（摘要算法）"></a>Hash算法（摘要算法）</h2><p>Hash算法是一个单向的数据摘要算法，我们可以对目标信息使用Hash算法生成一段特定长度的Hash值，但是不能反向操作，即不能通过Hash值反推出目标信息。 Hash算法用在不可还原的密码存储和信息完整性校验等方面。</p>
+<p>常见的Hash算法： MD2 MD4 MD5 HAVAL SHA</p>
+<h2 id="对称加密技术"><a href="#对称加密技术" class="headerlink" title="对称加密技术"></a>对称加密技术</h2><p>对称加密采用了对称密码编码技术，它的特点是文件加密和解密使用相同的密钥，即加密密钥也可以用作解密密钥，这种方法在密码学中叫做对称加密算法，对称加密算法使用起来简单快捷，密钥较短，且破译困难</p>
+<p>1、要求提供一条安全的渠道使通讯双方在首次通讯时协商一个共同的密钥。直接的面对面协商可能是不现实而且难于实施的，所以双方可能需要借助于邮件和电话等其它相对不够安全的手段来进行协商；</p>
+<p>2、密钥的数目难于管理。因为对于每一个合作者都需要使用不同的密钥，很难适应开放社会中大量的信息交流；</p>
+<p>3、对称加密算法一般不能提供信息完整性的鉴别。它无法验证发送者和接受者的身份；</p>
+<p>4、对称密钥的管理和分发工作是一件具有潜在危险的和烦琐的过程。对称加密是基于共同保守秘密来实现的，采用对称加密技术的贸易双方必须保证采用的是相同的密钥，保证彼此密钥的交换是安全可靠的，同时还要设定防止密钥泄密和更改密钥的程序。</p>
+<p>常见的对称加密算法有 DES、3DES、Blowfish、IDEA、RC4、RC5、RC6和AES </p>
+<h2 id="非对称加密技术"><a href="#非对称加密技术" class="headerlink" title="非对称加密技术"></a>非对称加密技术</h2><p>1976年，美国学者Dime和Henman为解决信息公开传送和密钥管理问题，提出一种新的密钥交换协议，允许在不安全的媒体上的通讯双方交换信息，安全地达成一致的密钥，这就是“公开密钥系统”。相对于“对称加密算法”这种方法也叫做“非对称加密算法”。</p>
+<p>与对称加密算法不同，非对称加密算法需要两个密钥：公开密钥（publickey）和私有密钥（privatekey）。公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密。因为加密和解密使用的是两个不同的密钥，所以这种算法叫作非对称加密算法。</p>
+<p>非对称加密算法的保密性比较好，它消除了最终用户交换密钥的需要，但加密和解密花费时间长、速度慢，它不适合于对文件加密而只适用于对少量数据进行加密。</p>
+<p>如果企业中有n个用户，企业需要生成n对密钥，并分发n个公钥。由于公钥是可以公开的，用户只要保管好自己的私钥即可(企业分发后一般保存的是私钥,用户拿的是公钥)，因此加密密钥的分发将变得十分简单。同时，由于每个用户的私钥是唯一的，其他用户除了可以可以通过信息发送者的公钥来验证信息的来源是否真实，还可以确保发送者无法否认曾发送过该信息。非对称加密的缺点是加解密速度要远远慢于对称加密，在某些极端情况下，甚至能比非对称加密慢上1000倍。</p>
+<font color="red">非对称加密的典型应用是数字签名</font>。<br><br>常见的非对称加密算法有：RSA、ECC（移动设备用）、Diffie-Hellman、El Gamal、DSA（数字签名用）<br><br><br>## 数字指纹（信息摘要） ##<br><br>数字指纹又称为信息摘要，是指发送方通过HASH算法对明文信息计算后得出的数据。采用数字指纹时，<br><br>发送方会将本端对明文进哈希运算后生成的数字指纹（还要经过数字签名），<br><br>进行数字签名： 通过本端的 私钥 对数字指纹进行加密<br><br>以及采用对端公钥对明文进行加密后生成的密文一起发送给接收方，<br><br>接收方用同样的HASH算法对明文计算生成的数据指纹，与收到的数字指纹进行匹配，如果一致，便可确定明文信息没有被篡改。<br><br><font color="red">如果 接收方 能确认手中的公钥是发送方的，那么还可以证明确实是发送方发过来的，但是，如果有人偷换了接收方的公钥，那么就只能接收小偷的信息了。 怎么解决这个问题呢？  引入第三方CA的数字证书。</font>
+
+
+<h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><p>数字签名是指：发送方使用自己的私钥对数字指纹进行加密所得的数据。</p>
+<p>下面这篇文章对于数字签名将的非常好</p>
+<p><a href="http://winda.blog.51cto.com/55153/1968298" target="_blank" rel="external">http://winda.blog.51cto.com/55153/1968298</a></p>
+<h3 id="使用-CRYPTO-库-进行-PKCS7-格式的数字签名"><a href="#使用-CRYPTO-库-进行-PKCS7-格式的数字签名" class="headerlink" title="使用 CRYPTO 库 进行 PKCS7 格式的数字签名"></a>使用 CRYPTO 库 进行 PKCS7 格式的数字签名</h3><p>在windows中，可以直接使用微软提供的crypto库实现PKCS7签名与签名验证。签名接口函数为CryptSignMessage，其接口定义为：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">BOOL WINAPI <span class="title">CryptSignMessage</span><span class="params">(  </span></span></div><div class="line">  __in          PCRYPT_SIGN_MESSAGE_PARA pSignPara,  </div><div class="line">  __in          BOOL fDetachedSignature,  </div><div class="line">  __in          DWORD cToBeSigned,  </div><div class="line">  __in          <span class="keyword">const</span> BYTE* rgpbToBeSigned[],  </div><div class="line">  __in          DWORD rgcbToBeSigned[],  </div><div class="line">  __out         BYTE* pbSignedBlob,  </div><div class="line">  __in_out      DWORD* pcbSignedBlob  </div><div class="line">);</div></pre></td></tr></table></figure>
+<ol>
+<li>CRYPT_SIGN_MESSAGE_PARA，它包含签名过程中一些参数的配置，如签名者证书，证书撤销列表，以及一些授权属性与非授权属性</li>
+</ol>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> _CRYPT_SIGN_MESSAGE_PARA </div><div class="line">&#123;</div><div class="line">  DWORD                      cbSize;                    *这个结构的大小</div><div class="line">  DWORD                      dwMsgEncodingType;			*编码方式的选择，一般同时指定证书的编码格式和消息的编码格式  X509_ASN_ENCODING | PKCS_7_ASN_ENCODING  证书 | 消息(这个地方指定了使用 PKCS7 格式的数字签名格式)</div><div class="line">  PCCERT_CONTEXT             pSigningCert;              *签名者证书   必须为上下文设置CERT_KEY_PROV_INFO_PROP_ID或CERT_KEY_CONTEXT_PROP_ID属性以提供对私有签名密钥的访问。</div><div class="line">  CRYPT_ALGORITHM_IDENTIFIER HashAlgorithm;             *HASH 算法</div><div class="line">  <span class="keyword">void</span>                       *pvHashAuxInfo; 			<span class="literal">NULL</span></div><div class="line">  DWORD                      cMsgCert;					*下面数组的个数</div><div class="line">  PCCERT_CONTEXT             *rgpMsgCert;				*要包含在已签名消息中的指向CERT_CONTEXT结构的指针数组。 pSigningCert 不为空就要包含在内</div><div class="line">  DWORD                      cMsgCrl;					注销证书列表的个数</div><div class="line">  PCCRL_CONTEXT              *rgpMsgCrl;                注销的证书列表</div><div class="line">  DWORD                      cAuthAttr;					</div><div class="line">  PCRYPT_ATTRIBUTE           rgAuthAttr;</div><div class="line">  DWORD                      cUnauthAttr;</div><div class="line">  PCRYPT_ATTRIBUTE           rgUnauthAttr;</div><div class="line">  DWORD                      dwFlags;</div><div class="line">  DWORD                      dwInnerContentType;</div><div class="line">  CRYPT_ALGORITHM_IDENTIFIER HashEncryptionAlgorithm;</div><div class="line">  <span class="keyword">void</span>                       pvHashEncryptionAuxInfo;</div><div class="line">&#125; CRYPT_SIGN_MESSAGE_PARA, *PCRYPT_SIGN_MESSAGE_PARA;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>fDetachedSignature用来标识是否发送明文，如果为真，则不发送明文，需在接收方配置明文信息；反之，则发送签名消息的同时发送明文，接收方可从中取出明文。</p>
+</li>
+<li><p>第三、四、五个参数与待签名的明文相关，如果fDetachedSignature为真，则它们都为空；否则，不能为空，第三个参数标识待签名明文的个数，可以有多组明文，第四个参数标识明文串，它是一个指针数组，其中包含每组明文的地址，第五个参数标识每组明文的长度。</p>
+</li>
+<li><p>第六和第七个参数为生成的编码签名串，它是由PKCS7格式转化得到。</p>
+</li>
+</ol>
+<h3 id="使用-CRYPTO-库-进行-PKCS7-格式的数字签名-验证"><a href="#使用-CRYPTO-库-进行-PKCS7-格式的数字签名-验证" class="headerlink" title="使用 CRYPTO 库 进行 PKCS7 格式的数字签名 验证"></a>使用 CRYPTO 库 进行 PKCS7 格式的数字签名 验证</h3><p>验证签名的接口函数有两种，分别为CryptVerifyMessageSignature和CryptVerifyDetachedMessageSignature，前者用来验证包含明文的签名，后者用来验证不包含明文的签名。它们的接口定义分别为：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">BOOL WINAPI <span class="title">CryptVerifyMessageSignature</span><span class="params">(</span></span></div><div class="line">  __in          PCRYPT_VERIFY_MESSAGE_PARA pVerifyPara,</div><div class="line">  __in          DWORD dwSignerIndex,</div><div class="line">  __in          <span class="keyword">const</span> BYTE* pbSignedBlob,</div><div class="line">  __in          DWORD cbSignedBlob,</div><div class="line">  __out         BYTE* pbDecoded,</div><div class="line">  __in_out      DWORD* pcbDecoded,</div><div class="line">  __out_opt     PCCERT_CONTEXT* ppSignerCert</div><div class="line">);</div></pre></td></tr></table></figure>
+<ol>
+<li><p>其中，第一个参数为CRYPT_VERIFY_MESSAGE_PARA类型，它定义了一个获取签名者证书的回调函数，可以设置回调函数为空，默认从签名消息证书库中获取签名者证书。 也就是我们签名的时候，附带在签名数据后面的证书。。</p>
+</li>
+<li><p>第二个参数dwSignerIndex用来标识签名者索引，因为签名消息可以由多个签名者签名构成，第三和第四个参数为接收到的签名串，第五和第六个参数为解码后得到的明文，第七个参数可以获取签名者证书上下文。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">BOOL WINAPI <span class="title">CryptVerifyDetachedMessageSignature</span><span class="params">(</span></span></div><div class="line">  __in          PCRYPT_VERIFY_MESSAGE_PARA pVerifyPara,</div><div class="line">  __in          DWORD dwSignerIndex,</div><div class="line">  __in          <span class="keyword">const</span> BYTE* pbDetachedSignBlob,</div><div class="line">  __in          DWORD cbDetachedSignBlob,</div><div class="line">  __in          DWORD cToBeSigned,</div><div class="line">  __in          <span class="keyword">const</span> BYTE* rgpbToBeSigned[],</div><div class="line">  __in          DWORD rgcbToBeSigned[],</div><div class="line">  __out_opt     PCCERT_CONTEXT* ppSignerCert</div><div class="line">);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>其中，第一和第二个参数与上面一致，第三和第四个参数为接收到的签名串，第五、六、七个参数用来标识明文信息，因为在签名串中不包含明文，第八个参数可以获取签名者证书上下文。</p>
+<h2 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h2><p>上面<strong>数字指纹</strong>一节中说道，如果接收方B电脑里面存储的发送方的公钥被C换掉，那么就只能接收偷换者C发来的消息，因为接收方B的公钥是对外开放的，C也可能会有。 </p>
+<p>现在接收方B无法确认 手里的公钥 是不是真正的属于 发送方A，于是他要求 A 去证书中心（CA）为公钥进行认证，<font color="red">CA 用自己的私钥对 A的公钥和A的信息进行数字签名，这就是数字证书。</font></p>
+<font color="green"><br>A现在拿到数字证书之后，再给B写信，只需要在签名的同时附带上 CA 认证的证书，（一般的数字签名会选择把明文带上），B 收到之后使用 CA的公钥，解签证书，从信息中发现这确实是 A 签名的信息，再验证信息的完整性。。。</font>
+
+
+<h1 id="数字证书常见标准"><a href="#数字证书常见标准" class="headerlink" title="数字证书常见标准"></a>数字证书常见标准</h1><h2 id="X509-标准"><a href="#X509-标准" class="headerlink" title="X509 标准"></a>X509 标准</h2><p>这是传统的标准（.DER .PEM .CER .CRT）  基本证书格式，只包含公钥。</p>
+<p>x509证书由用户公共密钥和用户标识符组成。此外还包括版本号、证书序列号、CA标识符、签名算法标识、签发者名称、证书有效期等信息。</p>
+<h2 id="PKCS-系列"><a href="#PKCS-系列" class="headerlink" title="PKCS 系列"></a>PKCS 系列</h2><p>PKCS是由美国RSA数据安全公司及其合作伙伴制定的一组公钥密码学标准，其中包括<strong>证书申请、证书更新、证书作废表发布、扩展证书内容以及数字签名、数字信封的格式</strong>等方面的一系列相关协议。到1999年底，PKCS已经公布了以下标准： </p>
+<ul>
+<li><strong>PKCS#1：定义RSA公开密钥算法加密和签名机制，主要用于组织PKCS#7中所描述的数字签名和数字信封</strong>[22]。 </li>
+<li>PKCS#3：定义Diffie-Hellman密钥交换协议[23]。 </li>
+<li>PKCS#5：描述一种利用从口令派生出来的安全密钥加密字符串的方法。使用MD2或MD5 从口令中派生密钥，并采用DES-CBC模式加密。主要用于加密从一个计算机传送到另一个计算机的私人密钥，不能用于加密消息[24]。 </li>
+<li>PKCS#6：描述了公钥证书的标准语法，主要描述X.509证书的扩展格式[25]。 </li>
+<li><strong>PKCS#7：定义一种通用的消息语法，包括数字签名和加密等用于增强的加密机制，PKCS#7与PEM兼容，所以不需其他密码操作，就可以将加密的消息转换成PEM消息[26].PKCS#7为使用密码算法的数据规定了通用语法，比如数字签名和数字信封。PKCS#7提供了许多格式选项，包括未加密或签名的格式化消息、已封装（加密）消息、已签名消息和既经过签名又经过加密的消息.</strong></li>
+<li>PKCS#8：描述私有密钥信息格式，该信息包括公开密钥算法的私有密钥以及可选的属性集等[27]。 </li>
+<li>PKCS#9：定义一些用于PKCS#6证书扩展、PKCS#7数字签名和PKCS#8私钥加密信息的属性类型[28]。 </li>
+<li>PKCS#10：描述证书请求语法[29]。 </li>
+<li>PKCS#11：称为Cyptoki，定义了一套独立于技术的程序设计接口，用于智能卡和PCMCIA卡之类的加密设备[30]。 </li>
+<li>PKCS#12：<strong>描述个人信息交换语法标准。描述了将用户公钥、私钥、证书和其他相关信息打包的语法[31]。 </strong></li>
+<li>PKCS#13：椭圆曲线密码体制标准[32]。 </li>
+<li>PKCS#14：伪随机数生成标准。 </li>
+<li>PKCS#15：密码令牌信息格式标准[33]。</li>
+</ul>
+<p>实际上PKCS#7、PKCS#10、PKCS#12都是PKCS系列标准的一部分。相互之间并不是替代的关系，而是对不同使用场景的定义。</p>
+<h3 id="符合PKCS-7-加密消息语法标准-P7B-P7C-SPC-P7R"><a href="#符合PKCS-7-加密消息语法标准-P7B-P7C-SPC-P7R" class="headerlink" title="符合PKCS#7 加密消息语法标准(.P7B .P7C .SPC .P7R)"></a>符合PKCS#7 加密消息语法标准(.P7B .P7C .SPC .P7R)</h3><p>该格式把证书分为两个文件，一个公钥一个私钥，有PEM和DER两种编码格式。 PEM比较多见，是纯文本格式的，一般用于发布公钥，看到的是一串字符串，通常以 .crt .cer .key 为文件后缀。</p>
+<p>DER 是二进制编码。</p>
+<p>PKCS#7：也叫做加密消息的语法标准，由RSA安全体系在公钥加密系统中交换数字证书产生的一种加密标准。PKCS#7描述数字证书的语法和其他加密消息——尤其是，数据加密和数字签名的方法，也包含了算法。<strong>当使用PKCS#7进行数字签名时，结果包含签名证书（一列相关证书撤回列表）和已证明路径上任何其他证书。</strong>如果使用PKCS#7加密数据，通常包含发行者的参考消息和证书的序列号，它与用于解密已加密数据的公共密钥相关。 </p>
+<p>PKCS#7标准定义了多种内容类型，包括下面这些：</p>
+<ul>
+<li>·数据：字节或8位元组串。 </li>
+<li>·签名设计：随加密数据摘要一起的数据。一个信息摘要是一个哈希算法的结果（术语摘要和散列是相同定义的）。使用信息摘要保证原始消息在传输过程中没有被篡改，并确认发送者的身份。 </li>
+<li>·封装数据：密文加上公钥能够解密数据。用这种方法保持消息内容对所有人保密，都是信任收件人。 </li>
+<li>·签名和加密数据：有公钥的加密内容和双重加密的消息摘要。 </li>
+<li>·摘要数据：数据加上消息摘要。 </li>
+<li>·单独的加密数据：在这种情况，加密数据的公钥必须通过其他机制传输。</li>
+</ul>
+<font color="red" size="5"><strong>该标准一般用来做数字信封，数字签名</strong> </font>
+
+<h3 id="符合PKCS-10-证书请求标准-p10"><a href="#符合PKCS-10-证书请求标准-p10" class="headerlink" title="符合PKCS#10 证书请求标准(.p10)"></a>符合PKCS#10 证书请求标准(.p10)</h3><p>证书请求语法。</p>
+<h3 id="符合PKCS-12-个人信息交换标准（-pfx-p12）"><a href="#符合PKCS-12-个人信息交换标准（-pfx-p12）" class="headerlink" title="符合PKCS#12 个人信息交换标准（.pfx *.p12）"></a>符合PKCS#12 个人信息交换标准（.pfx *.p12）</h3><p>一种文件打包格式，为存储和发布用户和服务器私钥、公钥和证书指定了一个可移植的格式，是一种二进制格式，通常以 .pfx 或者 .p12 文件后缀名。</p>
+<font color="red">P12是把证书压成一个文件，xxx.pfx 。主要是考虑分发证书，私钥是要绝对保密的，不能随便以文本方式散播。所以P7格式不适合分发。</font>.pfx中可以加密码保护，所以相对安全些。<br><br><font color="green"><br>.p12: 也写作 .pfx，全称：PKCS #12，是公钥加密标准（Public Key Cryptography Standards，PKCS）系列的一种，它定义了描述个人信息交换语法（Personal Information Exchange Syntax）的标准，可以用来将包含了公钥的 X.509 证书和证书对应的私钥以及其他相关信息打包，进行交换。简单理解：<br><br>一份 .p12 文件 = X.509 证书+私钥；<br></font>
+
+<h2 id="关于以上三种标准的总结！！！！"><a href="#关于以上三种标准的总结！！！！" class="headerlink" title="关于以上三种标准的总结！！！！"></a>关于以上三种标准的总结！！！！</h2><ol>
+<li><p>证书的标准格式—X509格式:  标准证书格式（比如CA签发的证书），包含一个公钥和一些版本信息，CA信息等等。。。</p>
+</li>
+<li><p>PKCS7 格式： 之前对这个格式有些误解，不明白他为什么是证书格式又是数字签名和数字信封格式。 其实从他的名字来看–<strong>加密消息语法标准</strong>（由RSA安全体系在公钥加密系统中交换数字证书产生的一种加密标准）</p>
+</li>
+</ol>
+<p>看名字并不能发现他和证书的关系，我的理解是，他既可以是证书封装格式可以包含多个X509证书.p7b，也可以作为消息加密方式如 对于PKCS7数字签名来说，加密消息是指按照一定的格式进行 Padding 等操作，一般使用 PKCS7 进行数字签名会带上 证书（也可以不带），所以这里也算一种证书标准，只不过还带着一些加密的消息等。  关于 PKCS7 一些详细的操作比如 如何对数字指纹进行padding，关于PKCS1签名、PKCS7签名、PKCS数字信封，<a href="http://www.tk4479.net/andryyu/article/details/52400223" title="PKCS1签名、PKCS7签名、PKCS数字信封" target="_blank" rel="external">http://www.tk4479.net/andryyu/article/details/52400223</a></p>
+<ol>
+<li>PKCS12 .p12: 也写作 .pfx，全称：PKCS #12，是公钥加密标准（Public Key Cryptography Standards，PKCS）系列的一种，它定义了描述个人信息交换语法（Personal Information Exchange Syntax）的标准，可以用来将包含了公钥的 X.509 证书和证书对应的私钥以及其他相关信息打包，进行交换。简单理解：一份 .p12 文件 = X.509 证书+私钥；</li>
+</ol>
+<p>也是一种证书封装格式 不过他的用途是用来分发证书，和传输证书的，这种格式的一般会带着一个口令密码，才能安装。。。</p>
+<h1 id="证书编码格式"><a href="#证书编码格式" class="headerlink" title="证书编码格式"></a>证书编码格式</h1><p>X.509 标准的证书文件具有不同的编码格式，一般包括 PEM 和 DER 两种。</p>
+<h2 id="PEM"><a href="#PEM" class="headerlink" title="PEM"></a><strong>PEM</strong></h2><p>PEM: Privacy Enhanced Mail 的缩写，以文本的方式进行存储。它的文件结构以 —–BEGIN XXX—–，并以 —–END XXX—– 结尾，<strong>中间 Body 内容为 Base64 编码过的数据。</strong><br>例如，以 PEM 格式存储的证书结构大概如下：</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">-----BEGIN CERTIFICATE-----</div><div class="line"></div><div class="line">Base64编码过的证书数据</div><div class="line"></div><div class="line">-----END CERTIFICATE-----</div></pre></td></tr></table></figure>
+<h2 id="DER"><a href="#DER" class="headerlink" title="DER"></a><strong>DER</strong></h2><p>DER: Distinguished Encoding Rules 的缩写，以二进制方式进行存储，文件结构无法直接预览，同样可以通过如下 OpenSSL 命令查看其证书内容：</p>
+<p>openssl x509 -in xxx.der -inform der -text -noout</p>
+<p>一般 Java 和 Windows 服务器应用偏向于使用 DER 这种编码格式。</p>
+<p>当然同一 X.509 证书的不同编码之间可以互相转换：</p>
+<p><strong>PEM 转为 DER：</strong><br>openssl x509 -in xxx.pem -outform der -out xxx.der</p>
+<p><strong>DER 转为 PEM：</strong><br>openssl x509 -in xxx.der -inform der -outform pem -out xxx.pem</p>
+<h1 id="证书的文件扩展名"><a href="#证书的文件扩展名" class="headerlink" title="证书的文件扩展名"></a>证书的文件扩展名</h1><p>如上所述，对于 X.509 标准的证书两种不同编码格式，一般采用 PEM 编码就以 .pem 作为文件扩展名，若采用 DER 编码，就应以 .der 作为扩展名。但常见的证书扩展名还包括 .crt、.cer、.p12 等，他们采用的编码格式可能不同，内容也有所差别，但大多数都能互相转换，现总结如下：</p>
+<h2 id="pem"><a href="#pem" class="headerlink" title=".pem"></a>.pem</h2><p>.pem: 采用 PEM 编码格式的 X.509 证书的文件扩展名；</p>
+<h2 id="der"><a href="#der" class="headerlink" title=".der"></a>.der</h2><p>.der: 采用 DER 编码格式的 X.509 证书的文件扩展名；</p>
+<h2 id="crt"><a href="#crt" class="headerlink" title=".crt"></a>.crt</h2><p>.crt: 即 certificate 的缩写，常见于类 UNIX 系统，有可能是 PEM 编码，也有可能是 DER 编码，但绝大多数情况下此格式证书都是采用 PEM 编码；</p>
+<h2 id="cer"><a href="#cer" class="headerlink" title=".cer"></a>.cer</h2><p>.cer: 也是 certificate 的缩写，常见于 Windows 系统，同样地，可能是 PEM 编码，也可能是 DER 编码，但绝大多数情况下此格式证书都是采用 DER 编码；</p>
+<h2 id="p12"><a href="#p12" class="headerlink" title=".p12"></a>.p12</h2><p>.p12: 也写作 .pfx，全称：PKCS #12，是公钥加密标准（Public Key Cryptography Standards，PKCS）系列的一种，它定义了描述个人信息交换语法（Personal Information Exchange Syntax）的标准，可以用来将包含了公钥的 X.509 证书和证书对应的私钥以及其他相关信息打包，进行交换。简单理解：一份 .p12 文件 = X.509 证书+私钥；</p>
+<h2 id="csr"><a href="#csr" class="headerlink" title=".csr"></a>.csr</h2><p>.csr: Certificate Signing Request 的缩写，即<strong>证书签名请求，</strong>它并不是证书的格式，而是用于向权威证书颁发机构（Certificate Authority, CA）获得签名证书的申请，其核心内容包含一个 RSA 公钥和其他附带信息，在生成这个 .csr 申请的时候，同时也会生成一个配对 RSA 私钥，私钥通常需要严格保存于服务端，不能外泄。</p>
+<h2 id="key"><a href="#key" class="headerlink" title=".key"></a>.key</h2><p>.key: 通常用来存放一个 RSA 公钥或者私钥，它并非 X.509 证书格式，编码同样可能是 PEM，也可能是 DER，查看方式如下：</p>
+<p>PEM 编码格式：openssl rsa -in xxx.key -text -noout<br>DER 编码格式：openssl rsa -in xxx.key -text -noout -inform der</p>
+<h1 id="关于-CSP-的理解"><a href="#关于-CSP-的理解" class="headerlink" title="关于 CSP 的理解"></a>关于 CSP 的理解</h1><p>顾名思义： CSP (Cryptographic Server Provider) 加密服务提供者</p>
+<p>特点如下：</p>
+<ol>
+<li>CSP 是真正执行密码运算的独立模块</li>
+<li>物理上一个 CSP 由两部分组成： 一个动态链接库（加解密的算法，消息 摘要算法都在里面），一个签名文件</li>
+<li>签名文件保证 该 CSP 经过了认证，也就是说该签名文件经过了CA的认证，以防出现攻击者冒充 CSP</li>
+<li>若加密算法用硬件实现，则CSP还包括硬件装置</li>
+<li>Microsoft通过捆绑RSA Base Provider，在操作系统中提供一个CSP，使用RSA公司的公钥加密算法，更多的CSP可以根据需要增加到应用中</li>
+</ol>
+<p><img src="http://img.my.csdn.net/uploads/201207/24/1343098474_7916.png" alt=""></p>
+<p>下面这篇文章可以说是很详细的说明了 CSP 的结构和作用<br><a href="http://www.cnblogs.com/qiuxiangmuyu/p/6418869.html#undefined" target="_blank" rel="external">http://www.cnblogs.com/qiuxiangmuyu/p/6418869.html#undefined</a></p>
+<p><img src="http://my.csdn.net/uploads/201207/24/1343098615_5226.png" alt=""></p>
+<p>上面这个图 表示了 CSP 的组成，需要注意的是 <strong>密钥容器</strong></p>
+<p>CSP的密钥库及密钥容器，每一个加密服务提供程序都有一个独立的密钥库，它是一个CSP内部数据库，此数据库包含一个和多个分属于每个独立用户的容器，每个容器都用一个独立的标识符进行标识。不同的密钥容器内存放不同用户的<strong>签名密钥对</strong>与<strong>交换密钥对</strong>以及<strong>x．509数字证书</strong>。出于安全性考虑，私钥一般不可以被导出。带硬件实现的CSP，CSP的密钥库及密钥容器放在硬件存储器中，纯软的CSP实现是放在硬盘上的文件中。</p>
+<p>关于 CSP 在 CRYPTO 库中的编程方法，可以参照这篇文章： <a href="http://blog.csdn.net/liuhuiyi/article/details/7788975" target="_blank" rel="external">http://blog.csdn.net/liuhuiyi/article/details/7788975</a></p>
+<h1 id="数字信封加密"><a href="#数字信封加密" class="headerlink" title="数字信封加密"></a>数字信封加密</h1><p><a href="http://winda.blog.51cto.com/55153/1967665" target="_blank" rel="external">http://winda.blog.51cto.com/55153/1967665</a></p>
+<p><a href="http://blog.csdn.net/yunnysunny/article/details/7899574" target="_blank" rel="external">http://blog.csdn.net/yunnysunny/article/details/7899574</a></p>
+<h1 id="程序"><a href="#程序" class="headerlink" title="程序"></a>程序</h1><h2 id="数字信封加密-1"><a href="#数字信封加密-1" class="headerlink" title="数字信封加密"></a>数字信封加密</h2> <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div><div class="line">435</div><div class="line">436</div><div class="line">437</div><div class="line">438</div><div class="line">439</div><div class="line">440</div><div class="line">441</div><div class="line">442</div><div class="line">443</div><div class="line">444</div><div class="line">445</div><div class="line">446</div><div class="line">447</div><div class="line">448</div><div class="line">449</div><div class="line">450</div><div class="line">451</div><div class="line">452</div><div class="line">453</div><div class="line">454</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;wincrypt.h&gt;</span>  </span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"></div><div class="line"><span class="comment">/* 数字信封 */</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MY_ENCODING_TYPE  (PKCS_7_ASN_ENCODING | X509_ASN_ENCODING)  </span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">HandleError</span><span class="params">(<span class="keyword">char</span> *s)</span></span>;</div><div class="line"></div><div class="line"><span class="function">PCCERT_CONTEXT <span class="title">GetRecipientCert</span><span class="params">(HCERTSTORE hCertStore)</span></span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">ByteToStr</span><span class="params">(</span></span></div><div class="line">	DWORD cb,</div><div class="line">	<span class="keyword">void</span>* pv,</div><div class="line">	LPSTR sz);</div><div class="line"></div><div class="line"><span class="function">BOOL <span class="title">DecryptMessage</span><span class="params">(</span></span></div><div class="line">	BYTE *pbEncryptedBlob,</div><div class="line">	DWORD cbEncryptedBlob,</div><div class="line">	HCRYPTPROV hCryptProv,</div><div class="line">	HCERTSTORE hStoreHandle);</div><div class="line"></div><div class="line"><span class="function">HCRYPTPROV <span class="title">GetCryptProv</span><span class="params">()</span></span>;</div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cryptuiapi.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main123</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="comment">//-------------------------------------------------------------------- </span></div><div class="line">	<span class="comment">// 变量申明与初始化 </span></div><div class="line">	BYTE* pbContent = (BYTE*) <span class="string">"Security is our business."</span>;  <span class="comment">// 待加密消息 </span></div><div class="line">	DWORD cbContent = <span class="built_in">strlen</span>((<span class="keyword">char</span> *)pbContent) + <span class="number">1</span>;        <span class="comment">// 消息长度 </span></div><div class="line">	HCRYPTPROV hCryptProv;                                  <span class="comment">// CSP句柄 </span></div><div class="line">	HCERTSTORE hStoreHandle;                                <span class="comment">// 证书库句柄 </span></div><div class="line">	PCCERT_CONTEXT pRecipientCert;                          <span class="comment">// 接收证书 </span></div><div class="line">	PCCERT_CONTEXT RecipientCertArray[<span class="number">1</span>];                   <span class="comment">// 接收证书列表 </span></div><div class="line">	DWORD EncryptAlgSize;</div><div class="line">	CRYPT_ALGORITHM_IDENTIFIER EncryptAlgorithm;</div><div class="line">	CRYPT_ENCRYPT_MESSAGE_PARA EncryptParams;</div><div class="line">	DWORD EncryptParamsSize;</div><div class="line">	BYTE*    pbEncryptedBlob;</div><div class="line">	DWORD    cbEncryptedBlob;</div><div class="line"></div><div class="line">	FILE *f;</div><div class="line">	f = fopen(<span class="string">"test3"</span>, <span class="string">"wb"</span>);</div><div class="line"></div><div class="line">	<span class="built_in">printf</span>(<span class="string">"即将从消息 %s 开始.\n"</span>, pbContent);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"这个消息的长度是 %d 字节. \n"</span>, cbContent);</div><div class="line"></div><div class="line">	<span class="comment">//获取加密服务者句柄  </span></div><div class="line">	hCryptProv = GetCryptProv();</div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 打开系统证书库.  </span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (hStoreHandle = CertOpenSystemStore(</div><div class="line">		hCryptProv,</div><div class="line">		<span class="string">"MY"</span>))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">" MY 证书库已经打开. \n"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		HandleError(<span class="string">"获取证书库句柄出错."</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 调用函数GetRecipientCert获取接收者证书  </span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (pRecipientCert = GetRecipientCert(</div><div class="line">		hStoreHandle))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"接收者的证书已经获取. \n"</span>);</div><div class="line">		<span class="keyword">char</span> *name = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="number">128</span>*<span class="keyword">sizeof</span>(<span class="keyword">char</span>));</div><div class="line">		<span class="keyword">if</span> (CertGetNameString(pRecipientCert, CERT_NAME_SIMPLE_DISPLAY_TYPE, <span class="number">0</span>, <span class="literal">NULL</span>, name, <span class="number">128</span>))</div><div class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">"证书名称： "</span> &lt;&lt; <span class="built_in">string</span>(name) &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">		CryptUIDlgViewContext(CERT_STORE_CERTIFICATE_CONTEXT, pRecipientCert, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="number">0</span>, <span class="literal">NULL</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"No certificate with a CERT_KEY_CONTEXT_PROP_ID \n"</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"property and an AT_KEYEXCHANGE private key available. \n"</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"While the message could be encrypted, in this case, \n"</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"it could not be decrypted in this program. \n"</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"For more information, see the documentation for \n"</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"CrypteEncryptMessage and CryptDecryptMessage.\n\n"</span>);</div><div class="line">		HandleError(<span class="string">"No Certificate with AT_KEYEXCHANGE key in store."</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 创建接收证书列表.这里仅包含一个接收者证书  </span></div><div class="line">	RecipientCertArray[<span class="number">0</span>] = pRecipientCert;</div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 初始化算法结构.  </span></div><div class="line"></div><div class="line">	EncryptAlgSize = <span class="keyword">sizeof</span>(EncryptAlgorithm);</div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 初始化算法结构为0.  </span></div><div class="line"></div><div class="line">	<span class="built_in">memset</span>(&amp;EncryptAlgorithm, <span class="number">0</span>, EncryptAlgSize);</div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 设置算法结构的必要的成员变量.  </span></div><div class="line"></div><div class="line">	EncryptAlgorithm.pszObjId = szOID_RSA_RC4;</div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 初始化CRYPT_ENCRYPT_MESSAGE_PARA 结构.   </span></div><div class="line"></div><div class="line">	EncryptParamsSize = <span class="keyword">sizeof</span>(EncryptParams);</div><div class="line">	<span class="built_in">memset</span>(&amp;EncryptParams, <span class="number">0</span>, EncryptParamsSize);</div><div class="line">	EncryptParams.cbSize = EncryptParamsSize;</div><div class="line">	EncryptParams.dwMsgEncodingType = MY_ENCODING_TYPE;</div><div class="line">	EncryptParams.hCryptProv = hCryptProv;		<span class="comment">// CSP 句柄  加解密算法真正执行的地方</span></div><div class="line">	EncryptParams.ContentEncryptionAlgorithm = EncryptAlgorithm;    <span class="comment">// 设置消息加密算法（对称加密算法） 用来加密 消息内容</span></div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 调用 CryptEncryptMessage加密消息.  </span></div><div class="line"></div><div class="line">	<span class="comment">//获取加密后数据长度  </span></div><div class="line">	<span class="keyword">if</span> (CryptEncryptMessage(</div><div class="line">		&amp;EncryptParams,</div><div class="line">		<span class="number">1</span>,</div><div class="line">		RecipientCertArray,<span class="comment">//收件证书列表  </span></div><div class="line">		pbContent,</div><div class="line">		cbContent,</div><div class="line">		<span class="literal">NULL</span>,</div><div class="line">		&amp;cbEncryptedBlob))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"加密消息是 %d 字节. \n"</span>, cbEncryptedBlob);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		HandleError(<span class="string">"获取加密后数据块长度失败."</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 分配内存空间.  </span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (pbEncryptedBlob = (BYTE*)<span class="built_in">malloc</span>(cbEncryptedBlob))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"已经为加密数据块分配了内存空间. \n"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		HandleError(<span class="string">"加密时内存分配出错."</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 加密消息  </span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (CryptEncryptMessage(</div><div class="line">		&amp;EncryptParams,</div><div class="line">		<span class="number">1</span>,</div><div class="line">		RecipientCertArray,  <span class="comment">// 接收方证书列表  使用里面的公钥加密 对称加密秘钥 -- 组成数字信封 </span></div><div class="line">		pbContent,			 <span class="comment">// 待加密消息</span></div><div class="line">		cbContent,			 <span class="comment">// 待加密消息长度</span></div><div class="line">		pbEncryptedBlob,</div><div class="line">		&amp;cbEncryptedBlob))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"加密成功. 加密后数据的长度： %d \n"</span>, cbEncryptedBlob);</div><div class="line">		<span class="comment">/* 将加密后的数据放入 文件 test3 中 */</span></div><div class="line">		fwrite(pbEncryptedBlob, <span class="number">1</span>, cbEncryptedBlob, f);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		HandleError(<span class="string">"加密失败."</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 调用DecryptMessage解密消息  </span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (DecryptMessage(</div><div class="line">		pbEncryptedBlob,</div><div class="line">		cbEncryptedBlob,</div><div class="line">		hCryptProv,</div><div class="line">		hStoreHandle))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"解密成功. \n"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"解密失败. \n"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">//释放内存空间.  </span></div><div class="line"></div><div class="line">	CertFreeCertificateContext(pRecipientCert);</div><div class="line">	<span class="keyword">if</span> (CertCloseStore(</div><div class="line">		hStoreHandle,</div><div class="line">		CERT_CLOSE_STORE_CHECK_FLAG))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"MY证书库顺利关闭. \n"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"加密后证书库关闭 -- \n"</span></div><div class="line">			<span class="string">"但是不是所有证书或证书撤消列表都被释放. \n"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span> (hCryptProv)</div><div class="line">	&#123;</div><div class="line">		CryptReleaseContext(hCryptProv, <span class="number">0</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"CSP句柄已经释放. \n"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"CSP句柄为空. \n"</span>);</div><div class="line">	&#125;</div><div class="line">&#125; <span class="comment">// End of main  </span></div><div class="line"></div><div class="line"><span class="comment">//--------------------------------------------------------------------  </span></div><div class="line"><span class="comment">//  功能：解密用函数CryptDecryptMessage加密的消息.  </span></div><div class="line"><span class="comment">//  参数  </span></div><div class="line"><span class="comment">//        pbEncryptedBlob：待解密的消息  </span></div><div class="line"><span class="comment">//        cbEncryptedBlob：待解密消息长度  </span></div><div class="line"><span class="comment">//        hCryptProv：     CSP句柄  </span></div><div class="line"><span class="comment">//        hStoreHandle：   已打开的证书库句柄  </span></div><div class="line"><span class="function">BOOL <span class="title">DecryptMessage</span><span class="params">(</span></span></div><div class="line">	BYTE *pbEncryptedBlob,</div><div class="line">	DWORD cbEncryptedBlob,</div><div class="line">	HCRYPTPROV hCryptProv,</div><div class="line">	HCERTSTORE hStoreHandle)</div><div class="line">&#123;</div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">//申明与初始化变量  </span></div><div class="line">	DWORD cbDecryptedMessage;</div><div class="line"></div><div class="line">	<span class="keyword">char</span>* EncryptedString = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>) *(cbEncryptedBlob * <span class="number">2</span> + <span class="number">1</span>));</div><div class="line">	HCERTSTORE CertStoreArray[] = &#123; hStoreHandle &#125;;</div><div class="line">	CRYPT_DECRYPT_MESSAGE_PARA  DecryptParams;</div><div class="line">	DWORD  DecryptParamsSize = <span class="keyword">sizeof</span>(DecryptParams);</div><div class="line">	BYTE*  pbDecryptedMessage;</div><div class="line">	LPSTR  DecryptedString;</div><div class="line">	BOOL   fReturn = TRUE;</div><div class="line"></div><div class="line"></div><div class="line">	ByteToStr(</div><div class="line">		cbEncryptedBlob,</div><div class="line">		pbEncryptedBlob,</div><div class="line">		EncryptedString);</div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">//打印转化后的密文.  </span></div><div class="line">	<span class="built_in">printf</span>(<span class="string">"加密后的字符串是: \n%s\n"</span>, EncryptedString);</div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">//   初始化CRYPT_DECRYPT_MESSAGE_PARA结构.  </span></div><div class="line"></div><div class="line">	<span class="built_in">memset</span>(&amp;DecryptParams, <span class="number">0</span>, DecryptParamsSize);</div><div class="line">	DecryptParams.cbSize = DecryptParamsSize;</div><div class="line">	DecryptParams.dwMsgAndCertEncodingType = MY_ENCODING_TYPE;  <span class="comment">// 证书编码格式</span></div><div class="line">	DecryptParams.cCertStore = <span class="number">1</span>;</div><div class="line">	DecryptParams.rghCertStore = CertStoreArray;<span class="comment">//证书库列表  </span></div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">//  解密消息数据.  </span></div><div class="line"></div><div class="line">	<span class="comment">//  先调用CryptDecryptMessage确定解密后数据长度.  </span></div><div class="line">	<span class="keyword">if</span> (CryptDecryptMessage(</div><div class="line">		&amp;DecryptParams,</div><div class="line">		pbEncryptedBlob,</div><div class="line">		cbEncryptedBlob,</div><div class="line">		<span class="literal">NULL</span>,</div><div class="line">		&amp;cbDecryptedMessage,</div><div class="line">		<span class="literal">NULL</span>))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"解密后数据的长度是: %d.\n"</span>, cbDecryptedMessage);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		HandleError(<span class="string">"获取解密后消息长度出错"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 分配空间  </span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (pbDecryptedMessage = (BYTE*)<span class="built_in">malloc</span>(</div><div class="line">		cbDecryptedMessage))</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"已经为解密消息分配了内存空间. \n"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		HandleError(<span class="string">"解密时内存分配出错"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">// 调用 CryptDecryptMessage 解密数据.  </span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (CryptDecryptMessage(</div><div class="line">		&amp;DecryptParams,</div><div class="line">		pbEncryptedBlob,</div><div class="line">		cbEncryptedBlob,</div><div class="line">		pbDecryptedMessage,</div><div class="line">		&amp;cbDecryptedMessage,</div><div class="line">		<span class="literal">NULL</span>))</div><div class="line">	&#123;</div><div class="line">		DecryptedString = (LPSTR)pbDecryptedMessage;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"消息解密成功. \n"</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"被解密的字符串是: %s\n"</span>, DecryptedString);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"解密此消息出错 \n"</span>);</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"错误代码 %x \n"</span>, GetLastError());</div><div class="line">		fReturn = FALSE;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------  </span></div><div class="line">	<span class="comment">//释放内存空间  </span></div><div class="line"></div><div class="line">	<span class="built_in">free</span>(pbEncryptedBlob);</div><div class="line">	<span class="built_in">free</span>(pbDecryptedMessage);</div><div class="line">	<span class="keyword">return</span> fReturn;</div><div class="line">&#125;  <span class="comment">// End of DecryptMessage  </span></div><div class="line"></div><div class="line"><span class="comment">//--------------------------------------------------------------------  </span></div><div class="line"><span class="comment">// ByteToStr：  转换BYTE类型数组为字符串  </span></div><div class="line"><span class="comment">//参数：cb[in]  需要转换的BYTE数组的长度  </span></div><div class="line"><span class="comment">//      pv[in]  需要转换的BYTE数组指针  </span></div><div class="line"><span class="comment">//      sz[out] 字符串指针  </span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">ByteToStr</span><span class="params">(</span></span></div><div class="line">	DWORD cb,</div><div class="line">	<span class="keyword">void</span>* pv,</div><div class="line">	LPSTR sz)</div><div class="line">&#123;</div><div class="line">	BYTE* pb = (BYTE*)pv;</div><div class="line">	DWORD i;</div><div class="line">	<span class="keyword">int</span> b;</div><div class="line"></div><div class="line">	<span class="keyword">for</span> (i = <span class="number">0</span>; i&lt;cb; i++)</div><div class="line">	&#123;</div><div class="line">		<span class="comment">//pb的前4位转换为字符  </span></div><div class="line">		b = (*pb &amp; <span class="number">0xF0</span>) &gt;&gt; <span class="number">4</span>;</div><div class="line">		*sz++ = (b &lt;= <span class="number">9</span>) ? b + <span class="string">'0'</span> : (b - <span class="number">10</span>) + <span class="string">'A'</span>;</div><div class="line">		<span class="comment">//pb的后4位转换为字符  </span></div><div class="line">		b = *pb &amp; <span class="number">0x0F</span>;</div><div class="line">		*sz++ = (b &lt;= <span class="number">9</span>) ? b + <span class="string">'0'</span> : (b - <span class="number">10</span>) + <span class="string">'A'</span>;</div><div class="line">		pb++;</div><div class="line">	&#125;</div><div class="line">	*sz++ = <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//--------------------------------------------------------------------  </span></div><div class="line"><span class="comment">// 功能：遍历证书库中的证书，才，找到则返回此证书.    </span></div><div class="line"><span class="comment">// 参数：hCertStore 证书库句柄  </span></div><div class="line"></div><div class="line"><span class="function">PCCERT_CONTEXT <span class="title">GetRecipientCert</span><span class="params">(</span></span></div><div class="line">	HCERTSTORE hCertStore)</div><div class="line">&#123;</div><div class="line">	<span class="comment">//--------------------------------------------------------------------   </span></div><div class="line">	<span class="comment">// 申明与初始化变量  </span></div><div class="line"></div><div class="line">	PCCERT_CONTEXT pCertContext = <span class="literal">NULL</span>;</div><div class="line">	BOOL fMore = TRUE;</div><div class="line">	DWORD dwSize = <span class="number">0</span>;</div><div class="line">	CRYPT_KEY_PROV_INFO* pKeyInfo = <span class="literal">NULL</span>;</div><div class="line">	DWORD PropId = CERT_KEY_PROV_INFO_PROP_ID;</div><div class="line"></div><div class="line">	<span class="comment">//--------------------------------------------------------------------   </span></div><div class="line">	<span class="comment">// 寻找包含  交换密钥对  的证书  </span></div><div class="line"></div><div class="line">	<span class="keyword">while</span> (fMore &amp;&amp; (pCertContext = CertFindCertificateInStore(</div><div class="line">		hCertStore, <span class="comment">// 证书库句柄.   </span></div><div class="line">		<span class="number">0</span>,          <span class="comment">// 编码类型.   </span></div><div class="line">		<span class="number">0</span>,          <span class="comment">// dwFindFlags. 说明查询标准，这里没有使用  </span></div><div class="line">		CERT_FIND_PROPERTY, <span class="comment">// 查询类型，决定进行何种类型的查询。这里使用证书的特定扩展属性  </span></div><div class="line">		&amp;PropId,    <span class="comment">// pvFindPara. 给出查询的特定值，这里为 扩展属性的标识符  </span></div><div class="line">		pCertContext))) <span class="comment">//证书句柄，第一次调用时为NULL ，之后为上一次返回的指针  </span></div><div class="line">	&#123;</div><div class="line">		<span class="comment">//-------------------------------------------------------------   </span></div><div class="line">		<span class="comment">//  获取证书属性：密钥对信息  </span></div><div class="line"></div><div class="line">		<span class="keyword">if</span> (!(CertGetCertificateContextProperty(</div><div class="line">			pCertContext,</div><div class="line">			CERT_KEY_PROV_INFO_PROP_ID,</div><div class="line">			<span class="literal">NULL</span>, &amp;dwSize)))</div><div class="line">		&#123;</div><div class="line">			HandleError(<span class="string">"获取密钥特性出错."</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">//--------------------------------------------------------------   </span></div><div class="line">		<span class="comment">// 分配空间  </span></div><div class="line"></div><div class="line">		<span class="keyword">if</span> (pKeyInfo)</div><div class="line">			<span class="built_in">free</span>(pKeyInfo);</div><div class="line">		<span class="keyword">if</span> (!(pKeyInfo = (CRYPT_KEY_PROV_INFO*)<span class="built_in">malloc</span>(dwSize)))</div><div class="line">		&#123;</div><div class="line">			HandleError(<span class="string">"为变量 pKeyInfo 分配内存出错."</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">//--------------------------------------------------------------   </span></div><div class="line">		<span class="comment">// 获取密钥信息块.   </span></div><div class="line"></div><div class="line">		<span class="keyword">if</span> (!(CertGetCertificateContextProperty(</div><div class="line">			pCertContext,</div><div class="line">			CERT_KEY_PROV_INFO_PROP_ID,</div><div class="line">			pKeyInfo,</div><div class="line">			&amp;dwSize)))</div><div class="line">		&#123;</div><div class="line">			HandleError(<span class="string">"第二次调用此函数失败."</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		<span class="comment">//-------------------------------------------   </span></div><div class="line">		<span class="comment">// 检查密钥信息块是否包含交换密钥对.   </span></div><div class="line"></div><div class="line">		<span class="keyword">if</span> (pKeyInfo-&gt;dwKeySpec == AT_KEYEXCHANGE)</div><div class="line">		&#123;</div><div class="line">			fMore = FALSE;</div><div class="line">		&#125;</div><div class="line">	&#125;    <span class="comment">// End of while loop   </span></div><div class="line"></div><div class="line">	<span class="keyword">if</span> (pKeyInfo)</div><div class="line">		<span class="built_in">free</span>(pKeyInfo);</div><div class="line">	<span class="keyword">return</span> (pCertContext);</div><div class="line">&#125; <span class="comment">// End of GetRecipientCert   </span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//获取加密提供者句柄  </span></div><div class="line"><span class="function">HCRYPTPROV <span class="title">GetCryptProv</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	HCRYPTPROV hCryptProv;           <span class="comment">// 加密服务提供者句柄  </span></div><div class="line"></div><div class="line">	<span class="comment">//获取加密提供者句柄  </span></div><div class="line">	<span class="keyword">if</span> (CryptAcquireContext(</div><div class="line">		&amp;hCryptProv,             <span class="comment">// 加密服务提供者句柄  </span></div><div class="line">		<span class="string">"ruanou"</span>,                <span class="comment">// 密钥容器名,这里使用登陆用户名  </span></div><div class="line">		MS_ENHANCED_PROV,        <span class="comment">// 加密服务提供者      </span></div><div class="line">		PROV_RSA_FULL,           <span class="comment">// 加密服务提供者类型,可以提供加密和签名等功能  </span></div><div class="line">		<span class="number">0</span>))                      <span class="comment">// 标志  </span></div><div class="line">	&#123;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"加密服务提供者句柄获取成功!\n"</span>);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		<span class="comment">//重新建立一个新的密钥集  </span></div><div class="line">		<span class="keyword">if</span> (!CryptAcquireContext(&amp;hCryptProv, <span class="string">"ruanou"</span>, MS_ENHANCED_PROV, PROV_RSA_FULL, CRYPT_NEWKEYSET))</div><div class="line">		&#123;</div><div class="line">			HandleError(<span class="string">"重新建立一个新的密钥集出错!"</span>);</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> hCryptProv;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//  HandleError：错误处理函数，打印错误信息，并退出程序  </span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">HandleError</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"程序执行发生错误!\n"</span>);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%s\n"</span>, s);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"错误代码为: %x.\n"</span>, GetLastError());</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"程序终止执行!\n"</span>);</div><div class="line">	<span class="built_in">exit</span>(<span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="数字签名-1"><a href="#数字签名-1" class="headerlink" title="数字签名"></a>数字签名</h2> <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="function">PCCERT_CONTEXT <span class="title">FindCertContext</span><span class="params">(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">string</span> &amp;target)</span> </span>&#123;</div><div class="line">	HCERTSTORE hStore = CertOpenSystemStore(<span class="number">0</span>, <span class="string">"MY"</span>);</div><div class="line">    <span class="keyword">if</span> (!hStore) &#123;</div><div class="line">    	<span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"CertOpenSystemStore failed: "</span> &lt;&lt; ConvertErrorCodeToString(GetLastError()) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">    	<span class="keyword">return</span> <span class="literal">NULL</span>;</div><div class="line">	&#125;</div><div class="line">        </div><div class="line">    <span class="keyword">char</span> name[<span class="number">128</span>];</div><div class="line">    PCCERT_CONTEXT pContext = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">while</span> (pContext = CertEnumCertificatesInStore(hStore, pContext)) &#123;</div><div class="line">        <span class="keyword">if</span>(!CertGetNameString(pContext, CERT_NAME_SIMPLE_DISPLAY_TYPE, <span class="number">0</span>, <span class="literal">NULL</span>, name, <span class="number">128</span>)) &#123;</div><div class="line">   			<span class="keyword">continue</span>;</div><div class="line">		&#125;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; name &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">if</span> (target == name) &#123;</div><div class="line">			<span class="built_in">std</span>::<span class="built_in">cout</span> &lt;&lt; <span class="string">"certificate found: "</span> &lt;&lt; name &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">			<span class="keyword">break</span>;</div><div class="line">		&#125;</div><div class="line">    &#125;</div><div class="line">    CertCloseStore(hStore, <span class="number">0</span>);</div><div class="line">    <span class="keyword">return</span> pContext;</div><div class="line">&#125;</div><div class="line"><span class="comment">// Encrypt(pContext, message, &amp;encrypted);</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Encrypt</span><span class="params">(PCCERT_CONTEXT context, <span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; &amp;input, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; *output)</span> </span>&#123;</div><div class="line">    <span class="keyword">const</span> BYTE *msg[<span class="number">1</span>];</div><div class="line">	DWORD msgLen[<span class="number">1</span>]; </div><div class="line">	</div><div class="line">	msg[<span class="number">0</span>] = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> BYTE*&gt;(&amp;input[<span class="number">0</span>]);</div><div class="line">	msgLen[<span class="number">0</span>] = input.size();</div><div class="line">	</div><div class="line">	CRYPT_SIGN_MESSAGE_PARA param;</div><div class="line">	<span class="built_in">memset</span>(&amp;param, <span class="number">0</span>, <span class="keyword">sizeof</span>(param));</div><div class="line">	param.cbSize = <span class="keyword">sizeof</span>(param);</div><div class="line">	param.dwMsgEncodingType = (PKCS_7_ASN_ENCODING);  <span class="comment">// PKCS 7 格式</span></div><div class="line">	param.pSigningCert = context;   </div><div class="line">	param.HashAlgorithm.pszObjId = <span class="keyword">const_cast</span>&lt;<span class="keyword">char</span>*&gt;(szOID_RSA_MD5);  </div><div class="line">	param.HashAlgorithm.Parameters.cbData = <span class="number">0</span>;  </div><div class="line">	param.cMsgCert = <span class="number">1</span>;</div><div class="line">	param.rgpMsgCert = &amp;context;</div><div class="line">	</div><div class="line">	</div><div class="line">	BYTE buff[<span class="number">2048</span>];</div><div class="line">	DWORD buffLen = <span class="number">2048</span>;</div><div class="line">	<span class="comment">/* The CryptSignMessage function creates a hash of the specified content, signs the hash, and then encodes both the original message content and the signed hash.</span></div><div class="line">	也就是说 这个函数 负责 对要发送的消息进行 HASH 算法，（私钥）签名hash结果消息摘要，  最后将 原始消息和签名后的 消息摘要 数据打包</div><div class="line">	这个函数 的第二个参数 涉及到需不需要进行 明文 的发送 buffer 存放 按照PKCS7格式 编码生成的 签名串 */</div><div class="line">	<span class="keyword">if</span> (CryptSignMessage(&amp;param, <span class="number">1</span>, <span class="number">1</span>, msg, msgLen, buff, &amp;buffLen) != TRUE) </div><div class="line">	&#123;</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"crypt failed: "</span> &lt;&lt; ConvertErrorCodeToString(GetLastError()) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125;</div><div class="line">	output-&gt;insert(output-&gt;end(), buff, buff+buffLen);</div><div class="line"></div><div class="line">	<span class="comment">//output-&gt;clear();</span></div><div class="line">	<span class="comment">//output-&gt;insert(output-&gt;begin(), buff, buff+buffLen);</span></div><div class="line">	<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// Decrypt(decoded.data(), decoded.size(), &amp;decrypted, NULL);</span></div><div class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Decrypt</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span> *data, <span class="keyword">size_t</span> size, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt; *output, PCCERT_CONTEXT *context)</span> </span>&#123;</div><div class="line">	CRYPT_VERIFY_MESSAGE_PARA param;</div><div class="line">	<span class="built_in">memset</span>(&amp;param, <span class="number">0</span>, <span class="keyword">sizeof</span>(param));</div><div class="line">	param.cbSize = <span class="keyword">sizeof</span>(param);</div><div class="line">	param.dwMsgAndCertEncodingType = X509_ASN_ENCODING | PKCS_7_ASN_ENCODING;</div><div class="line">	</div><div class="line">	DWORD len = <span class="number">4096</span>;</div><div class="line">	output-&gt;resize(len);</div><div class="line">	BOOL ret = CryptVerifyMessageSignature(&amp;param, <span class="number">0</span>, </div><div class="line">											<span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">const</span> BYTE*&gt;(data), </div><div class="line">											size, </div><div class="line">											<span class="keyword">reinterpret_cast</span>&lt;BYTE*&gt;(&amp;(*output)[<span class="number">0</span>]), </div><div class="line">											&amp;len, </div><div class="line">											context);</div><div class="line">	<span class="keyword">if</span> (ret != TRUE) &#123;</div><div class="line">		output-&gt;clear();</div><div class="line">		<span class="built_in">std</span>::<span class="built_in">cerr</span> &lt;&lt; <span class="string">"decrypt failed: "</span> &lt;&lt; ConvertErrorCodeToString(GetLastError()) &lt;&lt; <span class="built_in">std</span>::<span class="built_in">endl</span>;</div><div class="line">		<span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		output-&gt;resize(len);</div><div class="line">		<span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="消息加密与签名"><a href="#消息加密与签名" class="headerlink" title="消息加密与签名"></a>消息加密与签名</h2> <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div><div class="line">330</div><div class="line">331</div><div class="line">332</div><div class="line">333</div><div class="line">334</div><div class="line">335</div><div class="line">336</div><div class="line">337</div><div class="line">338</div><div class="line">339</div><div class="line">340</div><div class="line">341</div><div class="line">342</div><div class="line">343</div><div class="line">344</div><div class="line">345</div><div class="line">346</div><div class="line">347</div><div class="line">348</div><div class="line">349</div><div class="line">350</div><div class="line">351</div><div class="line">352</div><div class="line">353</div><div class="line">354</div><div class="line">355</div><div class="line">356</div><div class="line">357</div><div class="line">358</div><div class="line">359</div><div class="line">360</div><div class="line">361</div><div class="line">362</div><div class="line">363</div><div class="line">364</div><div class="line">365</div><div class="line">366</div><div class="line">367</div><div class="line">368</div><div class="line">369</div><div class="line">370</div><div class="line">371</div><div class="line">372</div><div class="line">373</div><div class="line">374</div><div class="line">375</div><div class="line">376</div><div class="line">377</div><div class="line">378</div><div class="line">379</div><div class="line">380</div><div class="line">381</div><div class="line">382</div><div class="line">383</div><div class="line">384</div><div class="line">385</div><div class="line">386</div><div class="line">387</div><div class="line">388</div><div class="line">389</div><div class="line">390</div><div class="line">391</div><div class="line">392</div><div class="line">393</div><div class="line">394</div><div class="line">395</div><div class="line">396</div><div class="line">397</div><div class="line">398</div><div class="line">399</div><div class="line">400</div><div class="line">401</div><div class="line">402</div><div class="line">403</div><div class="line">404</div><div class="line">405</div><div class="line">406</div><div class="line">407</div><div class="line">408</div><div class="line">409</div><div class="line">410</div><div class="line">411</div><div class="line">412</div><div class="line">413</div><div class="line">414</div><div class="line">415</div><div class="line">416</div><div class="line">417</div><div class="line">418</div><div class="line">419</div><div class="line">420</div><div class="line">421</div><div class="line">422</div><div class="line">423</div><div class="line">424</div><div class="line">425</div><div class="line">426</div><div class="line">427</div><div class="line">428</div><div class="line">429</div><div class="line">430</div><div class="line">431</div><div class="line">432</div><div class="line">433</div><div class="line">434</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">//-------------------------------------------------------------------</span></div><div class="line"><span class="comment">// 程序功能： 用发送者私钥签名消息，然后用接收者公钥加密签名消息。</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;tchar.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;wincrypt.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MY_ENCODING_TYPE (PKCS_7_ASN_ENCODING | X509_ASN_ENCODING)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_NAME  128</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> SIGNER_NAME <span class="meta-string">L"DUMMY_SIGNER_NAME"</span>     <span class="comment">//签名者证书名称</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> RECEIVER_NAME <span class="meta-string">L"China-wuhan-ruanou"</span>  <span class="comment">//接收者证书名称</span></span></div><div class="line"></div><div class="line"><span class="comment">//函数申明</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">HandleError</span><span class="params">(<span class="keyword">char</span> *s)</span></span>;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShowBytes</span><span class="params">(BYTE *s, DWORD len)</span></span>;</div><div class="line"><span class="function">BYTE* <span class="title">SignAndEncrypt</span><span class="params">(</span></span></div><div class="line">     <span class="keyword">const</span> BYTE     *pbToBeSignedAndEncrypted,</div><div class="line">     DWORD          cbToBeSignedAndEncrypted,</div><div class="line">     DWORD          *pcbSignedAndEncryptedBlob);</div><div class="line"><span class="function">BYTE* <span class="title">DecryptAndVerify</span><span class="params">(</span></span></div><div class="line">     BYTE  *pbSignedAndEncryptedBlob,</div><div class="line">     DWORD  cbSignedAndEncryptedBlob);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span> <span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">// 变量申明与初始化</span></div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//   pbToBeSignedAndEncrypted 为要签名与加密的消息，即原文消息</span></div><div class="line">    <span class="keyword">const</span> BYTE *pbToBeSignedAndEncrypted =</div><div class="line">            (<span class="keyword">const</span> <span class="keyword">unsigned</span> <span class="keyword">char</span> *)<span class="string">"在这里插入要签名的消息"</span>;</div><div class="line">    DWORD cbToBeSignedAndEncrypted = </div><div class="line">        lstrlenA((<span class="keyword">const</span> <span class="keyword">char</span> *)pbToBeSignedAndEncrypted) + <span class="number">1</span>;   <span class="comment">//消息长度</span></div><div class="line"></div><div class="line">    BYTE *pbSignedAndEncryptedBlob;  <span class="comment">//加密和签名后的消息</span></div><div class="line">    DWORD cbSignedAndEncryptedBlob;  <span class="comment">//加密和签名后的消息长度</span></div><div class="line">    BYTE *pReturnMessage;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//  调用SignAndEncrypt函数签名并加密消息，函数返回签名并加密后的消息及消息长度.</span></div><div class="line">    pbSignedAndEncryptedBlob = SignAndEncrypt(</div><div class="line">        pbToBeSignedAndEncrypted,</div><div class="line">        cbToBeSignedAndEncrypted,</div><div class="line">        &amp;cbSignedAndEncryptedBlob);</div><div class="line"></div><div class="line">    <span class="built_in">printf</span>(TEXT(<span class="string">"下面是签名和加密后的"</span>)</div><div class="line">        TEXT(<span class="string">"消息./n"</span>));</div><div class="line">    ShowBytes(pbSignedAndEncryptedBlob,cbSignedAndEncryptedBlob/<span class="number">4</span>);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//   调用函数DecryptAndVerify解密消息并验证消息签名     </span></div><div class="line">    <span class="keyword">if</span>(pReturnMessage = DecryptAndVerify(</div><div class="line">        pbSignedAndEncryptedBlob,</div><div class="line">        cbSignedAndEncryptedBlob))</div><div class="line">    &#123;</div><div class="line">       <span class="built_in">printf</span>(TEXT(<span class="string">"返回验证后的消息是 -&gt;/n%s/n"</span>),</div><div class="line">		    pReturnMessage);</div><div class="line">       <span class="built_in">printf</span>(TEXT(<span class="string">"此程序执行无错./n"</span>));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">       <span class="built_in">printf</span>(TEXT(<span class="string">"Verification failed./n"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125; <span class="comment">// End Main.</span></div><div class="line"></div><div class="line"><span class="comment">//-------------------------------------------------------------------</span></div><div class="line"><span class="comment">// 功能：签名原文消息，并加密此消息</span></div><div class="line"><span class="comment">// 返回值：签名并加密后的消息</span></div><div class="line"><span class="comment">// 参数：</span></div><div class="line"><span class="comment">//      pbToBeSignedAndEncrypted    欲签名并加密消息</span></div><div class="line"><span class="comment">//      cbToBeSignedAndEncrypted    欲签名并加密消息长度</span></div><div class="line"><span class="comment">//      pcbSignedAndEncryptedBlob   签名并加密后的消息长度</span></div><div class="line"></div><div class="line"><span class="function">BYTE* <span class="title">SignAndEncrypt</span><span class="params">(</span></span></div><div class="line">     <span class="keyword">const</span> BYTE *pbToBeSignedAndEncrypted,</div><div class="line">     DWORD cbToBeSignedAndEncrypted,</div><div class="line">     DWORD *pcbSignedAndEncryptedBlob)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//  变量申明与初始化</span></div><div class="line">    HCERTSTORE hCertStore;  <span class="comment">//证书库</span></div><div class="line">    PCCERT_CONTEXT pSignerCertContext ;  <span class="comment">//签名证书</span></div><div class="line">    PCCERT_CONTEXT pReceiverCertContext;  <span class="comment">//接收者证书</span></div><div class="line"></div><div class="line">    TCHAR pszNameString[<span class="number">256</span>];</div><div class="line">    CRYPT_SIGN_MESSAGE_PARA SignPara;       <span class="comment">//签名参数结构</span></div><div class="line">    CRYPT_ENCRYPT_MESSAGE_PARA EncryptPara; <span class="comment">//加密参数结构</span></div><div class="line">    DWORD cRecipientCert;</div><div class="line">    PCCERT_CONTEXT rgpRecipientCert[<span class="number">5</span>];</div><div class="line">    BYTE *pbSignedAndEncryptedBlob = <span class="literal">NULL</span>;</div><div class="line">    DWORD dwKeySpec;</div><div class="line">    HCRYPTPROV hCryptProv;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//    打开“MY”证书库 </span></div><div class="line">    <span class="keyword">if</span> ( !( hCertStore = CertOpenStore(</div><div class="line">        CERT_STORE_PROV_SYSTEM,</div><div class="line">        <span class="number">0</span>,</div><div class="line">        <span class="literal">NULL</span>,</div><div class="line">        CERT_SYSTEM_STORE_CURRENT_USER,</div><div class="line">        <span class="string">L"my"</span>)))</div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"MY 证书库不能打开."</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">// 获取签名证书，此证书包含签名密钥对</span></div><div class="line">    <span class="keyword">if</span>(!(pSignerCertContext = CertFindCertificateInStore(</div><div class="line">        hCertStore,</div><div class="line">        MY_ENCODING_TYPE,</div><div class="line">        <span class="number">0</span>,</div><div class="line">        CERT_FIND_SUBJECT_STR,</div><div class="line">        SIGNER_NAME,</div><div class="line">        <span class="literal">NULL</span>)))</div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"发送者证书未找到./n"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//   获取消息签名者证书名称</span></div><div class="line">    <span class="keyword">if</span>(CertGetNameString(</div><div class="line">        pSignerCertContext ,</div><div class="line">        CERT_NAME_SIMPLE_DISPLAY_TYPE,</div><div class="line">        <span class="number">0</span>,</div><div class="line">        <span class="literal">NULL</span>,</div><div class="line">        pszNameString,</div><div class="line">        MAX_NAME) &gt; <span class="number">1</span>)</div><div class="line">    &#123;</div><div class="line">        _tprintf(</div><div class="line">            TEXT(<span class="string">"SIMPLE_DISPLAY_TYPE 消息签名者的名称是 "</span>)</div><div class="line">            TEXT(<span class="string">"%s /n"</span>),</div><div class="line">            pszNameString);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"获取签名者的名称失败./n"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	<span class="comment">//获取签名者证书私钥</span></div><div class="line">    <span class="keyword">if</span>(!( CryptAcquireCertificatePrivateKey(</div><div class="line">        pSignerCertContext,</div><div class="line">        <span class="number">0</span>,</div><div class="line">        <span class="literal">NULL</span>,</div><div class="line">        &amp;hCryptProv,</div><div class="line">        &amp;dwKeySpec,</div><div class="line">        <span class="literal">NULL</span>)))</div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"CryptAcquireCertificatePrivateKey./n"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="comment">//  获取接收者证书</span></div><div class="line"></div><div class="line">	 <span class="keyword">if</span>(!(pReceiverCertContext = CertFindCertificateInStore(</div><div class="line">        hCertStore,</div><div class="line">        MY_ENCODING_TYPE,</div><div class="line">        <span class="number">0</span>,</div><div class="line">        CERT_FIND_SUBJECT_STR,</div><div class="line">        RECEIVER_NAME,</div><div class="line">        <span class="literal">NULL</span>)))</div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"接收者证书未找到./n"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//  获取接收者证书名称.</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span>(CertGetNameString(</div><div class="line">        pReceiverCertContext ,</div><div class="line">        CERT_NAME_SIMPLE_DISPLAY_TYPE,</div><div class="line">        <span class="number">0</span>,</div><div class="line">        <span class="literal">NULL</span>,</div><div class="line">        pszNameString,</div><div class="line">        MAX_NAME) &gt; <span class="number">1</span>)</div><div class="line">    &#123;</div><div class="line">        _tprintf(TEXT(<span class="string">"消息接收者是  %s /n"</span>), </div><div class="line">            pszNameString);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"获取接收者的名称失败./n"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//  初始化签名参数结构</span></div><div class="line">    SignPara.cbSize = <span class="keyword">sizeof</span>(CRYPT_SIGN_MESSAGE_PARA);</div><div class="line">    SignPara.dwMsgEncodingType = MY_ENCODING_TYPE;</div><div class="line">    SignPara.pSigningCert = pSignerCertContext ;</div><div class="line">    SignPara.HashAlgorithm.pszObjId = szOID_RSA_MD2;</div><div class="line">    SignPara.HashAlgorithm.Parameters.cbData = <span class="number">0</span>;</div><div class="line">    SignPara.pvHashAuxInfo = <span class="literal">NULL</span>;</div><div class="line">    SignPara.cMsgCert = <span class="number">1</span>;</div><div class="line">    SignPara.rgpMsgCert = &amp;pSignerCertContext ;</div><div class="line">    SignPara.cMsgCrl = <span class="number">0</span>;</div><div class="line">    SignPara.rgpMsgCrl = <span class="literal">NULL</span>;</div><div class="line">    SignPara.cAuthAttr = <span class="number">0</span>;</div><div class="line">    SignPara.rgAuthAttr = <span class="literal">NULL</span>;</div><div class="line">    SignPara.cUnauthAttr = <span class="number">0</span>;</div><div class="line">    SignPara.rgUnauthAttr = <span class="literal">NULL</span>;</div><div class="line">    SignPara.dwFlags = <span class="number">0</span>;</div><div class="line">    SignPara.dwInnerContentType = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//  初始化加密参数结构</span></div><div class="line">    EncryptPara.cbSize = <span class="keyword">sizeof</span>(CRYPT_ENCRYPT_MESSAGE_PARA);</div><div class="line">    EncryptPara.dwMsgEncodingType = MY_ENCODING_TYPE;</div><div class="line">    EncryptPara.hCryptProv = <span class="number">0</span>;</div><div class="line">    EncryptPara.ContentEncryptionAlgorithm.pszObjId = szOID_RSA_RC4;</div><div class="line">    EncryptPara.ContentEncryptionAlgorithm.Parameters.cbData = <span class="number">0</span>;</div><div class="line">    EncryptPara.pvEncryptionAuxInfo = <span class="literal">NULL</span>;</div><div class="line">    EncryptPara.dwFlags = <span class="number">0</span>;</div><div class="line">    EncryptPara.dwInnerContentType = <span class="number">0</span>;</div><div class="line"></div><div class="line">    cRecipientCert = <span class="number">1</span>;</div><div class="line">    rgpRecipientCert[<span class="number">0</span>] = pReceiverCertContext;</div><div class="line">    *pcbSignedAndEncryptedBlob = <span class="number">0</span>;</div><div class="line">    pbSignedAndEncryptedBlob = <span class="literal">NULL</span>;</div><div class="line"></div><div class="line">	<span class="comment">//获取签名并加密后的消息长度</span></div><div class="line">    <span class="keyword">if</span>( CryptSignAndEncryptMessage(</div><div class="line">        &amp;SignPara,                          <span class="comment">//签名参数结构</span></div><div class="line">        &amp;EncryptPara,                       <span class="comment">//加密参数结构</span></div><div class="line">        cRecipientCert,                     <span class="comment">//接收者证书数目</span></div><div class="line">        rgpRecipientCert,                   <span class="comment">//接收者证书列表</span></div><div class="line">        pbToBeSignedAndEncrypted,           <span class="comment">//欲签名并加密消息</span></div><div class="line">        cbToBeSignedAndEncrypted,           <span class="comment">//欲签名并加密消息长度</span></div><div class="line">        <span class="literal">NULL</span>,                               <span class="comment">//签名并加密后的消息</span></div><div class="line">        pcbSignedAndEncryptedBlob))         <span class="comment">//签名并加密后的消息长度</span></div><div class="line">    &#123;</div><div class="line">        _tprintf(TEXT(<span class="string">"%d 字节分配给了缓冲区./n"</span>),</div><div class="line">            *pcbSignedAndEncryptedBlob);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"获取缓冲区长度失败."</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//    分配内存</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!(pbSignedAndEncryptedBlob = </div><div class="line">        (<span class="keyword">unsigned</span> <span class="keyword">char</span> *)<span class="built_in">malloc</span>(*pcbSignedAndEncryptedBlob)))</div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"内存分配失败."</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//   签名消息，并对前面消息加密</span></div><div class="line">    <span class="keyword">if</span>( CryptSignAndEncryptMessage(</div><div class="line">		&amp;SignPara,                          <span class="comment">//签名参数结构</span></div><div class="line">        &amp;EncryptPara,                       <span class="comment">//加密参数结构</span></div><div class="line">        cRecipientCert,                     <span class="comment">//接收者证书数目</span></div><div class="line">        rgpRecipientCert,                   <span class="comment">//接收者证书列表</span></div><div class="line">        pbToBeSignedAndEncrypted,           <span class="comment">//欲签名并加密消息</span></div><div class="line">        cbToBeSignedAndEncrypted,           <span class="comment">//欲签名并加密消息长度</span></div><div class="line">        pbSignedAndEncryptedBlob,                               <span class="comment">//签名并加密后的消息</span></div><div class="line">        pcbSignedAndEncryptedBlob))         <span class="comment">//签名并加密后的消息长度</span></div><div class="line">    &#123;</div><div class="line">        _tprintf(TEXT(<span class="string">"此消息已经被签名并加密./n"</span>));</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"此消息签名和加密失败."</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//  释放空间</span></div><div class="line">    <span class="keyword">if</span>(pSignerCertContext )</div><div class="line">    &#123;</div><div class="line">        CertFreeCertificateContext(pSignerCertContext);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>(pReceiverCertContext )</div><div class="line">    &#123;</div><div class="line">        CertFreeCertificateContext(pReceiverCertContext);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    CertCloseStore(hCertStore, <span class="number">0</span>);</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//   返回签名并加密后的消息</span></div><div class="line">    <span class="keyword">return</span> pbSignedAndEncryptedBlob;</div><div class="line"></div><div class="line">&#125;  <span class="comment">// End SignAndEncrypt.</span></div><div class="line"></div><div class="line"><span class="comment">//-------------------------------------------------------------------</span></div><div class="line"><span class="comment">// 功能：解密消息，验证其签名</span></div><div class="line"><span class="comment">// 返回值：解密后消息</span></div><div class="line"><span class="comment">// 参数：</span></div><div class="line"><span class="comment">//      pbSignedAndEncryptedBlob    签名并加密后的消息</span></div><div class="line"><span class="comment">//      cbSignedAndEncryptedBlob    签名并加密后的消息长度</span></div><div class="line"><span class="function">BYTE* <span class="title">DecryptAndVerify</span><span class="params">(</span></span></div><div class="line">     BYTE  *pbSignedAndEncryptedBlob,</div><div class="line">     DWORD  cbSignedAndEncryptedBlob)</div><div class="line">&#123;</div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//  变量申明与初始化</span></div><div class="line">    HCERTSTORE hCertStore;</div><div class="line">    CRYPT_DECRYPT_MESSAGE_PARA DecryptPara;</div><div class="line">    CRYPT_VERIFY_MESSAGE_PARA VerifyPara;</div><div class="line">    DWORD dwSignerIndex = <span class="number">0</span>;</div><div class="line">    BYTE *pbDecrypted;</div><div class="line">    DWORD cbDecrypted;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//   打开“my”证书库</span></div><div class="line">    <span class="keyword">if</span> ( !( hCertStore = CertOpenStore(</div><div class="line">        CERT_STORE_PROV_SYSTEM,</div><div class="line">        <span class="number">0</span>,</div><div class="line">        <span class="literal">NULL</span>,</div><div class="line">        CERT_SYSTEM_STORE_CURRENT_USER,</div><div class="line">        <span class="string">L"my"</span>)))</div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"MY 证书库不能被打开."</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//   初始化解密参数结构</span></div><div class="line">    DecryptPara.cbSize = <span class="keyword">sizeof</span>(CRYPT_DECRYPT_MESSAGE_PARA);</div><div class="line">    DecryptPara.dwMsgAndCertEncodingType = MY_ENCODING_TYPE;</div><div class="line">    DecryptPara.cCertStore = <span class="number">1</span>;</div><div class="line">    DecryptPara.rghCertStore = &amp;hCertStore;</div><div class="line"></div><div class="line">	<span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//   初始化验证参数结构</span></div><div class="line">    VerifyPara.cbSize = <span class="keyword">sizeof</span>(CRYPT_VERIFY_MESSAGE_PARA);</div><div class="line">    VerifyPara.dwMsgAndCertEncodingType = MY_ENCODING_TYPE;</div><div class="line">    VerifyPara.hCryptProv = <span class="number">0</span>;</div><div class="line">    VerifyPara.pfnGetSignerCertificate = <span class="literal">NULL</span>;</div><div class="line">    VerifyPara.pvGetArg = <span class="literal">NULL</span>;</div><div class="line">    pbDecrypted = <span class="literal">NULL</span>;</div><div class="line">    cbDecrypted = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//     确定解密后消息长度</span></div><div class="line">    <span class="keyword">if</span>(!(CryptDecryptAndVerifyMessageSignature(</div><div class="line">        &amp;DecryptPara,                  <span class="comment">//解密参数结构体</span></div><div class="line">        &amp;VerifyPara,                   <span class="comment">//验证参数结构体</span></div><div class="line">        dwSignerIndex,                 <span class="comment">//签名消息序号</span></div><div class="line">        pbSignedAndEncryptedBlob,      <span class="comment">//签名、加密、编码后的数据</span></div><div class="line">        cbSignedAndEncryptedBlob,      <span class="comment">//签名、加密、编码后的数据长度</span></div><div class="line">        <span class="literal">NULL</span>,                          <span class="comment">//解密后的数据</span></div><div class="line">        &amp;cbDecrypted,                  <span class="comment">//解密后的数据长度</span></div><div class="line">        <span class="literal">NULL</span>,</div><div class="line">        <span class="literal">NULL</span>)))</div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"获取解密后消息长度失败."</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//    分配内存</span></div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!(pbDecrypted = (BYTE *)<span class="built_in">malloc</span>(cbDecrypted)))</div><div class="line">    &#123;</div><div class="line">        HandleError(TEXT(<span class="string">"Memory allocation failed."</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">	<span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//     解密消息，并验证消息</span></div><div class="line">    <span class="keyword">if</span>(!(CryptDecryptAndVerifyMessageSignature(</div><div class="line">		&amp;DecryptPara,                  <span class="comment">//解密参数结构体</span></div><div class="line">        &amp;VerifyPara,                   <span class="comment">//验证参数结构体</span></div><div class="line">        dwSignerIndex,                 <span class="comment">//签名消息序号</span></div><div class="line">        pbSignedAndEncryptedBlob,      <span class="comment">//签名、加密、编码后的数据</span></div><div class="line">        cbSignedAndEncryptedBlob,      <span class="comment">//签名、加密、编码后的数据长度</span></div><div class="line">        pbDecrypted,                   <span class="comment">//解密后的数据</span></div><div class="line">        &amp;cbDecrypted,                  <span class="comment">//解密后的数据长度</span></div><div class="line">        <span class="literal">NULL</span>,</div><div class="line">        <span class="literal">NULL</span>)))</div><div class="line">    &#123;</div><div class="line">        pbDecrypted = <span class="literal">NULL</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//  关闭证书库</span></div><div class="line">    CertCloseStore(</div><div class="line">        hCertStore,</div><div class="line">        <span class="number">0</span>);</div><div class="line"></div><div class="line">    <span class="comment">//---------------------------------------------------------------</span></div><div class="line">    <span class="comment">//    返回解密后消息</span></div><div class="line">    <span class="keyword">return</span> pbDecrypted;</div><div class="line"></div><div class="line">&#125; <span class="comment">// End of DecryptandVerify.</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//-------------------------------------------------------------------</span></div><div class="line"><span class="comment">//  功能：显示BYTE数据，小于'0'及大于'-'的字符都显示为'-'</span></div><div class="line"><span class="comment">//  参数：s BYTE数据；len  数据长度 </span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShowBytes</span><span class="params">(BYTE *s, DWORD len)</span></span></div><div class="line">&#123;</div><div class="line">    DWORD TotalChars = <span class="number">0</span>;</div><div class="line">    DWORD ThisLine = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">while</span>(TotalChars &lt; len)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(ThisLine &gt; <span class="number">70</span>)</div><div class="line">        &#123;</div><div class="line">            ThisLine = <span class="number">0</span>;</div><div class="line">            _tprintf(TEXT(<span class="string">"/n"</span>));</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>( s[TotalChars] &lt; <span class="string">'0'</span> || s[TotalChars] &gt; <span class="string">'z'</span>)</div><div class="line">        &#123;</div><div class="line">            _tprintf(TEXT(<span class="string">"-"</span>));</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">        &#123;</div><div class="line">            _tprintf(TEXT(<span class="string">"%c"</span>), s[TotalChars]);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        TotalChars++;</div><div class="line">        ThisLine++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    _tprintf(TEXT(<span class="string">"/n"</span>));</div><div class="line">&#125; <span class="comment">// End of ShowBytes.</span></div><div class="line"></div><div class="line"><span class="comment">//  HandleError：错误处理函数，打印错误信息，并退出程序</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">HandleError</span><span class="params">(<span class="keyword">char</span> *s)</span></span></div><div class="line">&#123;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"程序执行发生错误!/n"</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%s/n"</span>,s);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"错误代码为: %x./n"</span>,GetLastError());</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"程序终止执行!/n"</span>);</div><div class="line">    <span class="built_in">exit</span>(<span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/加密/" rel="tag">#加密</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/20/静态联编，动态联编，静态类型，动态类型/" rel="next" title="静态联编，动态联编，静态类型，动态类型">
+                <i class="fa fa-chevron-left"></i> 静态联编，动态联编，静态类型，动态类型
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="sdu-zyq" />
+          <p class="site-author-name" itemprop="name">sdu-zyq</p>
+          <p class="site-description motion-element" itemprop="description">Studies pass into and influence manners</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/smb111" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://219.231.143.218" target="_blank" title="Lab517">
+                  
+                    <i class="fa fa-fw fa-building"></i>
+                  
+                  Lab517
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2446286071/home?wvr=5&lf=reg" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://gradms.sdu.edu.cn/login" target="_blank" title="SDU">
+                  
+                    <i class="fa fa-fw fa-star"></i>
+                  
+                  SDU
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.nowcoder.com/3883768" target="_blank" title="NewCoder">
+                  
+                    <i class="fa fa-fw fa-code"></i>
+                  
+                  NewCoder
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" title="Google">
+                  
+                    <i class="fa fa-fw fa-google"></i>
+                  
+                  Google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.hackerrank.com/dashboard" target="_blank" title="hackerrank">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  hackerrank
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://bailian.openjudge.cn/practice/status/" target="_blank" title="OpenJudge">
+                  
+                    <i class="fa fa-fw fa-code"></i>
+                  
+                  OpenJudge
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#三大类加密算法"><span class="nav-number">1.</span> <span class="nav-text">三大类加密算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hash算法（摘要算法）"><span class="nav-number">1.1.</span> <span class="nav-text">Hash算法（摘要算法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对称加密技术"><span class="nav-number">1.2.</span> <span class="nav-text">对称加密技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非对称加密技术"><span class="nav-number">1.3.</span> <span class="nav-text">非对称加密技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字签名"><span class="nav-number">1.4.</span> <span class="nav-text">数字签名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-CRYPTO-库-进行-PKCS7-格式的数字签名"><span class="nav-number">1.4.1.</span> <span class="nav-text">使用 CRYPTO 库 进行 PKCS7 格式的数字签名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-CRYPTO-库-进行-PKCS7-格式的数字签名-验证"><span class="nav-number">1.4.2.</span> <span class="nav-text">使用 CRYPTO 库 进行 PKCS7 格式的数字签名 验证</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字证书"><span class="nav-number">1.5.</span> <span class="nav-text">数字证书</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数字证书常见标准"><span class="nav-number">2.</span> <span class="nav-text">数字证书常见标准</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#X509-标准"><span class="nav-number">2.1.</span> <span class="nav-text">X509 标准</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PKCS-系列"><span class="nav-number">2.2.</span> <span class="nav-text">PKCS 系列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#符合PKCS-7-加密消息语法标准-P7B-P7C-SPC-P7R"><span class="nav-number">2.2.1.</span> <span class="nav-text">符合PKCS#7 加密消息语法标准(.P7B .P7C .SPC .P7R)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符合PKCS-10-证书请求标准-p10"><span class="nav-number">2.2.2.</span> <span class="nav-text">符合PKCS#10 证书请求标准(.p10)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符合PKCS-12-个人信息交换标准（-pfx-p12）"><span class="nav-number">2.2.3.</span> <span class="nav-text">符合PKCS#12 个人信息交换标准（.pfx *.p12）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于以上三种标准的总结！！！！"><span class="nav-number">2.3.</span> <span class="nav-text">关于以上三种标准的总结！！！！</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#证书编码格式"><span class="nav-number">3.</span> <span class="nav-text">证书编码格式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#PEM"><span class="nav-number">3.1.</span> <span class="nav-text">PEM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DER"><span class="nav-number">3.2.</span> <span class="nav-text">DER</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#证书的文件扩展名"><span class="nav-number">4.</span> <span class="nav-text">证书的文件扩展名</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pem"><span class="nav-number">4.1.</span> <span class="nav-text">.pem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#der"><span class="nav-number">4.2.</span> <span class="nav-text">.der</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#crt"><span class="nav-number">4.3.</span> <span class="nav-text">.crt</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#cer"><span class="nav-number">4.4.</span> <span class="nav-text">.cer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#p12"><span class="nav-number">4.5.</span> <span class="nav-text">.p12</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#csr"><span class="nav-number">4.6.</span> <span class="nav-text">.csr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#key"><span class="nav-number">4.7.</span> <span class="nav-text">.key</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于-CSP-的理解"><span class="nav-number">5.</span> <span class="nav-text">关于 CSP 的理解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数字信封加密"><span class="nav-number">6.</span> <span class="nav-text">数字信封加密</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程序"><span class="nav-number">7.</span> <span class="nav-text">程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数字信封加密-1"><span class="nav-number">7.1.</span> <span class="nav-text">数字信封加密</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数字签名-1"><span class="nav-number">7.2.</span> <span class="nav-text">数字签名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#消息加密与签名"><span class="nav-number">7.3.</span> <span class="nav-text">消息加密与签名</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sdu-zyq</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>

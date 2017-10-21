@@ -1,0 +1,711 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++,设计模式," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="C++中虚基类以及虚析构函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++中虚析构函数和工厂设计模式">
+<meta property="og:url" content="http://yoursite.com/2017/09/18/虚基类虚函数以及虚析构函数/index.html">
+<meta property="og:site_name" content="Skymyweakness">
+<meta property="og:description" content="C++中虚基类以及虚析构函数">
+<meta property="og:image" content="https://i.imgur.com/u5el0PY.png">
+<meta property="og:image" content="https://i.imgur.com/XUJWgXy.jpg">
+<meta property="og:updated_time" content="2017-09-20T09:56:50.136Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++中虚析构函数和工厂设计模式">
+<meta name="twitter:description" content="C++中虚基类以及虚析构函数">
+<meta name="twitter:image" content="https://i.imgur.com/u5el0PY.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> C++中虚析构函数和工厂设计模式 | Skymyweakness </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Skymyweakness</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C++中虚析构函数和工厂设计模式
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-09-18T09:15:29+08:00" content="2017-09-18">
+              2017-09-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C/" itemprop="url" rel="index">
+                    <span itemprop="name">C++</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="为什么-C-中的基类指针可以指向子类对象？"><a href="#为什么-C-中的基类指针可以指向子类对象？" class="headerlink" title="为什么 C++ 中的基类指针可以指向子类对象？"></a>为什么 C++ 中的基类指针可以指向子类对象？</h2><p>答： 基类指针指向的是 基类内存中的起始地址 ， 当子类继承基类并且进行扩充之后，内存占用扩大，但是，基类指向的是 子类和基类共有的 那块内存区域，所以基类指针访问，基类成员（子类对象相关成员）的时候，不会超出内存范围。</p>
+<p>可以指向，但是无法使用不存在于基类只存在于派生类的元素。（所以我们需要虚函数和纯虚函数）</p>
+<p>基类中及其派生类 占用一块内存 虚函数表 用来存放虚函数的 地址</p>
+<p>虚函数的实现要求对象携带额外的信息，这些信息用于在运行时确定该对象应该调用哪一个虚函数。典型情况下，这一信息具有一种被称为 vptr（virtual table pointer，虚函数表指针）的指针的形式。vptr 指向一个被称为 vtbl（virtual table，虚函数表）的函数指针数组，每一个包含虚函数的类都关联到 vtbl。当一个对象调用了虚函数，实际的被调用函数通过下面的步骤确定：找到对象的 vptr 指向的 vtbl，然后在 vtbl 中寻找合适的函数指针。<br>虚拟函数的地址翻译取决于对象的内存地址，而不取决于数据类型(编译器对函数调用的合法性检查取决于数据类型)。如果类定义了虚函数，该类及其派生类就要生成一张虚拟函数表，即vtable。而在类的对象地址空间中存储一个该虚表的入口，占4个字节，这个入口地址是在构造对象时由编译器写入的。所以，由于对象的内存空间包含了虚表入口，编译器能够由这个入口找到恰当的虚函数，这个函数的地址不再由数据类型决定了。故对于一个父类的对象指针，调用虚拟函数，如果给他赋父类对象的指针，那么他就调用父类中的函数，如果给他赋子类对象的指针，他就调用子类中的函数(取决于对象的内存地址)。<br>每当创建一个包含有虚函数的类或从包含有虚函数的类派生一个类时，编译器就会为这个类创建一个虚函数表（VTABLE）保存该类所有虚函数的地址，其实这个VTABLE的作用就是保存自己类中所有虚函数的地址，可以把VTABLE形象地看成一个函数指针数组，这个数组的每个元素存放的就是虚函数的地址。在每个带有虚函数的类 中，编译器秘密地置入一指针，称为v p o i n t e r（缩写为V P T R），指向这个对象的V TA B L E。 当构造该派生类对象时，其成员VPTR被初始化指向该派生类的VTABLE。所以可以认为VTABLE是该类的所有对象共有的，在定义该类时被初始化；而VPTR则是每个类对象都有独立一份的，且在该类对象被构造时被初始化。</p>
+<h2 id="C-中的类所占内存空间总结"><a href="#C-中的类所占内存空间总结" class="headerlink" title="C++ 中的类所占内存空间总结"></a>C++ 中的类所占内存空间总结</h2><ul>
+<li>类中的普通成员函数是不占用内存的，而虚函数则会创建一个，虚函数表占用四个字节</li>
+</ul>
+<ul>
+<li><p>还要注意： 类中的内存对齐</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">class</span> A&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="keyword">int</span> a;</div><div class="line">    <span class="keyword">char</span> b;</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span> </span>&#123; &#125; </div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pp</span><span class="params">()</span> </span>&#123; <span class="keyword">int</span> a,b,c; <span class="built_in">cout</span> &lt;&lt; a+b+c &lt;&lt; <span class="built_in">endl</span>;&#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">sizeof</span>(<span class="keyword">class</span> A) =====&gt; <span class="number">8</span>  因为 <span class="keyword">char</span> 型的数据，会进行内存对齐（根据 <span class="keyword">int</span> a 来进行对齐）</div></pre></td></tr></table></figure>
+</li>
+<li><p>就算是空类也会占用一个字节的内存大小</p>
+</li>
+</ul>
+<p>因为BS大大当年说要确保两个不一样的对象拥有不同的地址—“To ensure that the addresses of two different objects will be different.”  就用那1byte来在内存中占用不同地址了。:)又因为这些空class没有赋值的意义，所以就没必要占用更多内存。<br>因为没有必要 空类 内存大于 有内容的类 sizeof(class A{}) &gt; sizeof(class A{char a;};)====&gt;这不是脑抽？？？</p>
+<p>1、空类、单一继承的空类、多重继承的空类所占空间大小为：1（字节，下同）；</p>
+<p>2、一个类中，虚函数本身、成员函数（包括静态与非静态）和静态数据成员都是不占用类对象的存储空间的；</p>
+<p>3、因此一个对象的大小≥所有非静态成员大小的总和； </p>
+<p>4、当类中声明了虚函数（不管是1个还是多个），那么在实例化对象时，编译器会自动在对象里安插一个指针vPtr指向虚函数表VTable；</p>
+<p>5、虚承继的情况：由于涉及到虚函数表和虚基表，会同时增加一个（多重虚继承下对应多个）vfPtr指针指向虚函数表vfTable和一个vbPtr指针指向虚基表vbTable，这两者所占的空间大小为：8（或8乘以多继承时父类的个数）；</p>
+<p>6、在考虑以上内容所占空间的大小时，还要注意编译器下的“补齐”padding的影响，即编译器会插入多余的字节补齐；</p>
+<p>7、类对象的大小=各非静态数据成员（包括父类的非静态数据成员但都不包括所有的成员函数）的总和+ vfptr指针(多继承下可能不止一个)+vbptr指针(多继承下可能不止一个)+编译器额外增加的字节。</p>
+<p><a href="http://blog.sina.com.cn/s/blog_69c189bf0100mkeu.html" target="_blank" rel="external">http://blog.sina.com.cn/s/blog_69c189bf0100mkeu.html</a></p>
+<h2 id="C-中只能子类对象赋值给父类对象"><a href="#C-中只能子类对象赋值给父类对象" class="headerlink" title="C++ 中只能子类对象赋值给父类对象"></a>C++ 中只能子类对象赋值给父类对象</h2><p><a href="http://www.cnblogs.com/yexuannan/p/3687458.html" target="_blank" rel="external">http://www.cnblogs.com/yexuannan/p/3687458.html</a></p>
+<p>还是从内存的角度来讲，子类的最想占用的内存空间是大于父类内存空间的， 而且子类的前一部分内存空间和父类是相同的，所以，父类的成员变量可以通过子类的成员变量进行拷贝，对于子类多余的那部分空间直接舍弃掉。 （类似于 普通类型转换里面的 DWORD 转换成 WORD）</p>
+<h2 id="C-的四种cast操作符的区别–类型转换"><a href="#C-的四种cast操作符的区别–类型转换" class="headerlink" title="C++的四种cast操作符的区别–类型转换"></a>C++的四种cast操作符的区别–类型转换</h2><p><a href="http://www.cnblogs.com/welfare/articles/336091.html" target="_blank" rel="external">http://www.cnblogs.com/welfare/articles/336091.html</a></p>
+<h2 id="关于-虚析构函数-的重要性"><a href="#关于-虚析构函数-的重要性" class="headerlink" title="关于 虚析构函数 的重要性"></a>关于 虚析构函数 的重要性</h2><p>实现多态，通过 基类指针 指向 派生类的对象， delete 基类指针的时候，只会执行基类的析构函数，并不会执行 派生类的 析构函数，如果基类的析构函数不是虚函数。 这样就会导致 内存的泄露。</p>
+ <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">class</span> Base&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> *p;</div><div class="line">	Base() : p(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>]) &#123;	&#125;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	~Base()</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">delete</span>[]p;</div><div class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">"Base is destroyed !"</span> &lt;&lt; <span class="built_in">endl</span>;</div><div class="line">	&#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">class</span> Derived : <span class="keyword">public</span> Base</div><div class="line">&#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	<span class="keyword">int</span> *pp;</div><div class="line">	Derived() : pp(<span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">10</span>]) &#123;	&#125;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">	~Derived()&#123; <span class="keyword">delete</span>[]pp; <span class="built_in">cout</span> &lt;&lt; <span class="string">"Derived is destroyed !"</span> &lt;&lt; <span class="built_in">endl</span>; &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	Base *p = <span class="keyword">new</span> Derived();</div><div class="line">	<span class="keyword">delete</span> p;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line">   程序输出： Base is destroyed !  子类的 pp 并没有被释放</div><div class="line">   如果 Base 类的，析构函数 加上 <span class="keyword">virtual</span> 那么程序输出：</div><div class="line">   Derived is destroyed !</div><div class="line">Base is destroyed !</div><div class="line">子类先析构，基类在进行析构，避免了内存的泄露</div></pre></td></tr></table></figure>
+<p>下面，我从内存角度 说明一下 为什么 用于实现多态的 基类析构函数 必须 是虚函数 ！！！</p>
+<p>1.这里虚析构函数和虚成员函数有什么区别吗？有虚析构函数– 与contructor顺序相反, 主要负责释放物件执行时间所使用的资源, 例如: 内存。那为什么需要virtual? 根据你的程式码，若你让类别D析构函数没有使用virtual，这样将导致delete时，D的资源没有被释放。虚成员函数– 定义类别之间的共同行为，每个类别有专属自己的行为，即每个类别用自己方法实作虚成员函数相关惯用语：C++接口 [1]</p>
+<p>2.delete操作符对析构函数的调用有特殊处理吗 ?下图为vtable示意图虚析构函数– 当调用delete删除指针Ｂ主要依赖_vptr指向的位置，由于_vptr指向D1的vtable，所以会呼叫D1的析构函数，然后在呼叫基类的析构函数Ｂ。（根据C ++ FAQ[2]，子类的析构函数会自动调用基类析构函数。）虚成员函数– 當指針b調用 function1()，讓_vptr立刻調用D1的vtable function1()<br><img src="https://i.imgur.com/u5el0PY.png" alt=""></p>
+<p><img src="https://i.imgur.com/XUJWgXy.jpg" alt=""></p>
+<h2 id="C-设计模式-简单工厂模式"><a href="#C-设计模式-简单工厂模式" class="headerlink" title="C++ 设计模式 简单工厂模式"></a>C++ 设计模式 简单工厂模式</h2><p><a href="http://www.jellythink.com/archives/42" target="_blank" rel="external">http://www.jellythink.com/archives/42</a></p>
+<h2 id="C-的多态和非多态"><a href="#C-的多态和非多态" class="headerlink" title="C++ 的多态和非多态"></a>C++ 的多态和非多态</h2><p>多态与非多态的实质区别就是函数地址是早绑定还是晚绑定。如果函数的调用，在编译器编译期间就可以确定函数的调用地址，并生产代码，是静态的，就是说地址是早绑定的。而如果函数调用的地址不能在编译器期间确定，需要在运行时才确定，这就属于晚绑定。</p>
+<p>那么多态的作用是什么呢，封装可以使得代码模块化，继承可以扩展已存在的代码，他们的目的都是为了代码重用。而多态的目的则是为了接口重用。也就是说，不论传递过来的究竟是那个类的对象，函数都能够通过同一个接口调用到适应各自对象的实现方法。</p>
+<p>最常见的用法就是声明基类的指针，利用该指针指向任意一个子类对象，调用相应的虚函数，可以根据指向的子类的不同而实现不同的方法。如果没有使用虚函数的话，即没有利用C++多态性，则利用基类指针调用相应的函数的时候，将总被限制在基类函数本身，而无法调用到子类中被重写过的函数。因为没有多态性，函数调用的地址将是一定的，而固定的地址将始终调用到同一个函数，这就无法实现一个接口，多种方法的目的了。</p>
+<p><a href="http://blog.csdn.net/hackbuteer1/article/details/7475622" target="_blank" rel="external">http://blog.csdn.net/hackbuteer1/article/details/7475622</a></p>
+<p>这篇网址里面的例子非常的好</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag">#C++</a>
+          
+            <a href="/tags/设计模式/" rel="tag">#设计模式</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/03/交叉编译器 Linux内核版本 应用程序默认路径问题/" rel="next" title="关于交叉编译工具（arm-linux-）的默认头文件路径的问题">
+                <i class="fa fa-chevron-left"></i> 关于交叉编译工具（arm-linux-）的默认头文件路径的问题
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/20/静态联编，动态联编，静态类型，动态类型/" rel="prev" title="静态联编，动态联编，静态类型，动态类型">
+                静态联编，动态联编，静态类型，动态类型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.png"
+               alt="sdu-zyq" />
+          <p class="site-author-name" itemprop="name">sdu-zyq</p>
+          <p class="site-description motion-element" itemprop="description">Studies pass into and influence manners</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">27</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">28</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/smb111" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://219.231.143.218" target="_blank" title="Lab517">
+                  
+                    <i class="fa fa-fw fa-building"></i>
+                  
+                  Lab517
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/2446286071/home?wvr=5&lf=reg" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://gradms.sdu.edu.cn/login" target="_blank" title="SDU">
+                  
+                    <i class="fa fa-fw fa-star"></i>
+                  
+                  SDU
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.nowcoder.com/3883768" target="_blank" title="NewCoder">
+                  
+                    <i class="fa fa-fw fa-code"></i>
+                  
+                  NewCoder
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" title="Google">
+                  
+                    <i class="fa fa-fw fa-google"></i>
+                  
+                  Google
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.hackerrank.com/dashboard" target="_blank" title="hackerrank">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  hackerrank
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://bailian.openjudge.cn/practice/status/" target="_blank" title="OpenJudge">
+                  
+                    <i class="fa fa-fw fa-code"></i>
+                  
+                  OpenJudge
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么-C-中的基类指针可以指向子类对象？"><span class="nav-number">1.</span> <span class="nav-text">为什么 C++ 中的基类指针可以指向子类对象？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-中的类所占内存空间总结"><span class="nav-number">2.</span> <span class="nav-text">C++ 中的类所占内存空间总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-中只能子类对象赋值给父类对象"><span class="nav-number">3.</span> <span class="nav-text">C++ 中只能子类对象赋值给父类对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的四种cast操作符的区别–类型转换"><span class="nav-number">4.</span> <span class="nav-text">C++的四种cast操作符的区别–类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-虚析构函数-的重要性"><span class="nav-number">5.</span> <span class="nav-text">关于 虚析构函数 的重要性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-设计模式-简单工厂模式"><span class="nav-number">6.</span> <span class="nav-text">C++ 设计模式 简单工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-的多态和非多态"><span class="nav-number">7.</span> <span class="nav-text">C++ 的多态和非多态</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sdu-zyq</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
